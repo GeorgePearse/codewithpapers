@@ -109,7 +109,7 @@ Papers are currently stored in YAML format (`benchmark_metrics.yaml`). Each pape
 
 Could try to make this work, but honestly feels unlikely that it's worth it, at least not until everything else is working well https://github.com/paperswithcode/sota-extractor
 
-Plan for the maintenance of the dataset right now, is to workout if something like GitHub can cope with the volume of data, but then sync it with postgres to run the backend on.
+Plan for the maintenance of the dataset right now, is to workout if something like GitHub can cope with the volume of data, but then sync it with postgres to run the backend on. Sounds like you can hit 100GB which is probably plenty? https://www.reddit.com/r/github/comments/xn8y97/is_there_a_limit_to_how_big_a_github_repo_can_be/ (for now anyway, for a first draft)
 
 ## Contributing
 
