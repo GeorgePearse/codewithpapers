@@ -111,6 +111,8 @@ Could try to make this work, but honestly feels unlikely that it's worth it, at 
 
 Plan for the maintenance of the dataset right now, is to workout if something like GitHub can cope with the volume of data, but then sync it with postgres to run the backend on. Sounds like you can hit 100GB which is probably plenty? https://www.reddit.com/r/github/comments/xn8y97/is_there_a_limit_to_how_big_a_github_repo_can_be/ (for now anyway, for a first draft)
 
+Definitely going to want to scrape https://web.archive.org/web/20250708172035/https://paperswithcode.com/task/representation-learning to really get this moving. Got to be services you can just pay to do it for you.
+
 ## Contributing
 
 This project is in early development. Contributions are welcome! Areas where help is particularly needed:
