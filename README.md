@@ -42,6 +42,10 @@ Papers are currently stored in YAML format (`benchmark_metrics.yaml`). Each pape
 
 Architecture -> So what we could do, is have entries and edits submitted via GitHub, but then not stored with it, maybe it stays there for a few weeks, maybe it gets deleted as soon as ingested, tests check that it conforms to the required structure. Just chuck everything in postgres for now, it's a pretty RDBMS type problem, and can yeet anything else in JSONB very easily if needed, just give absolutely every table an overflow JSONB column and call it a day. The submissions should probably be YAML files.
 
+Use supabase for now just because it's so easy to get started with it. Do not touch any python until its really needed, node / react / supabase etc. is just too damn smooth.
+
+Biggest concern is actually the amount it might be scraped and the hosting cost that will cause.
+
 ### Core Features
 
 - [ ] **Multiple Implementation Links**
