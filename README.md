@@ -107,6 +107,8 @@ Papers are currently stored in YAML format (`benchmark_metrics.yaml`). Each pape
 - [ ] **Paper Recommendations**
   - [ ] "Papers like this"
 
+Could try to make this work, but honestly feels unlikely that it's worth it, at least not until everything else is working well https://github.com/paperswithcode/sota-extractor
+
 ## Contributing
 
 This project is in early development. Contributions are welcome! Areas where help is particularly needed:
