@@ -1,0 +1,34 @@
+# Requirements for Papers with Code Archive Scraper
+
+# Web scraping
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# Data processing
+pyyaml>=6.0
+python-dateutil>=2.8.2
+
+# HTTP utilities
+urllib3>=2.0.0
+
+# Rate limiting and retrying
+tenacity>=8.2.0  # Alternative retry library with more features
+
+# Progress bars for long-running scrapes
+tqdm>=4.65.0
+
+# Data validation
+jsonschema>=4.17.0
+
+# Optional: For parallel processing
+aiohttp>=3.8.0  # For async HTTP requests
+asyncio>=3.8.0  # For async operations
+
+# Optional: For better text processing
+ftfy>=6.1.0  # Fix text encoding issues
+unidecode>=1.3.0  # ASCII transliterations
+
+# Optional: For data analysis
+pandas>=2.0.0  # For data manipulation
+matplotlib>=3.7.0  # For visualization of scraping progress
