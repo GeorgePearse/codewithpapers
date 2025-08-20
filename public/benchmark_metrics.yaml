@@ -1,0 +1,5028 @@
+summary:
+  mmdetection:
+    total_configs: 100
+    total_models: 821
+  mmpose:
+    total_configs: 18
+    total_models: 215
+metrics:
+  mmdetection:
+  - repository: mmdetection
+    file: configs/selfsup_pretrain/README.md
+    config: selfsup_pretrain
+    algorithm: Backbones Trained by Self-Supervise Algorithms
+    models:
+    - model: R50 by MoCo v2
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 38.0
+      mask_AP: 34.3
+    - model: R50 by MoCo v2
+      style: pytorch
+      lr_schedule: multi-scale 2x
+      box_AP: 40.8
+      mask_AP: 36.8
+    - model: R50 by SwAV
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 39.1
+      mask_AP: 35.7
+    - model: R50 by SwAV
+      style: pytorch
+      lr_schedule: multi-scale 2x
+      box_AP: 41.3
+      mask_AP: 37.3
+  - repository: mmdetection
+    file: configs/libra_rcnn/README.md
+    config: libra_rcnn
+    algorithm: Libra R-CNN
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.6
+      fps: 19.0
+      box_AP: 38.3
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.5
+      fps: 14.4
+      box_AP: 40.1
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.8
+      fps: 8.5
+      box_AP: 42.7
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.2
+      fps: 17.7
+      box_AP: 37.6
+  - repository: mmdetection
+    file: configs/lvis/README.md
+    config: lvis
+    algorithm: LVIS
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 26.1
+      mask_AP: 25.9
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 27.1
+      mask_AP: 27.0
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 26.7
+      mask_AP: 26.9
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 26.4
+      mask_AP: 26.0
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 9.1
+      box_AP: 22.5
+      mask_AP: 21.7
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.8
+      box_AP: 24.6
+      mask_AP: 23.6
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 11.8
+      box_AP: 26.7
+      mask_AP: 25.5
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 14.6
+      box_AP: 27.2
+      mask_AP: 25.8
+  - repository: mmdetection
+    file: configs/crowddet/README.md
+    config: crowddet
+    algorithm: CrowdDet
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      mem_gb: 4.4
+      box_AP: 90.0
+    - model: R-50-FPN
+      style: pytorch
+      mem_gb: 4.8
+      box_AP: 90.32
+  - repository: mmdetection
+    file: configs/ms_rcnn/README.md
+    config: ms_rcnn
+    algorithm: MS R-CNN
+    models:
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 4.5
+      box_AP: 38.2
+      mask_AP: 36.0
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 2x
+      box_AP: 38.8
+      mask_AP: 36.3
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 6.5
+      box_AP: 40.4
+      mask_AP: 37.6
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 2x
+      box_AP: 41.1
+      mask_AP: 38.1
+    - model: R-X101-32x4d
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 7.9
+      fps: 11.0
+      box_AP: 41.8
+      mask_AP: 38.7
+    - model: R-X101-64x4d
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 11.0
+      fps: 8.0
+      box_AP: 43.0
+      mask_AP: 39.5
+    - model: R-X101-64x4d
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 11.0
+      fps: 8.0
+      box_AP: 42.6
+      mask_AP: 39.5
+  - repository: mmdetection
+    file: configs/instaboost/README.md
+    config: instaboost
+    algorithm: Instaboost
+    models:
+    - model: R-50-FPN
+      lr_schedule: 4x
+      mem_gb: 4.4
+      fps: 17.5
+      box_AP: 40.6
+      mask_AP: 36.6
+    - model: R-101-FPN
+      lr_schedule: 4x
+      mem_gb: 6.4
+      box_AP: 42.5
+      mask_AP: 38.0
+    - model: X-101-64x4d-FPN
+      lr_schedule: 4x
+      mem_gb: 10.7
+      box_AP: 44.7
+      mask_AP: 39.7
+    - model: R-101-FPN
+      lr_schedule: 4x
+      mem_gb: 6.0
+      fps: 12.0
+      box_AP: 43.7
+      mask_AP: 38.0
+  - repository: mmdetection
+    file: configs/ssd/README.md
+    config: ssd
+    algorithm: SSD
+    models:
+    - model: VGG16
+      size: 300.0
+      style: caffe
+      lr_schedule: 120e
+      mem_gb: 9.9
+      fps: 43.7
+      box_AP: 25.5
+    - model: VGG16
+      size: 512.0
+      style: caffe
+      lr_schedule: 120e
+      mem_gb: 19.4
+      fps: 30.7
+      box_AP: 29.5
+    - model: MobileNetV2
+      size: 320.0
+      lr_schedule: 600e
+      mem_gb: 4.0
+      fps: 69.9
+      box_AP: 21.3
+  - repository: mmdetection
+    file: configs/htc/README.md
+    config: htc
+    algorithm: HTC
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 8.2
+      fps: 5.8
+      box_AP: 42.3
+      mask_AP: 37.4
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 8.2
+      box_AP: 43.3
+      mask_AP: 38.3
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 10.2
+      fps: 5.5
+      box_AP: 44.8
+      mask_AP: 39.6
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 11.4
+      fps: 5.0
+      box_AP: 46.1
+      mask_AP: 40.5
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 14.5
+      fps: 4.4
+      box_AP: 47.0
+      mask_AP: 41.4
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 20e
+      box_AP: 50.4
+      mask_AP: 43.8
+  - repository: mmdetection
+    file: configs/groie/README.md
+    config: groie
+    algorithm: GRoIE
+    models:
+    - model: Faster Original
+      lr_schedule: 1x
+      box_AP: 37.4
+    - model: + GRoIE
+      lr_schedule: 1x
+      box_AP: 38.3
+    - model: Grid R-CNN
+      lr_schedule: 1x
+      box_AP: 39.1
+    - model: + GRoIE
+      lr_schedule: 1x
+    - model: Mask R-CNN
+      lr_schedule: 1x
+      box_AP: 38.2
+      mask_AP: 34.7
+    - model: + GRoIE
+      lr_schedule: 1x
+      box_AP: 39.0
+      mask_AP: 36.0
+    - model: GC-Net
+      lr_schedule: 1x
+      box_AP: 40.7
+      mask_AP: 36.5
+    - model: + GRoIE
+      lr_schedule: 1x
+      box_AP: 41.0
+      mask_AP: 37.8
+    - model: GC-Net
+      lr_schedule: 1x
+      box_AP: 42.2
+      mask_AP: 37.8
+    - model: + GRoIE
+      lr_schedule: 1x
+      box_AP: 42.6
+      mask_AP: 38.7
+  - repository: mmdetection
+    file: configs/guided_anchoring/README.md
+    config: guided_anchoring
+    algorithm: Guided Anchoring
+    models:
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 5.5
+      box_AP: 39.6
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 7.5
+      box_AP: 41.5
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 8.7
+      fps: 9.7
+      box_AP: 43.0
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 11.8
+      fps: 7.3
+      box_AP: 43.9
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 3.5
+      fps: 16.8
+      box_AP: 36.9
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 5.5
+      fps: 12.9
+      box_AP: 39.0
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.9
+      fps: 10.6
+      box_AP: 40.5
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 9.9
+      fps: 7.7
+      box_AP: 41.3
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 1x
+      score_thr: 0.05
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 1x
+      score_thr: 0.001
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 1x
+      score_thr: 0.05
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 2x
+      score_thr: 0.05
+  - repository: mmdetection
+    file: configs/strong_baselines/README.md
+    config: strong_baselines
+    algorithm: Strong Baselines
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 50e
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 100e
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 100e
+      box_AP: 44.7
+      mask_AP: 40.4
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 400e
+  - repository: mmdetection
+    file: configs/centernet/README.md
+    config: centernet
+    algorithm: CenterNet
+    models:
+    - model: ResNet-18
+      mem_gb: 3.45
+      box_AP: 27.3
+    - model: ResNet-18
+      mem_gb: 3.47
+      box_AP: 30.9
+    - model: ResNet-50
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 3.3
+      box_AP: 40.2
+  - repository: mmdetection
+    file: configs/swin/README.md
+    config: swin
+    algorithm: Swin
+    models:
+    - model: Swin-T
+      lr_schedule: 1x
+      mem_gb: 7.6
+      box_AP: 42.7
+      mask_AP: 39.3
+    - model: Swin-T
+      lr_schedule: 3x
+      mem_gb: 10.2
+      box_AP: 46.0
+      mask_AP: 41.6
+    - model: Swin-T
+      lr_schedule: 3x
+      mem_gb: 7.8
+      box_AP: 46.0
+      mask_AP: 41.7
+    - model: Swin-S
+      lr_schedule: 3x
+      mem_gb: 11.9
+      box_AP: 48.2
+      mask_AP: 43.2
+  - repository: mmdetection
+    file: configs/yolox/README.md
+    config: yolox
+    algorithm: YOLOX
+    models:
+    - model: YOLOX-tiny
+      size: 416.0
+      mem_gb: 3.5
+      box_AP: 32.0
+    - model: YOLOX-s
+      size: 640.0
+      mem_gb: 7.6
+      box_AP: 40.5
+    - model: YOLOX-l
+      size: 640.0
+      mem_gb: 19.9
+      box_AP: 49.4
+    - model: YOLOX-x
+      size: 640.0
+      mem_gb: 28.1
+      box_AP: 50.9
+  - repository: mmdetection
+    file: configs/convnext/README.md
+    config: convnext
+    algorithm: ConvNeXt
+    models:
+    - model: ConvNeXt-T
+      lr_schedule: 3x
+      mem_gb: 7.3
+      box_AP: 46.2
+      mask_AP: 41.7
+    - model: ConvNeXt-T
+      lr_schedule: 3x
+      mem_gb: 9.0
+      box_AP: 50.3
+      mask_AP: 43.6
+    - model: ConvNeXt-S
+      lr_schedule: 3x
+      mem_gb: 12.3
+      box_AP: 51.8
+      mask_AP: 44.8
+  - repository: mmdetection
+    file: configs/dcnv2/README.md
+    config: dcnv2
+    algorithm: DCNv2
+    models:
+    - model: Faster
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.1
+      fps: 17.6
+      box_AP: 41.4
+    - model: Faster
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.2
+      fps: 17.4
+      box_AP: 41.5
+    - model: Faster
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.8
+      fps: 16.6
+      box_AP: 38.7
+    - model: Mask
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.5
+      fps: 15.1
+      box_AP: 41.5
+      mask_AP: 37.1
+    - model: Mask
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 3.1
+      box_AP: 42.0
+      mask_AP: 37.6
+  - repository: mmdetection
+    file: configs/tridentnet/README.md
+    config: tridentnet
+    algorithm: TridentNet
+    models:
+    - model: R-50
+      style: caffe
+      lr_schedule: 1x
+      box_AP: 37.7
+    - model: R-50
+      style: caffe
+      lr_schedule: 1x
+      box_AP: 37.6
+    - model: R-50
+      style: caffe
+      lr_schedule: 3x
+      box_AP: 40.3
+  - repository: mmdetection
+    file: configs/conditional_detr/README.md
+    config: conditional_detr
+    algorithm: Conditional DETR
+    models:
+    - model: Conditional DETR
+      lr_schedule: 50e
+      box_AP: 41.1
+  - repository: mmdetection
+    file: configs/gn/README.md
+    config: gn
+    algorithm: GN
+    models:
+    - model: Mask R-CNN
+      lr_schedule: 2x
+      mem_gb: 7.1
+      fps: 11.0
+      box_AP: 40.2
+      mask_AP: 36.4
+    - model: Mask R-CNN
+      lr_schedule: 3x
+      mem_gb: 7.1
+      box_AP: 40.5
+      mask_AP: 36.7
+    - model: Mask R-CNN
+      lr_schedule: 2x
+      mem_gb: 9.9
+      fps: 9.0
+      box_AP: 41.9
+      mask_AP: 37.6
+    - model: Mask R-CNN
+      lr_schedule: 3x
+      mem_gb: 9.9
+      box_AP: 42.1
+      mask_AP: 38.0
+    - model: Mask R-CNN
+      lr_schedule: 2x
+      mem_gb: 7.1
+      fps: 10.9
+      box_AP: 40.0
+      mask_AP: 36.1
+    - model: Mask R-CNN
+      lr_schedule: 3x
+      mem_gb: 7.1
+      box_AP: 40.1
+      mask_AP: 36.2
+  - repository: mmdetection
+    file: configs/hrnet/README.md
+    config: hrnet
+    algorithm: HRNet
+    models:
+    - model: HRNetV2p-W18
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.6
+      fps: 13.4
+      box_AP: 36.9
+    - model: HRNetV2p-W18
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 6.6
+      box_AP: 38.9
+    - model: HRNetV2p-W32
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 9.0
+      fps: 12.4
+      box_AP: 40.2
+    - model: HRNetV2p-W32
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 9.0
+      box_AP: 41.4
+    - model: HRNetV2p-W40
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.4
+      fps: 10.5
+      box_AP: 41.2
+    - model: HRNetV2p-W40
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 10.4
+      box_AP: 42.1
+    - model: HRNetV2p-W18
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.0
+      fps: 11.7
+      box_AP: 37.7
+      mask_AP: 34.2
+    - model: HRNetV2p-W18
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 7.0
+      box_AP: 39.8
+      mask_AP: 36.0
+    - model: HRNetV2p-W32
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 9.4
+      fps: 11.3
+      box_AP: 41.2
+      mask_AP: 37.1
+    - model: HRNetV2p-W32
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 9.4
+      box_AP: 42.5
+      mask_AP: 37.8
+    - model: HRNetV2p-W40
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.9
+      box_AP: 42.1
+      mask_AP: 37.5
+    - model: HRNetV2p-W40
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 10.9
+      box_AP: 42.8
+      mask_AP: 38.2
+    - model: HRNetV2p-W18
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 7.0
+      fps: 11.0
+      box_AP: 41.2
+    - model: HRNetV2p-W32
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 9.4
+      fps: 11.0
+      box_AP: 43.3
+    - model: HRNetV2p-W40
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 10.8
+      box_AP: 43.8
+    - model: HRNetV2p-W18
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 8.5
+      fps: 8.5
+      box_AP: 41.6
+      mask_AP: 36.4
+    - model: HRNetV2p-W32
+      style: pytorch
+      lr_schedule: 20e
+      fps: 8.3
+      box_AP: 44.3
+      mask_AP: 38.6
+    - model: HRNetV2p-W40
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 12.5
+      box_AP: 45.1
+      mask_AP: 39.3
+    - model: HRNetV2p-W18
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 10.8
+      fps: 4.7
+      box_AP: 42.8
+      mask_AP: 37.9
+    - model: HRNetV2p-W32
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 13.1
+      fps: 4.9
+      box_AP: 45.4
+      mask_AP: 39.9
+    - model: HRNetV2p-W40
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 14.6
+      box_AP: 46.4
+      mask_AP: 40.8
+    - model: HRNetV2p-W18
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 13.0
+      fps: 12.9
+      box_AP: 35.3
+    - model: HRNetV2p-W18
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 13.0
+      box_AP: 38.2
+    - model: HRNetV2p-W32
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 17.5
+      fps: 12.9
+      box_AP: 39.5
+    - model: HRNetV2p-W32
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 17.5
+      box_AP: 40.8
+    - model: HRNetV2p-W18
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 13.0
+      fps: 12.9
+      box_AP: 38.3
+    - model: HRNetV2p-W32
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 17.5
+      fps: 12.4
+      box_AP: 41.9
+    - model: HRNetV2p-W48
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 20.3
+      fps: 10.8
+      box_AP: 42.7
+  - repository: mmdetection
+    file: configs/reppoints/README.md
+    config: reppoints
+    algorithm: RepPoints
+    models:
+    - model: R-50-FPN
+      lr_schedule: 1x
+      mem_gb: 3.9
+      fps: 15.9
+      box_AP: 36.4
+    - model: R-50-FPN
+      lr_schedule: 1x
+      mem_gb: 3.9
+      fps: 15.4
+      box_AP: 37.4
+    - model: R-50-FPN
+      lr_schedule: 1x
+      mem_gb: 3.3
+      fps: 18.5
+      box_AP: 37.0
+    - model: R-50-FPN
+      lr_schedule: 1x
+      mem_gb: 3.9
+      fps: 17.5
+      box_AP: 38.1
+    - model: R-50-FPN
+      lr_schedule: 2x
+      mem_gb: 3.9
+      box_AP: 38.6
+    - model: R-101-FPN
+      lr_schedule: 2x
+      mem_gb: 5.8
+      fps: 13.7
+      box_AP: 40.5
+    - model: R-101-FPN-DCN
+      lr_schedule: 2x
+      mem_gb: 5.9
+      fps: 12.1
+      box_AP: 42.9
+    - model: X-101-FPN-DCN
+      lr_schedule: 2x
+      mem_gb: 7.1
+      fps: 9.3
+      box_AP: 44.2
+  - repository: mmdetection
+    file: configs/cascade_rcnn/README.md
+    config: cascade_rcnn
+    algorithm: Cascade R-CNN
+    models:
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 4.2
+      box_AP: 40.4
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.4
+      fps: 16.1
+      box_AP: 40.3
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 20e
+      box_AP: 41.0
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 6.2
+      box_AP: 42.3
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.4
+      fps: 13.5
+      box_AP: 42.0
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 20e
+      box_AP: 42.5
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.6
+      fps: 10.9
+      box_AP: 43.7
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 7.6
+      box_AP: 43.7
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.7
+      box_AP: 44.7
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 10.7
+      box_AP: 44.5
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 5.9
+      box_AP: 41.2
+      mask_AP: 36.0
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.0
+      fps: 11.2
+      box_AP: 41.2
+      mask_AP: 35.9
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 20e
+      box_AP: 41.9
+      mask_AP: 36.5
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 7.8
+      box_AP: 43.2
+      mask_AP: 37.6
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.9
+      fps: 9.8
+      box_AP: 42.9
+      mask_AP: 37.3
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 20e
+      box_AP: 43.4
+      mask_AP: 37.8
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 9.2
+      fps: 8.6
+      box_AP: 44.3
+      mask_AP: 38.3
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 9.2
+      box_AP: 45.0
+      mask_AP: 39.0
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 12.2
+      fps: 6.7
+      box_AP: 45.3
+      mask_AP: 39.2
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 12.2
+      box_AP: 45.6
+      mask_AP: 39.5
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 3x
+      mem_gb: 5.7
+      box_AP: 44.0
+      mask_AP: 38.1
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 5.9
+      box_AP: 44.3
+      mask_AP: 38.5
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 3x
+      mem_gb: 7.7
+      box_AP: 45.4
+      mask_AP: 39.5
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 7.8
+      box_AP: 45.5
+      mask_AP: 39.6
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 9.0
+      box_AP: 46.3
+      mask_AP: 40.1
+    - model: X-101-32x8d-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 12.1
+      box_AP: 46.1
+      mask_AP: 39.9
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 12.0
+      box_AP: 46.6
+      mask_AP: 40.3
+  - repository: mmdetection
+    file: configs/ld/README.md
+    config: ld
+    algorithm: LD
+    models:
+    - mini_batch_size: 6.0
+      AP: 35.8
+    - mini_batch_size: 6.0
+      AP: 36.5
+    - mini_batch_size: 6.0
+      AP: 38.9
+    - mini_batch_size: 6.0
+      AP: 39.9
+    - mini_batch_size: 6.0
+      AP: 40.1
+    - mini_batch_size: 6.0
+      AP: 41.0
+    - mini_batch_size: 6.0
+      AP: 44.6
+    - mini_batch_size: 6.0
+      AP: 45.5
+  - repository: mmdetection
+    file: configs/yolact/README.md
+    config: yolact
+    algorithm: YOLACT
+    models:
+    - image_size: 550.0
+      model: Resnet50-FPN
+      fps: 42.5
+      mAP: 29.0
+    - image_size: 550.0
+      model: Resnet50-FPN
+      fps: 42.5
+      mAP: 28.4
+    - image_size: 550.0
+      model: Resnet101-FPN
+      fps: 33.5
+      mAP: 30.4
+  - repository: mmdetection
+    file: configs/dab_detr/README.md
+    config: dab_detr
+    algorithm: DAB-DETR
+    models:
+    - model: DAB-DETR
+      lr_schedule: 50e
+      box_AP: 42.3
+  - repository: mmdetection
+    file: configs/dynamic_rcnn/README.md
+    config: dynamic_rcnn
+    algorithm: Dynamic R-CNN
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 3.8
+      box_AP: 38.9
+  - repository: mmdetection
+    file: configs/resnest/README.md
+    config: resnest
+    algorithm: ResNeSt
+    models:
+    - model: S-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.8
+      box_AP: 42.0
+    - model: S-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.1
+      box_AP: 44.5
+    - model: S-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.5
+      box_AP: 42.6
+      mask_AP: 38.1
+    - model: S-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.8
+      box_AP: 45.2
+      mask_AP: 40.2
+    - model: S-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 44.5
+    - model: S-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 8.4
+      box_AP: 46.8
+    - model: S-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 45.4
+      mask_AP: 39.5
+    - model: S-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.5
+      box_AP: 47.7
+      mask_AP: 41.4
+  - repository: mmdetection
+    file: configs/queryinst/README.md
+    config: queryinst
+    algorithm: QueryInst
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      number_of_proposals: 100.0
+      box_AP: 42.0
+      mask_AP: 37.5
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 3x
+      number_of_proposals: 100.0
+      box_AP: 44.8
+      mask_AP: 39.8
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 3x
+      number_of_proposals: 300.0
+      box_AP: 47.5
+      mask_AP: 41.7
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 3x
+      number_of_proposals: 100.0
+      box_AP: 46.4
+      mask_AP: 41.0
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 3x
+      number_of_proposals: 300.0
+      box_AP: 49.0
+      mask_AP: 42.9
+  - repository: mmdetection
+    file: configs/lad/README.md
+    config: lad
+    algorithm: LAD
+    models:
+    - AP: 40.4
+    - AP: 42.6
+    - AP: 41.4
+    - AP: 43.2
+  - repository: mmdetection
+    file: configs/ddq/README.md
+    config: ddq
+    algorithm: DDQ
+    models:
+    - model: R-50
+      lr_schedule: 12e
+      box_AP: 51.4
+    - model: R-50
+      lr_schedule: 12e
+      box_AP: 52.1
+    - model: Swin-L
+      lr_schedule: 30e
+      box_AP: 58.7
+  - repository: mmdetection
+    file: configs/pvt/README.md
+    config: pvt
+    algorithm: PVT
+    models:
+    - model: PVT-Tiny
+      lr_schedule: 12e
+      mem_gb: 8.5
+      box_AP: 36.6
+    - model: PVT-Small
+      lr_schedule: 12e
+      mem_gb: 14.5
+      box_AP: 40.4
+    - model: PVT-Medium
+      lr_schedule: 12e
+      mem_gb: 20.9
+      box_AP: 41.7
+    - model: PVTv2-B0
+      lr_schedule: 12e
+      mem_gb: 7.4
+      box_AP: 37.1
+    - model: PVTv2-B1
+      lr_schedule: 12e
+      mem_gb: 9.5
+      box_AP: 41.2
+    - model: PVTv2-B2
+      lr_schedule: 12e
+      mem_gb: 16.2
+      box_AP: 44.6
+    - model: PVTv2-B3
+      lr_schedule: 12e
+      mem_gb: 23.0
+      box_AP: 46.0
+    - model: PVTv2-B4
+      lr_schedule: 12e
+      mem_gb: 17.0
+      box_AP: 46.3
+    - model: PVTv2-B5
+      lr_schedule: 12e
+      mem_gb: 18.7
+      box_AP: 46.1
+  - repository: mmdetection
+    file: configs/empirical_attention/README.md
+    config: empirical_attention
+    algorithm: Empirical Attention
+    models:
+    - model: R-50
+      attention_component: 1111.0
+      lr_schedule: 1x
+      mem_gb: 8.0
+      fps: 13.8
+      box_AP: 40.0
+    - model: R-50
+      attention_component: 10.0
+      lr_schedule: 1x
+      mem_gb: 4.2
+      fps: 18.4
+      box_AP: 39.1
+    - model: R-50
+      attention_component: 1111.0
+      lr_schedule: 1x
+      mem_gb: 8.0
+      fps: 12.7
+      box_AP: 42.1
+    - model: R-50
+      attention_component: 10.0
+      lr_schedule: 1x
+      mem_gb: 4.2
+      fps: 17.1
+      box_AP: 42.0
+  - repository: mmdetection
+    file: configs/glip/README.md
+    config: glip
+    algorithm: 'GLIP: Grounded Language-Image Pre-training'
+    models:
+    - model: GLIP-T (A)
+      mAP: 42.9
+    - model: GLIP-T (A)
+      mAP: 52.9
+    - model: GLIP-T (B)
+      mAP: 44.9
+    - model: GLIP-T (B)
+      mAP: 53.8
+    - model: GLIP-T (C)
+      mAP: 46.7
+    - model: GLIP-T (C)
+      mAP: 55.1
+    - model: GLIP-T
+      mAP: 46.6
+    - model: GLIP-T
+      mAP: 55.2
+    - model: GLIP-L
+      mAP: 51.4
+    - model: GLIP-L
+      mAP: 59.4
+    - model: GLIP-T (A)
+    - model: GLIP-T (A)
+      AP: 14.7
+    - model: GLIP-T (B)
+    - model: GLIP-T (B)
+      AP: 13.9
+    - model: GLIP-T (C)
+      AP: 24.6
+    - model: GLIP-T (C)
+      AP: 18.2
+    - model: GLIP-T
+    - model: GLIP-T
+      AP: 19.6
+    - model: GLIP-L
+      AP: 37.9
+    - model: GLIP-L
+      AP: 28.5
+  - repository: mmdetection
+    file: configs/masktrack_rcnn/README.md
+    config: masktrack_rcnn
+    algorithm: Video Instance Segmentation
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 12e
+      mem_gb: 1.61
+      AP: 30.2
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 12e
+      mem_gb: 2.27
+      AP: 32.2
+    - model: X-101-FPN
+      style: pytorch
+      lr_schedule: 12e
+      mem_gb: 3.69
+      AP: 34.7
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 12e
+      mem_gb: 1.61
+      AP: 28.7
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 12e
+      mem_gb: 2.27
+      AP: 31.3
+    - model: X-101-FPN
+      style: pytorch
+      lr_schedule: 12e
+      mem_gb: 3.69
+      AP: 33.5
+  - repository: mmdetection
+    file: configs/mask2former/README.md
+    config: mask2former
+    algorithm: Mask2Former
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 50e
+      mem_gb: 13.9
+      pq: 52.0
+      box_AP: 44.5
+      mask_AP: 41.8
+    - model: R-101
+      style: pytorch
+      lr_schedule: 50e
+      mem_gb: 16.1
+      pq: 52.4
+      box_AP: 45.3
+      mask_AP: 42.4
+    - model: Swin-T
+      style: '-'
+      lr_schedule: 50e
+      mem_gb: 15.9
+      pq: 53.4
+      box_AP: 46.3
+      mask_AP: 43.4
+    - model: Swin-S
+      style: '-'
+      lr_schedule: 50e
+      mem_gb: 19.1
+      pq: 54.5
+      box_AP: 47.8
+      mask_AP: 44.5
+    - model: Swin-B
+      style: '-'
+      lr_schedule: 50e
+      mem_gb: 26.0
+      pq: 55.1
+      box_AP: 48.2
+      mask_AP: 44.9
+    - model: Swin-B
+      style: '-'
+      lr_schedule: 50e
+      mem_gb: 25.8
+      pq: 56.3
+      box_AP: 50.0
+      mask_AP: 46.3
+    - model: Swin-L
+      style: '-'
+      lr_schedule: 100e
+      mem_gb: 21.1
+      pq: 57.6
+      box_AP: 52.2
+      mask_AP: 48.5
+    - model: R-50
+      style: pytorch
+      lr_schedule: 50e
+      mem_gb: 13.7
+      box_AP: 45.7
+      mask_AP: 42.9
+    - model: R-101
+      style: pytorch
+      lr_schedule: 50e
+      mem_gb: 15.5
+      box_AP: 46.7
+      mask_AP: 44.0
+    - model: Swin-T
+      style: '-'
+      lr_schedule: 50e
+      mem_gb: 15.3
+      box_AP: 47.7
+      mask_AP: 44.7
+    - model: Swin-S
+      style: '-'
+      lr_schedule: 50e
+      mem_gb: 18.8
+      box_AP: 49.3
+      mask_AP: 46.1
+  - repository: mmdetection
+    file: configs/grounding_dino/README.md
+    config: grounding_dino
+    algorithm: 'Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set
+      Object Detection'
+    models:
+    - model: Swin-T
+      style: Zero-shot
+      mAP: 48.4
+    - model: Swin-T
+      style: Finetune
+      mAP: 57.2
+    - model: Swin-B
+      style: Zero-shot
+      mAP: 56.7
+    - model: Swin-B
+      style: Finetune
+      mAP: 59.7
+    - model: R50
+      style: Scratch
+      mAP: 48.1
+    - model: Grounding DINO-T
+      AP: 20.1
+    - model: Grounding DINO-B
+      AP: 26.7
+    - model: RefCOCO val @1,5,10
+      AP: 84.61
+    - model: RefCOCO testA @1,5,10
+      AP: 88.65
+    - model: RefCOCO testB @1,5,10
+      AP: 80.51
+    - model: RefCOCO+ val @1,5,10
+      AP: 73.67
+    - model: RefCOCO+ testA @1,5,10
+      AP: 82.19
+    - model: RefCOCO+ testB @1,5,10
+      AP: 64.1
+    - model: RefCOCOg val @1,5,10
+      AP: 78.33
+    - model: RefCOCOg test @1,5,10
+      AP: 78.11
+    - model: gRefCOCO val Pr@(F1=1, IoU≥0.5),N-acc
+      AP: 46.18
+    - model: gRefCOCO testA Pr@(F1=1, IoU≥0.5),N-acc
+      AP: 38.6
+    - model: gRefCOCO testB Pr@(F1=1, IoU≥0.5),N-acc
+      AP: 35.87
+    - model: FULL/short/middle/long/very long
+      AP: 20.2
+    - model: FULL/short/middle/long/very long
+      AP: 25.0
+    - model: PRES/short/middle/long/very long
+      AP: 20.7
+    - model: PRES/short/middle/long/very long
+      AP: 23.7
+    - model: ABS/short/middle/long/very long
+      AP: 18.6
+    - model: ABS/short/middle/long/very long
+      AP: 28.8
+  - repository: mmdetection
+    file: configs/pafpn/README.md
+    config: pafpn
+    algorithm: PAFPN
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.0
+      fps: 17.2
+      box_AP: 37.5
+  - repository: mmdetection
+    file: configs/boxinst/README.md
+    config: boxinst
+    algorithm: BoxInst
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 39.6
+      mask_AP: 31.1
+    - model: R-101
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 41.8
+      mask_AP: 32.7
+  - repository: mmdetection
+    file: configs/pascal_voc/README.md
+    config: pascal_voc
+    algorithm: Pascal VOC
+    models:
+    - model: R-50
+      style: caffe
+      lr_schedule: 18k
+      box_AP: 80.9
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 2.6
+      box_AP: 80.4
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 2.1
+      box_AP: 77.3
+    - model: VGG16
+      style: '-'
+      lr_schedule: 120e
+      box_AP: 76.5
+    - model: VGG16
+      style: '-'
+      lr_schedule: 120e
+      box_AP: 79.5
+  - repository: mmdetection
+    file: configs/centripetalnet/README.md
+    config: centripetalnet
+    algorithm: CentripetalNet
+    models:
+    - model: HourglassNet-104
+      mem_gb: 16.7
+      fps: 3.7
+      box_AP: 44.8
+  - repository: mmdetection
+    file: configs/scnet/README.md
+    config: scnet
+    algorithm: SCNet
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.0
+      fps: 6.2
+      box_AP: 44.8
+      mask_AP: 40.9
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 7.0
+      fps: 6.2
+      box_AP: 45.8
+      mask_AP: 41.5
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 8.9
+      fps: 5.8
+      box_AP: 47.3
+      mask_AP: 42.7
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 13.2
+      fps: 4.9
+      box_AP: 48.9
+      mask_AP: 44.0
+  - repository: mmdetection
+    file: configs/efficientnet/README.md
+    config: efficientnet
+    algorithm: EfficientNet
+    models:
+    - model: Efficientnet-b3
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 40.5
+  - repository: mmdetection
+    file: configs/sabl/README.md
+    config: sabl
+    algorithm: SABL
+    models:
+    - model: R-50-FPN
+      lr_schedule: 1x
+      box_AP: 39.9
+    - model: R-101-FPN
+      lr_schedule: 1x
+      box_AP: 41.7
+    - model: R-50-FPN
+      lr_schedule: 1x
+      box_AP: 41.6
+    - model: R-101-FPN
+      lr_schedule: 1x
+      box_AP: 43.0
+    - model: R-50-FPN
+      lr_schedule: 1x
+      box_AP: 37.7
+    - model: R-50-FPN
+      lr_schedule: 1x
+      box_AP: 38.8
+    - model: R-101-FPN
+      lr_schedule: 1x
+      box_AP: 39.7
+    - model: R-101-FPN
+      lr_schedule: 1x
+      box_AP: 40.5
+    - model: R-101-FPN
+      lr_schedule: 2x
+      box_AP: 42.9
+    - model: R-101-FPN
+      lr_schedule: 2x
+      box_AP: 43.6
+  - repository: mmdetection
+    file: configs/fsaf/README.md
+    config: fsaf
+    algorithm: FSAF
+    models:
+    - model: R-50
+      lr_schedule: 1x
+      train_mem_gb: 3.15
+      fps: 12.3
+      box_AP: 36.0
+    - model: R-50
+      lr_schedule: 1x
+      train_mem_gb: 3.15
+      fps: 13.0
+      box_AP: 37.4
+    - model: R-101
+      lr_schedule: 1x
+      train_mem_gb: 5.08
+      fps: 10.8
+      box_AP: 39.3
+    - model: X-101
+      lr_schedule: 1x
+      train_mem_gb: 9.38
+      fps: 5.6
+      box_AP: 42.4
+  - repository: mmdetection
+    file: configs/vfnet/README.md
+    config: vfnet
+    algorithm: VarifocalNet
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 41.6
+    - model: R-50
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 44.8
+    - model: R-50
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 48.0
+    - model: R-101
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 43.6
+    - model: R-101
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 46.7
+    - model: R-101
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 49.2
+    - model: X-101-32x4d
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 50.0
+    - model: X-101-64x4d
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 50.8
+  - repository: mmdetection
+    file: configs/nas_fpn/README.md
+    config: nas_fpn
+    algorithm: NAS-FPN
+    models:
+    - model: R-50-FPN
+      lr_schedule: 50e
+      mem_gb: 12.9
+      fps: 22.9
+      box_AP: 37.9
+    - model: R-50-NASFPN
+      lr_schedule: 50e
+      mem_gb: 13.2
+      fps: 23.0
+      box_AP: 40.5
+  - repository: mmdetection
+    file: configs/gcnet/README.md
+    config: gcnet
+    algorithm: GCNet
+    models:
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 5.0
+      box_AP: 39.7
+      mask_AP: 35.9
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 5.1
+      fps: 15.0
+      box_AP: 39.9
+      mask_AP: 36.0
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 7.6
+      fps: 11.4
+      box_AP: 41.3
+      mask_AP: 37.2
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 7.8
+      fps: 11.6
+      box_AP: 42.2
+      mask_AP: 37.8
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 4.4
+      fps: 16.6
+      box_AP: 38.4
+      mask_AP: 34.6
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 5.0
+      fps: 15.5
+      box_AP: 40.4
+      mask_AP: 36.2
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 5.1
+      fps: 15.1
+      box_AP: 40.7
+      mask_AP: 36.5
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 6.4
+      fps: 13.3
+      box_AP: 40.5
+      mask_AP: 36.3
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 7.6
+      fps: 12.0
+      box_AP: 42.2
+      mask_AP: 37.8
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 7.8
+      fps: 11.8
+      box_AP: 42.2
+      mask_AP: 37.8
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 7.6
+      fps: 11.3
+      box_AP: 42.4
+      mask_AP: 37.7
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 8.8
+      fps: 9.8
+      box_AP: 43.5
+      mask_AP: 38.6
+    - model: Mask
+      lr_schedule: 1x
+      mem_gb: 9.0
+      fps: 9.7
+      box_AP: 43.9
+      mask_AP: 39.0
+    - model: Cascade Mask
+      lr_schedule: 1x
+      mem_gb: 9.2
+      fps: 8.4
+      box_AP: 44.7
+      mask_AP: 38.6
+    - model: Cascade Mask
+      lr_schedule: 1x
+      mem_gb: 10.3
+      fps: 7.7
+      box_AP: 46.2
+      mask_AP: 39.7
+    - model: Cascade Mask
+      lr_schedule: 1x
+      mem_gb: 10.6
+      box_AP: 46.4
+      mask_AP: 40.1
+    - model: DCN Cascade Mask
+      lr_schedule: 1x
+      box_AP: 47.5
+      mask_AP: 40.9
+    - model: DCN Cascade Mask
+      lr_schedule: 1x
+      box_AP: 48.0
+      mask_AP: 41.3
+    - model: DCN Cascade Mask
+      lr_schedule: 1x
+      box_AP: 47.9
+      mask_AP: 41.1
+  - repository: mmdetection
+    file: configs/point_rend/README.md
+    config: point_rend
+    algorithm: PointRend
+    models:
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 4.6
+      box_AP: 38.4
+      mask_AP: 36.3
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 3x
+      mem_gb: 4.6
+      box_AP: 41.0
+      mask_AP: 38.0
+  - repository: mmdetection
+    file: configs/dino/README.md
+    config: dino
+    algorithm: DINO
+    models:
+    - model: DINO-4scale
+      lr_schedule: 12e
+      box_AP: 49.0
+    - model: DINO-4scale
+      lr_schedule: 12e
+      box_AP: 50.1
+    - model: DINO-5scale
+      lr_schedule: 12e
+      box_AP: 57.2
+    - model: DINO-5scale
+      lr_schedule: 36e
+      box_AP: 58.4
+  - repository: mmdetection
+    file: configs/mask_rcnn/README.md
+    config: mask_rcnn
+    algorithm: Mask R-CNN
+    models:
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 4.3
+      box_AP: 38.0
+      mask_AP: 34.4
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.4
+      fps: 16.1
+      box_AP: 38.2
+      mask_AP: 34.7
+    - model: R-50-FPN (FP16)
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 3.6
+      fps: 24.1
+      box_AP: 38.1
+      mask_AP: 34.7
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 39.2
+      mask_AP: 35.4
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 1x
+      box_AP: 40.4
+      mask_AP: 36.4
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.4
+      fps: 13.5
+      box_AP: 40.0
+      mask_AP: 36.1
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 40.8
+      mask_AP: 36.6
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.6
+      fps: 11.3
+      box_AP: 41.9
+      mask_AP: 37.5
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 42.2
+      mask_AP: 37.8
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.7
+      fps: 8.0
+      box_AP: 42.8
+      mask_AP: 38.4
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 42.7
+      mask_AP: 38.1
+    - model: X-101-32x8d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.6
+      box_AP: 42.8
+      mask_AP: 38.3
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 2x
+      mem_gb: 4.3
+      box_AP: 40.3
+      mask_AP: 36.5
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 3x
+      mem_gb: 4.3
+      box_AP: 40.8
+      mask_AP: 37.0
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 4.1
+      box_AP: 40.9
+      mask_AP: 37.1
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 3x
+      mem_gb: 5.9
+      box_AP: 42.9
+      mask_AP: 38.5
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 6.1
+      box_AP: 42.7
+      mask_AP: 38.5
+    - model: x101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 7.3
+      box_AP: 43.6
+      mask_AP: 39.0
+    - model: X-101-32x8d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.4
+      box_AP: 43.4
+      mask_AP: 39.0
+    - model: X-101-32x8d-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 10.3
+      box_AP: 44.3
+      mask_AP: 39.5
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 10.4
+      box_AP: 44.5
+      mask_AP: 39.7
+  - repository: mmdetection
+    file: configs/openimages/README.md
+    config: openimages
+    algorithm: Open Images Dataset
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.7
+      box_AP: 51.6
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.7
+      box_AP: 60.0
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.7
+      box_AP: 54.9
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.1
+      box_AP: 65.0
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.6
+      box_AP: 61.5
+    - model: VGG16
+      style: pytorch
+      lr_schedule: 36e
+      mem_gb: 10.8
+      box_AP: 35.4
+    - model: Faster R-CNN r50 (Challenge 2019)
+      box_AP: 62.19
+    - model: Faster R-CNN r50 (Challenge 2019)
+      box_AP: 54.87
+    - model: Faster R-CNN r50 (Challenge 2019)
+      box_AP: 71.77
+    - model: Faster R-CNN r50 (Challenge 2019)
+      box_AP: 64.98
+  - repository: mmdetection
+    file: configs/carafe/README.md
+    config: carafe
+    algorithm: CARAFE
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      test_proposal_num: 1000.0
+      fps: 16.5
+      box_AP: 38.6
+      mask_AP: 38.6
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      test_proposal_num: 1000.0
+      fps: 14.0
+      box_AP: 39.3
+      mask_AP: 35.8
+  - repository: mmdetection
+    file: configs/deformable_detr/README.md
+    config: deformable_detr
+    algorithm: Deformable DETR
+    models:
+    - model: Deformable DETR
+      lr_schedule: 50e
+      box_AP: 44.3
+    - model: + iterative bounding box refinement
+      lr_schedule: 50e
+      box_AP: 46.2
+    - model: ++ two-stage Deformable DETR
+      lr_schedule: 50e
+      box_AP: 47.0
+  - repository: mmdetection
+    file: configs/scratch/README.md
+    config: scratch
+    algorithm: Scratch
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 6x
+      box_AP: 40.7
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 6x
+      box_AP: 41.2
+      mask_AP: 37.4
+  - repository: mmdetection
+    file: configs/ghm/README.md
+    config: ghm
+    algorithm: GHM
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.0
+      fps: 3.3
+      box_AP: 37.0
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.0
+      fps: 4.4
+      box_AP: 39.1
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.2
+      fps: 5.1
+      box_AP: 40.7
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.3
+      fps: 5.2
+      box_AP: 41.4
+  - repository: mmdetection
+    file: configs/sparse_rcnn/README.md
+    config: sparse_rcnn
+    algorithm: Sparse R-CNN
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      number_of_proposals: 100.0
+      box_AP: 37.9
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 3x
+      number_of_proposals: 100.0
+      box_AP: 42.8
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 3x
+      number_of_proposals: 300.0
+      box_AP: 45.0
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 3x
+      number_of_proposals: 100.0
+      box_AP: 44.2
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 3x
+      number_of_proposals: 300.0
+      box_AP: 46.2
+  - repository: mmdetection
+    file: configs/solo/README.md
+    config: solo
+    algorithm: SOLO
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 8.0
+      fps: 14.0
+      mask_AP: 33.1
+    - model: R-50
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 7.4
+      fps: 14.0
+      mask_AP: 35.9
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.8
+      fps: 12.5
+      mask_AP: 33.9
+    - model: R-50
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 7.9
+      fps: 12.5
+      mask_AP: 36.7
+    - model: R-50
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 2.2
+      fps: 31.2
+      mask_AP: 32.9
+  - repository: mmdetection
+    file: configs/v3det/README.md
+    config: v3det
+    algorithm: '<img src="v3det_icon.jpg" height="25"> V3Det: Vast Vocabulary Visual
+      Detection Dataset'
+    models:
+    - model: Faster R-CNN
+      lr_schedule: 2x
+      box_AP: 25.4
+    - model: Cascade R-CNN
+      lr_schedule: 2x
+      box_AP: 31.6
+    - model: FCOS
+      lr_schedule: 2x
+      box_AP: 9.4
+    - model: Deformable-DETR
+      lr_schedule: 50e
+      box_AP: 34.4
+    - model: DINO
+      lr_schedule: 36e
+      box_AP: 33.5
+    - model: Faster R-CNN
+      lr_schedule: 2x
+      box_AP: 37.6
+    - model: Cascade R-CNN
+      lr_schedule: 2x
+      box_AP: 42.5
+    - model: FCOS
+      lr_schedule: 2x
+      box_AP: 21.0
+    - model: Deformable-DETR
+      lr_schedule: 50e
+      box_AP: 42.5
+    - model: DINO
+      lr_schedule: 36e
+      box_AP: 42.0
+  - repository: mmdetection
+    file: configs/dsdl/README.md
+    config: dsdl
+    algorithm: 'DSDL: Standard Description Language for DataSet'
+    models:
+    - model: model
+      box_AP: 80.3
+    - model: model
+      box_AP: 37.4
+    - model: model
+      box_AP: 19.8
+    - model: model
+      box_AP: 59.9
+    - model: model
+      box_AP: 38.1
+      mask_AP: 34.7
+  - repository: mmdetection
+    file: configs/cascade_rpn/README.md
+    config: cascade_rpn
+    algorithm: Cascade RPN
+    models:
+    - model: R-50-FPN
+      style: caffe
+      box_AP: 39.9
+    - model: R-50-FPN
+      style: caffe
+      box_AP: 40.4
+  - repository: mmdetection
+    file: configs/fcos/README.md
+    config: fcos
+    algorithm: FCOS
+    models:
+    - model: R-50
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 3.6
+      fps: 22.7
+      box_AP: 36.6
+    - model: R-50
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 3.7
+      box_AP: 38.7
+    - model: R-50
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 3.8
+      box_AP: 42.3
+    - model: R-101
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 5.5
+      fps: 17.3
+      box_AP: 39.1
+    - model: R-50
+      style: caffe
+      lr_schedule: 2x
+      mem_gb: 2.6
+      fps: 22.9
+      box_AP: 38.5
+    - model: R-101
+      style: caffe
+      lr_schedule: 2x
+      mem_gb: 5.5
+      fps: 17.3
+      box_AP: 40.8
+    - model: X-101
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 10.0
+      fps: 9.7
+      box_AP: 42.6
+  - repository: mmdetection
+    file: configs/double_heads/README.md
+    config: double_heads
+    algorithm: Double Heads
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.8
+      fps: 9.5
+      box_AP: 40.0
+  - repository: mmdetection
+    file: configs/dcn/README.md
+    config: dcn
+    algorithm: DCN
+    models:
+    - model: Faster
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.0
+      fps: 17.8
+      box_AP: 41.3
+    - model: Faster
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.0
+      fps: 17.2
+      box_AP: 38.9
+    - model: Faster
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.0
+      fps: 12.5
+      box_AP: 42.7
+    - model: Faster
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.3
+      fps: 10.0
+      box_AP: 44.5
+    - model: Mask
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.5
+      fps: 15.4
+      box_AP: 41.8
+      mask_AP: 37.4
+    - model: Mask
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.5
+      fps: 11.7
+      box_AP: 43.5
+      mask_AP: 38.9
+    - model: Cascade
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.5
+      fps: 14.6
+      box_AP: 43.8
+    - model: Cascade
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.4
+      fps: 11.0
+      box_AP: 45.0
+    - model: Cascade Mask
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.0
+      fps: 10.0
+      box_AP: 44.4
+      mask_AP: 38.6
+    - model: Cascade Mask
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 8.0
+      fps: 8.6
+      box_AP: 45.8
+      mask_AP: 39.7
+    - model: Cascade Mask
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 9.2
+      box_AP: 47.3
+      mask_AP: 41.1
+    - model: Mask
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 3.0
+      box_AP: 41.9
+      mask_AP: 37.5
+  - repository: mmdetection
+    file: configs/retinanet/README.md
+    config: retinanet
+    algorithm: RetinaNet
+    models:
+    - model: R-18-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 1.7
+      box_AP: 31.7
+    - model: R-18-FPN
+      style: pytorch
+      lr_schedule: 1x(1 x 8 BS)
+      mem_gb: 5.0
+      box_AP: 31.7
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 3.5
+      fps: 18.6
+      box_AP: 36.3
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 3.8
+      fps: 19.0
+      box_AP: 36.5
+    - model: R-50-FPN (FP16)
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 2.8
+      fps: 31.6
+      box_AP: 36.4
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 37.4
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 5.5
+      fps: 14.7
+      box_AP: 38.5
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.7
+      fps: 15.0
+      box_AP: 38.5
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 38.9
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.0
+      fps: 12.1
+      box_AP: 39.9
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 40.1
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.0
+      fps: 8.7
+      box_AP: 41.0
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 40.8
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 3.5
+      box_AP: 39.5
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 3x
+      mem_gb: 5.4
+      box_AP: 40.7
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 5.4
+      box_AP: 41.0
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 9.8
+      box_AP: 41.6
+  - repository: mmdetection
+    file: configs/rtmdet/README.md
+    config: rtmdet
+    algorithm: 'RTMDet: An Empirical Study of Designing Real-Time Object Detectors'
+    models:
+    - model: RTMDet-tiny
+      size: 640.0
+      box_AP: 41.1
+      params_m: 4.8
+      flops_g: 8.1
+      trt_fp16_latency_ms_br_rtx3090: 0.98
+      trt_fp16_latency_ms_br_t4: 2.34
+    - model: RTMDet-s
+      size: 640.0
+      box_AP: 44.6
+      params_m: 8.89
+      flops_g: 14.8
+      trt_fp16_latency_ms_br_rtx3090: 1.22
+      trt_fp16_latency_ms_br_t4: 2.96
+    - model: RTMDet-m
+      size: 640.0
+      box_AP: 49.4
+      params_m: 24.71
+      flops_g: 39.27
+      trt_fp16_latency_ms_br_rtx3090: 1.62
+      trt_fp16_latency_ms_br_t4: 6.41
+    - model: RTMDet-l
+      size: 640.0
+      box_AP: 51.5
+      params_m: 52.3
+      flops_g: 80.23
+      trt_fp16_latency_ms_br_rtx3090: 2.44
+      trt_fp16_latency_ms_br_t4: 10.32
+    - model: RTMDet-x
+      size: 640.0
+      box_AP: 52.8
+      params_m: 94.86
+      flops_g: 141.67
+      trt_fp16_latency_ms_br_rtx3090: 3.1
+      trt_fp16_latency_ms_br_t4: 18.8
+    - model: RTMDet-x-P6
+      size: 1280.0
+      box_AP: 54.9
+    - model: RTMDet-l-ConvNeXt-B
+      size: 640.0
+      box_AP: 53.1
+    - model: RTMDet-l-Swin-B
+      size: 640.0
+      box_AP: 52.4
+    - model: RTMDet-l-Swin-B-P6
+      size: 1280.0
+      box_AP: 56.4
+    - model: RTMDet-Ins-tiny
+      size: 640.0
+      box_AP: 40.5
+      mask_AP: 35.4
+      params_m: 5.6
+      flops_g: 11.8
+      trt_fp16_latency_ms: 1.7
+    - model: RTMDet-Ins-s
+      size: 640.0
+      box_AP: 44.0
+      mask_AP: 38.7
+      params_m: 10.18
+      flops_g: 21.5
+      trt_fp16_latency_ms: 1.93
+    - model: RTMDet-Ins-m
+      size: 640.0
+      box_AP: 48.8
+      mask_AP: 42.1
+      params_m: 27.58
+      flops_g: 54.13
+      trt_fp16_latency_ms: 2.69
+    - model: RTMDet-Ins-l
+      size: 640.0
+      box_AP: 51.2
+      mask_AP: 43.7
+      params_m: 57.37
+      flops_g: 106.56
+      trt_fp16_latency_ms: 3.68
+    - model: RTMDet-Ins-x
+      size: 640.0
+      box_AP: 52.4
+      mask_AP: 44.6
+      params_m: 102.7
+      flops_g: 182.7
+      trt_fp16_latency_ms: 5.31
+    - model: RTMDet-tiny
+      mAP: 50.64
+      params_m: 4.88
+      flops_g: 20.45
+      trt_fp16_latency_ms: 4.4
+    - model: RTMDet-tiny
+      mAP: 58.87
+      params_m: 4.88
+      flops_g: 20.45
+      trt_fp16_latency_ms: 4.4
+    - model: RTMDet-s
+      mAP: 50.59
+      params_m: 8.86
+      flops_g: 37.62
+      trt_fp16_latency_ms: 4.86
+    - model: RTMDet-s
+      mAP: 60.07
+      params_m: 8.86
+      flops_g: 37.62
+      trt_fp16_latency_ms: 4.86
+    - model: RTMDet-m
+      mAP: 54.47
+      params_m: 24.67
+      flops_g: 99.76
+      trt_fp16_latency_ms: 7.82
+    - model: RTMDet-m
+      mAP: 61.26
+      params_m: 24.67
+      flops_g: 99.76
+      trt_fp16_latency_ms: 7.82
+    - model: RTMDet-l
+      mAP: 55.21
+      params_m: 52.27
+      flops_g: 204.21
+      trt_fp16_latency_ms: 10.82
+    - model: RTMDet-l
+      mAP: 61.47
+      params_m: 52.27
+      flops_g: 204.21
+      trt_fp16_latency_ms: 10.82
+    - model: RTMDet-l
+      mAP: 63.45
+      params_m: 52.27
+      flops_g: 204.21
+      trt_fp16_latency_ms: 10.82
+  - repository: mmdetection
+    file: configs/grid_rcnn/README.md
+    config: grid_rcnn
+    algorithm: Grid R-CNN
+    models:
+    - model: R-50
+      lr_schedule: 2x
+      mem_gb: 5.1
+      fps: 15.0
+      box_AP: 40.4
+    - model: R-101
+      lr_schedule: 2x
+      mem_gb: 7.0
+      fps: 12.6
+      box_AP: 41.5
+    - model: X-101-32x4d
+      lr_schedule: 2x
+      mem_gb: 8.3
+      fps: 10.8
+      box_AP: 42.9
+    - model: X-101-64x4d
+      lr_schedule: 2x
+      mem_gb: 11.3
+      fps: 7.7
+      box_AP: 43.0
+  - repository: mmdetection
+    file: configs/dyhead/README.md
+    config: dyhead
+    algorithm: DyHead
+    models:
+    - model: R-50
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 5.4
+      fps: 13.2
+      box_AP: 42.5
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.9
+      fps: 13.7
+      box_AP: 43.3
+    - model: Swin-L
+      style: caffe
+      lr_schedule: 2x
+      box_AP: 56.2
+  - repository: mmdetection
+    file: configs/objects365/README.md
+    config: objects365
+    algorithm: Objects365 Dataset
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 19.6
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1350K
+      box_AP: 22.3
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 14.8
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1350K
+      box_AP: 18.0
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 19.8
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 16.7
+  - repository: mmdetection
+    file: configs/gn+ws/README.md
+    config: gn+ws
+    algorithm: GN + WS
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.9
+      fps: 11.7
+      box_AP: 39.7
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 8.9
+      fps: 9.0
+      box_AP: 41.7
+    - model: X-50-32x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.0
+      fps: 10.3
+      box_AP: 40.7
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.8
+      fps: 7.6
+      box_AP: 42.1
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 7.3
+      fps: 10.5
+      box_AP: 40.6
+      mask_AP: 36.6
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 10.3
+      fps: 8.6
+      box_AP: 42.0
+      mask_AP: 37.7
+    - model: X-50-32x4d-FPN
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 8.4
+      fps: 9.3
+      box_AP: 41.1
+      mask_AP: 37.0
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 12.2
+      fps: 7.1
+      box_AP: 42.1
+      mask_AP: 37.9
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 20-23-24e
+      mem_gb: 7.3
+      box_AP: 41.1
+      mask_AP: 37.1
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 20-23-24e
+      mem_gb: 10.3
+      box_AP: 43.1
+      mask_AP: 38.6
+    - model: X-50-32x4d-FPN
+      style: pytorch
+      lr_schedule: 20-23-24e
+      mem_gb: 8.4
+      box_AP: 42.1
+      mask_AP: 38.0
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 20-23-24e
+      mem_gb: 12.2
+      box_AP: 42.7
+      mask_AP: 38.5
+  - repository: mmdetection
+    file: configs/yolof/README.md
+    config: yolof
+    algorithm: YOLOF
+    models:
+    - model: R-50-C5
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 8.3
+      box_AP: 37.5
+  - repository: mmdetection
+    file: configs/pisa/README.md
+    config: pisa
+    algorithm: PISA
+    models:
+    - model: R-50-FPN
+      lr_schedule: 1x
+      box_AP: 36.4
+    - model: R-50-FPN
+      lr_schedule: 1x
+      box_AP: 38.4
+    - model: X101-32x4d-FPN
+      lr_schedule: 1x
+      box_AP: 40.1
+    - model: X101-32x4d-FPN
+      lr_schedule: 1x
+      box_AP: 41.9
+    - model: R-50-FPN
+      lr_schedule: 1x
+      box_AP: 37.3
+      mask_AP: 34.2
+    - model: R-50-FPN
+      lr_schedule: 1x
+      box_AP: 39.1
+      mask_AP: 35.2
+    - model: X101-32x4d-FPN
+      lr_schedule: 1x
+      box_AP: 41.1
+      mask_AP: 37.1
+    - model: X101-32x4d-FPN
+      lr_schedule: 1x
+    - model: R-50-FPN
+      lr_schedule: 1x
+      box_AP: 35.6
+    - model: R-50-FPN
+      lr_schedule: 1x
+      box_AP: 36.9
+    - model: X101-32x4d-FPN
+      lr_schedule: 1x
+      box_AP: 39.0
+    - model: X101-32x4d-FPN
+      lr_schedule: 1x
+      box_AP: 40.7
+    - model: VGG16
+      lr_schedule: 1x
+      box_AP: 25.6
+    - model: VGG16
+      lr_schedule: 1x
+      box_AP: 27.6
+    - model: VGG16
+      lr_schedule: 1x
+      box_AP: 29.3
+    - model: VGG16
+      lr_schedule: 1x
+      box_AP: 31.8
+  - repository: mmdetection
+    file: configs/ddod/README.md
+    config: ddod
+    algorithm: DDOD
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 3.4
+      box_AP: 41.7
+  - repository: mmdetection
+    file: configs/res2net/README.md
+    config: res2net
+    algorithm: Res2Net
+    models:
+    - model: R2-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 7.4
+      box_AP: 43.0
+    - model: R2-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 7.9
+      box_AP: 43.6
+      mask_AP: 38.7
+    - model: R2-101-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 7.8
+      box_AP: 45.7
+    - model: R2-101-FPN
+      style: pytorch
+      lr_schedule: 20e
+      mem_gb: 9.5
+      box_AP: 46.4
+      mask_AP: 40.0
+    - model: R2-101-FPN
+      style: pytorch
+      lr_schedule: 20e
+      box_AP: 47.5
+      mask_AP: 41.6
+  - repository: mmdetection
+    file: configs/faster_rcnn/README.md
+    config: faster_rcnn
+    algorithm: Faster R-CNN
+    models:
+    - model: R-50-C4
+      style: caffe
+      lr_schedule: 1x
+      box_AP: 35.6
+    - model: R-50-DC5
+      style: caffe
+      lr_schedule: 1x
+      box_AP: 37.2
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 3.8
+      box_AP: 37.8
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.0
+      fps: 21.4
+      box_AP: 37.4
+    - model: R-50-FPN (FP16)
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 3.4
+      fps: 28.8
+      box_AP: 37.5
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 38.4
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 5.7
+      box_AP: 39.8
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.0
+      fps: 15.6
+      box_AP: 39.4
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 39.8
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.2
+      fps: 13.8
+      box_AP: 41.2
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 41.2
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 10.3
+      fps: 9.4
+      box_AP: 42.1
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 41.6
+    - model: R-50-FPN
+      mem_gb: 4.0
+      fps: 21.4
+      box_AP: 37.4
+    - model: R-50-FPN
+      box_AP: 37.9
+    - model: R-50-FPN
+      box_AP: 37.6
+    - model: R-50-FPN
+      box_AP: 37.4
+    - model: R-50-C4
+      style: caffe
+      lr_schedule: 1x
+      box_AP: 35.9
+    - model: R-50-DC5
+      style: caffe
+      lr_schedule: 1x
+      box_AP: 37.4
+    - model: R-50-DC5
+      style: caffe
+      lr_schedule: 3x
+      box_AP: 38.7
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 2x
+      mem_gb: 3.7
+      box_AP: 39.7
+    - model: R-50-FPN
+      style: caffe
+      lr_schedule: 3x
+      mem_gb: 3.7
+      box_AP: 39.9
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 3.9
+      box_AP: 40.3
+    - model: R-101-FPN
+      style: caffe
+      lr_schedule: 3x
+      mem_gb: 5.6
+      box_AP: 42.0
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 5.8
+      box_AP: 41.8
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 7.0
+      box_AP: 42.5
+    - model: X-101-32x8d-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 10.1
+      box_AP: 42.4
+    - model: X-101-64x4d-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 10.0
+      box_AP: 43.1
+    - model: R-50-FPN-Caffe-3x
+      style: caffe
+      mem_gb: 3.7
+      box_AP: 55.8
+    - model: R-50-FPN-Caffe-3x
+      style: caffe
+      mem_gb: 3.7
+      box_AP: 44.1
+    - model: R-50-TNR
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 40.2
+  - repository: mmdetection
+    file: configs/albu_example/README.md
+    config: albu_example
+    algorithm: Albu Example
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.4
+      fps: 16.6
+      box_AP: 38.0
+      mask_AP: 34.5
+  - repository: mmdetection
+    file: configs/solov2/README.md
+    config: solov2
+    algorithm: SOLOv2
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.1
+      mask_AP: 34.8
+    - model: R-50
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 5.1
+      mask_AP: 37.5
+    - model: R-101
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 6.9
+      mask_AP: 39.1
+    - model: R-101(DCN)
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 7.1
+      mask_AP: 41.2
+    - model: X-101(DCN)
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 11.3
+      mask_AP: 42.4
+    - model: R-18
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 9.1
+      mask_AP: 29.7
+    - model: R-34
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 9.3
+      mask_AP: 31.9
+    - model: R-50
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 9.9
+      mask_AP: 33.7
+  - repository: mmdetection
+    file: configs/resnet_strikes_back/README.md
+    config: resnet_strikes_back
+    algorithm: ResNet strikes back
+    models:
+    - model: R-50 rsb
+      lr_schedule: 1x
+      mem_gb: 3.9
+      box_AP: 40.8
+    - model: R-50 rsb
+      lr_schedule: 1x
+      mem_gb: 4.5
+      box_AP: 41.2
+      mask_AP: 38.2
+    - model: R-50 rsb
+      lr_schedule: 1x
+      mem_gb: 6.2
+      box_AP: 44.8
+      mask_AP: 39.9
+    - model: R-50 rsb
+      lr_schedule: 1x
+      mem_gb: 3.8
+      box_AP: 39.0
+  - repository: mmdetection
+    file: configs/mm_grounding_dino/README.md
+    config: mm_grounding_dino
+    algorithm: MM Grounding DINO
+    models:
+    - model: Swin-T
+      style: Zero-shot
+      mAP: 46.7
+    - model: Swin-T
+      style: Zero-shot
+      mAP: 48.1
+    - model: Swin-T
+      style: Zero-shot
+      mAP: 48.4
+    - model: Swin-T
+      style: Zero-shot
+      mAP: 48.5
+    - model: Swin-T
+      style: Zero-shot
+      mAP: 50.4
+    - model: Swin-T
+      style: Zero-shot
+      mAP: 50.5
+    - model: Swin-T
+      style: Zero-shot
+      mAP: 50.6
+    - model: Swin-T
+      style: Zero-shot
+      mAP: 50.4
+    - model: Swin-B
+      style: Zero-shot
+      mAP: 52.5
+    - model: Swin-B
+      style: '-'
+      mAP: 59.5
+    - model: Swin-L
+      style: Zero-shot
+      mAP: 53.0
+    - model: Swin-L
+      style: '-'
+      mAP: 60.3
+    - model: GDINO-T
+      AP: 20.1
+    - model: MM-GDINO-T
+      AP: 27.0
+    - model: MM-GDINO-T
+      AP: 27.1
+    - model: MM-GDINO-T
+      AP: 30.6
+    - model: MM-GDINO-T
+      AP: 31.9
+    - model: AerialMaritimeDrone
+      AP: 0.173
+      mm_gdino_t_br_o365_goldg: 0.133
+      mm_gdino_t_br_o365_goldg_grit: 0.155
+      mm_gdino_t_br_o365_goldg_v3det: 0.177
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.151
+    - model: Aquarium
+      AP: 0.195
+      mm_gdino_t_br_o365_goldg: 0.252
+      mm_gdino_t_br_o365_goldg_grit: 0.261
+      mm_gdino_t_br_o365_goldg_v3det: 0.266
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.283
+    - model: CottontailRabbits
+      AP: 0.799
+      mm_gdino_t_br_o365_goldg: 0.771
+      mm_gdino_t_br_o365_goldg_grit: 0.81
+      mm_gdino_t_br_o365_goldg_v3det: 0.778
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.786
+    - model: EgoHands
+      AP: 0.608
+      mm_gdino_t_br_o365_goldg: 0.499
+      mm_gdino_t_br_o365_goldg_grit: 0.537
+      mm_gdino_t_br_o365_goldg_v3det: 0.506
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.519
+    - model: NorthAmericaMushrooms
+      AP: 0.507
+      mm_gdino_t_br_o365_goldg: 0.331
+      mm_gdino_t_br_o365_goldg_grit: 0.462
+      mm_gdino_t_br_o365_goldg_v3det: 0.669
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.767
+    - model: Packages
+      AP: 0.687
+      mm_gdino_t_br_o365_goldg: 0.707
+      mm_gdino_t_br_o365_goldg_grit: 0.687
+      mm_gdino_t_br_o365_goldg_v3det: 0.71
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.706
+    - model: PascalVOC
+      AP: 0.563
+      mm_gdino_t_br_o365_goldg: 0.565
+      mm_gdino_t_br_o365_goldg_grit: 0.58
+      mm_gdino_t_br_o365_goldg_v3det: 0.556
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.566
+    - model: pistols
+      AP: 0.726
+      mm_gdino_t_br_o365_goldg: 0.585
+      mm_gdino_t_br_o365_goldg_grit: 0.709
+      mm_gdino_t_br_o365_goldg_v3det: 0.671
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.729
+    - model: pothole
+      AP: 0.215
+      mm_gdino_t_br_o365_goldg: 0.136
+      mm_gdino_t_br_o365_goldg_grit: 0.285
+      mm_gdino_t_br_o365_goldg_v3det: 0.199
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.243
+    - model: Raccoon
+      AP: 0.549
+      mm_gdino_t_br_o365_goldg: 0.469
+      mm_gdino_t_br_o365_goldg_grit: 0.511
+      mm_gdino_t_br_o365_goldg_v3det: 0.553
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.535
+    - model: ShellfishOpenImages
+      AP: 0.393
+      mm_gdino_t_br_o365_goldg: 0.321
+      mm_gdino_t_br_o365_goldg_grit: 0.437
+      mm_gdino_t_br_o365_goldg_v3det: 0.519
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.488
+    - model: thermalDogsAndPeople
+      AP: 0.657
+      mm_gdino_t_br_o365_goldg: 0.556
+      mm_gdino_t_br_o365_goldg_grit: 0.603
+      mm_gdino_t_br_o365_goldg_v3det: 0.493
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.542
+    - model: VehiclesOpenImages
+      AP: 0.613
+      mm_gdino_t_br_o365_goldg: 0.566
+      mm_gdino_t_br_o365_goldg_grit: 0.603
+      mm_gdino_t_br_o365_goldg_v3det: 0.614
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.615
+    - model: Average
+      AP: 0.514
+      mm_gdino_t_br_o365_goldg: 0.453
+      mm_gdino_t_br_o365_goldg_grit: 0.511
+      mm_gdino_t_br_o365_goldg_v3det: 0.516
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.533
+    - model: AerialMaritimeDrone_large
+      AP: 0.173
+      mm_gdino_t_br_o365_goldg: 0.133
+      mm_gdino_t_br_o365_goldg_grit: 0.155
+      mm_gdino_t_br_o365_goldg_v3det: 0.177
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.151
+    - model: AerialMaritimeDrone_tiled
+      AP: 0.206
+      mm_gdino_t_br_o365_goldg: 0.17
+      mm_gdino_t_br_o365_goldg_grit: 0.225
+      mm_gdino_t_br_o365_goldg_v3det: 0.184
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.206
+    - model: AmericanSignLanguageLetters
+      AP: 0.002
+      mm_gdino_t_br_o365_goldg: 0.016
+      mm_gdino_t_br_o365_goldg_grit: 0.02
+      mm_gdino_t_br_o365_goldg_v3det: 0.011
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.007
+    - model: Aquarium
+      AP: 0.195
+      mm_gdino_t_br_o365_goldg: 0.252
+      mm_gdino_t_br_o365_goldg_grit: 0.261
+      mm_gdino_t_br_o365_goldg_v3det: 0.266
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.283
+    - model: BCCD
+      AP: 0.161
+      mm_gdino_t_br_o365_goldg: 0.069
+      mm_gdino_t_br_o365_goldg_grit: 0.118
+      mm_gdino_t_br_o365_goldg_v3det: 0.083
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.077
+    - model: boggleBoards
+      AP: 0.0
+      mm_gdino_t_br_o365_goldg: 0.002
+      mm_gdino_t_br_o365_goldg_grit: 0.001
+      mm_gdino_t_br_o365_goldg_v3det: 0.001
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.002
+    - model: brackishUnderwater
+      AP: 0.021
+      mm_gdino_t_br_o365_goldg: 0.033
+      mm_gdino_t_br_o365_goldg_grit: 0.021
+      mm_gdino_t_br_o365_goldg_v3det: 0.025
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.025
+    - model: ChessPieces
+      AP: 0.0
+      mm_gdino_t_br_o365_goldg: 0.0
+      mm_gdino_t_br_o365_goldg_grit: 0.0
+      mm_gdino_t_br_o365_goldg_v3det: 0.0
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.0
+    - model: CottontailRabbits
+      AP: 0.806
+      mm_gdino_t_br_o365_goldg: 0.771
+      mm_gdino_t_br_o365_goldg_grit: 0.81
+      mm_gdino_t_br_o365_goldg_v3det: 0.778
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.786
+    - model: dice
+      AP: 0.004
+      mm_gdino_t_br_o365_goldg: 0.002
+      mm_gdino_t_br_o365_goldg_grit: 0.005
+      mm_gdino_t_br_o365_goldg_v3det: 0.001
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.001
+    - model: DroneControl
+      AP: 0.042
+      mm_gdino_t_br_o365_goldg: 0.047
+      mm_gdino_t_br_o365_goldg_grit: 0.097
+      mm_gdino_t_br_o365_goldg_v3det: 0.088
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.074
+    - model: EgoHands_generic
+      AP: 0.608
+      mm_gdino_t_br_o365_goldg: 0.527
+      mm_gdino_t_br_o365_goldg_grit: 0.537
+      mm_gdino_t_br_o365_goldg_v3det: 0.506
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.519
+    - model: EgoHands_specific
+      AP: 0.002
+      mm_gdino_t_br_o365_goldg: 0.001
+      mm_gdino_t_br_o365_goldg_grit: 0.005
+      mm_gdino_t_br_o365_goldg_v3det: 0.007
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.003
+    - model: HardHatWorkers
+      AP: 0.046
+      mm_gdino_t_br_o365_goldg: 0.048
+      mm_gdino_t_br_o365_goldg_grit: 0.07
+      mm_gdino_t_br_o365_goldg_v3det: 0.07
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.108
+    - model: MaskWearing
+      AP: 0.004
+      mm_gdino_t_br_o365_goldg: 0.009
+      mm_gdino_t_br_o365_goldg_grit: 0.004
+      mm_gdino_t_br_o365_goldg_v3det: 0.011
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.009
+    - model: MountainDewCommercial
+      AP: 0.43
+      mm_gdino_t_br_o365_goldg: 0.453
+      mm_gdino_t_br_o365_goldg_grit: 0.465
+      mm_gdino_t_br_o365_goldg_v3det: 0.194
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.43
+    - model: NorthAmericaMushrooms
+      AP: 0.471
+      mm_gdino_t_br_o365_goldg: 0.331
+      mm_gdino_t_br_o365_goldg_grit: 0.462
+      mm_gdino_t_br_o365_goldg_v3det: 0.669
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.767
+    - model: openPoetryVision
+      AP: 0.0
+      mm_gdino_t_br_o365_goldg: 0.001
+      mm_gdino_t_br_o365_goldg_grit: 0.0
+      mm_gdino_t_br_o365_goldg_v3det: 0.0
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.0
+    - model: OxfordPets_by_breed
+      AP: 0.003
+      mm_gdino_t_br_o365_goldg: 0.002
+      mm_gdino_t_br_o365_goldg_grit: 0.004
+      mm_gdino_t_br_o365_goldg_v3det: 0.006
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.004
+    - model: OxfordPets_by_species
+      AP: 0.011
+      mm_gdino_t_br_o365_goldg: 0.019
+      mm_gdino_t_br_o365_goldg_grit: 0.016
+      mm_gdino_t_br_o365_goldg_v3det: 0.02
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.015
+    - model: PKLot
+      AP: 0.001
+      mm_gdino_t_br_o365_goldg: 0.004
+      mm_gdino_t_br_o365_goldg_grit: 0.002
+      mm_gdino_t_br_o365_goldg_v3det: 0.008
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.007
+    - model: Packages
+      AP: 0.695
+      mm_gdino_t_br_o365_goldg: 0.707
+      mm_gdino_t_br_o365_goldg_grit: 0.687
+      mm_gdino_t_br_o365_goldg_v3det: 0.71
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.706
+    - model: PascalVOC
+      AP: 0.563
+      mm_gdino_t_br_o365_goldg: 0.565
+      mm_gdino_t_br_o365_goldg_grit: 0.58
+      mm_gdino_t_br_o365_goldg_v3det: 0.566
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.566
+    - model: pistols
+      AP: 0.726
+      mm_gdino_t_br_o365_goldg: 0.585
+      mm_gdino_t_br_o365_goldg_grit: 0.709
+      mm_gdino_t_br_o365_goldg_v3det: 0.671
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.729
+    - model: plantdoc
+      AP: 0.005
+      mm_gdino_t_br_o365_goldg: 0.005
+      mm_gdino_t_br_o365_goldg_grit: 0.007
+      mm_gdino_t_br_o365_goldg_v3det: 0.008
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.011
+    - model: pothole
+      AP: 0.215
+      mm_gdino_t_br_o365_goldg: 0.136
+      mm_gdino_t_br_o365_goldg_grit: 0.219
+      mm_gdino_t_br_o365_goldg_v3det: 0.077
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.168
+    - model: Raccoons
+      AP: 0.549
+      mm_gdino_t_br_o365_goldg: 0.469
+      mm_gdino_t_br_o365_goldg_grit: 0.511
+      mm_gdino_t_br_o365_goldg_v3det: 0.553
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.535
+    - model: selfdrivingCar
+      AP: 0.089
+      mm_gdino_t_br_o365_goldg: 0.091
+      mm_gdino_t_br_o365_goldg_grit: 0.076
+      mm_gdino_t_br_o365_goldg_v3det: 0.094
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.083
+    - model: ShellfishOpenImages
+      AP: 0.393
+      mm_gdino_t_br_o365_goldg: 0.321
+      mm_gdino_t_br_o365_goldg_grit: 0.437
+      mm_gdino_t_br_o365_goldg_v3det: 0.519
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.488
+    - model: ThermalCheetah
+      AP: 0.087
+      mm_gdino_t_br_o365_goldg: 0.063
+      mm_gdino_t_br_o365_goldg_grit: 0.081
+      mm_gdino_t_br_o365_goldg_v3det: 0.03
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.045
+    - model: thermalDogsAndPeople
+      AP: 0.657
+      mm_gdino_t_br_o365_goldg: 0.556
+      mm_gdino_t_br_o365_goldg_grit: 0.603
+      mm_gdino_t_br_o365_goldg_v3det: 0.493
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.543
+    - model: UnoCards
+      AP: 0.006
+      mm_gdino_t_br_o365_goldg: 0.012
+      mm_gdino_t_br_o365_goldg_grit: 0.01
+      mm_gdino_t_br_o365_goldg_v3det: 0.009
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.005
+    - model: VehiclesOpenImages
+      AP: 0.613
+      mm_gdino_t_br_o365_goldg: 0.566
+      mm_gdino_t_br_o365_goldg_grit: 0.603
+      mm_gdino_t_br_o365_goldg_v3det: 0.614
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.615
+    - model: WildfireSmoke
+      AP: 0.134
+      mm_gdino_t_br_o365_goldg: 0.106
+      mm_gdino_t_br_o365_goldg_grit: 0.154
+      mm_gdino_t_br_o365_goldg_v3det: 0.042
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.127
+    - model: websiteScreenshots
+      AP: 0.012
+      mm_gdino_t_br_o365_goldg: 0.02
+      mm_gdino_t_br_o365_goldg_grit: 0.016
+      mm_gdino_t_br_o365_goldg_v3det: 0.016
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.016
+    - model: Average
+      AP: 0.227
+      mm_gdino_t_br_o365_goldg: 0.202
+      mm_gdino_t_br_o365_goldg_grit: 0.228
+      mm_gdino_t_br_o365_goldg_v3det: 0.214
+      mm_gdino_t_br_o365_goldg_grit_v3det: 0.284
+    - model: RefCOCO val @1,5,10
+      AP: 50.8
+    - model: RefCOCO testA @1,5,10
+      AP: 57.4
+    - model: RefCOCO testB @1,5,10
+      AP: 45.0
+    - model: RefCOCO+ val @1,5,10
+      AP: 51.6
+    - model: RefCOCO+ testA @1,5,10
+      AP: 57.3
+    - model: RefCOCO+ testB @1,5,10
+      AP: 46.4
+    - model: RefCOCOg val @1,5,10
+      AP: 60.4
+    - model: RefCOCOg test @1,5,10
+      AP: 59.7
+    - model: gRefCOCO val Pr@(F1=1, IoU≥0.5),N-acc
+      thresh_score: 0.5
+      AP: 39.3
+    - model: gRefCOCO val Pr@(F1=1, IoU≥0.5),N-acc
+      thresh_score: 0.6
+      AP: 40.5
+    - model: gRefCOCO val Pr@(F1=1, IoU≥0.5),N-acc
+      thresh_score: 0.7
+      AP: 41.3
+    - model: gRefCOCO val Pr@(F1=1, IoU≥0.5),N-acc
+      thresh_score: 0.8
+      AP: 41.5
+    - model: gRefCOCO testA Pr@(F1=1, IoU≥0.5),N-acc
+      thresh_score: 0.5
+      AP: 31.9
+    - model: gRefCOCO testA Pr@(F1=1, IoU≥0.5),N-acc
+      thresh_score: 0.6
+      AP: 29.3
+    - model: gRefCOCO testA Pr@(F1=1, IoU≥0.5),N-acc
+      thresh_score: 0.7
+      AP: 27.2
+    - model: gRefCOCO testA Pr@(F1=1, IoU≥0.5),N-acc
+      thresh_score: 0.8
+      AP: 25.1
+    - model: gRefCOCO testB Pr@(F1=1, IoU≥0.5),N-acc
+      thresh_score: 0.5
+      AP: 30.9
+    - model: gRefCOCO testB Pr@(F1=1, IoU≥0.5),N-acc
+      thresh_score: 0.6
+      AP: 30.0
+    - model: gRefCOCO testB Pr@(F1=1, IoU≥0.5),N-acc
+      thresh_score: 0.7
+      AP: 29.7
+    - model: gRefCOCO testB Pr@(F1=1, IoU≥0.5),N-acc
+      thresh_score: 0.8
+      AP: 29.1
+    - model: FULL/short/middle/long/very long
+      AP: 17.2
+    - model: FULL/short/middle/long/very long
+      AP: 22.3
+    - model: PRES/short/middle/long/very long
+      AP: 17.8
+    - model: PRES/short/middle/long/very long
+      AP: 21.0
+    - model: ABS/short/middle/long/very long
+      AP: 15.4
+    - model: ABS/short/middle/long/very long
+      AP: 26.0
+    - model: R-50
+      lr_schedule: 1x
+      box_AP: 48.1
+    - model: R-50
+      lr_schedule: 1x
+      box_AP: 50.8
+    - model: R-50
+      lr_schedule: 1x
+      box_AP: 48.2
+    - model: R-50
+      lr_schedule: 1X
+      box_AP: 50.8
+    - model: Swin-T
+      lr_schedule: ''
+      box_AP: 49.8
+    - model: Swin-T
+      lr_schedule: 1x
+      box_AP: 69.1
+    - model: R-50
+      lr_schedule: 1x
+      box_AP: 52.4
+    - model: R-50
+      lr_schedule: 1x
+      box_AP: 55.3
+    - model: R-50
+      lr_schedule: 1x
+      box_AP: 55.7
+    - model: R-50
+      lr_schedule: 1X
+      box_AP: 57.4
+    - model: Swin-T
+      lr_schedule: ''
+      box_AP: 29.8
+    - model: Swin-T
+      lr_schedule: 1x
+      box_AP: 65.5
+    - model: R-50
+      lr_schedule: 50e
+      box_AP: 43.5
+    - model: R-50
+      lr_schedule: 50e
+      box_AP: 46.2
+    - model: R-50
+      lr_schedule: 50e
+      box_AP: 46.4
+    - model: R-50
+      lr_schedule: 50e
+      box_AP: 48.6
+    - model: Swin-T
+      lr_schedule: 50e
+      box_AP: 47.5
+    - model: R-50
+      lr_schedule: 50e
+      box_AP: 30.1
+    - model: R-50
+      lr_schedule: 50e
+      box_AP: 31.8
+    - model: R-50
+      lr_schedule: 50e
+      box_AP: 34.5
+    - model: R-50
+      lr_schedule: 50e
+      box_AP: 34.8
+    - model: Swin-T
+      lr_schedule: ''
+      box_AP: 34.2
+    - model: Swin-T
+      lr_schedule: 50e
+      box_AP: 51.5
+    - model: R-50
+      lr_schedule: 50e
+      box_AP: 17.0
+    - model: R-50
+      lr_schedule: 50e
+      box_AP: 18.0
+    - model: R-50
+      lr_schedule: 50e
+      box_AP: 12.0
+    - model: R-50
+      lr_schedule: 50e
+      box_AP: 13.4
+    - model: Swin-T
+      lr_schedule: ''
+      box_AP: 23.1
+    - model: Swin-T
+      lr_schedule: 50e
+      box_AP: 38.9
+    - model: R-50
+      lr_schedule: 1x
+      box_AP: 37.4
+    - model: R-50
+      lr_schedule: 1x
+      box_AP: 40.3
+    - model: R-50
+      lr_schedule: 1x
+      box_AP: 39.4
+    - model: R-50
+      lr_schedule: 1X
+      box_AP: 42.4
+    - model: R-50
+      lr_schedule: 1X
+      box_AP: 50.1
+    - model: Swin-T
+      lr_schedule: ''
+      box_AP: 46.6
+    - model: Swin-T
+      lr_schedule: ''
+      box_AP: 48.5
+    - model: Swin-T
+      lr_schedule: ''
+      box_AP: 50.4
+    - model: Swin-T
+      lr_schedule: 1x
+      box_AP: 55.4
+    - model: Swin-T
+      lr_schedule: 1x
+      box_AP: 58.1
+    - model: Swin-T
+      lr_schedule: 1x
+      box_AP: 58.2
+    - model: Swin-T
+      lr_schedule: ''
+      box_AP: 46.7
+    - model: Swin-T
+      lr_schedule: ''
+      box_AP: 48.5
+    - model: Swin-T
+      lr_schedule: ''
+      box_AP: 50.4
+    - model: Swin-T
+      lr_schedule: 1x
+      box_AP: 54.7
+    - model: Swin-T
+      lr_schedule: ''
+      box_AP: 74.2
+    - model: Swin-T
+      lr_schedule: 1x
+      box_AP: 75.3
+    - model: Swin-T
+      lr_schedule: ''
+      AP: 19.6
+    - model: Swin-T
+      lr_schedule: ''
+      AP: 20.1
+    - model: Swin-T
+      lr_schedule: ''
+      AP: 31.9
+    - model: Swin-T
+      lr_schedule: 1x
+      AP: 51.7
+    - model: Swin-T
+      lr_schedule: ''
+      AP: 41.4
+    - model: Swin-T
+      lr_schedule: 1x
+      AP: 57.1
+  - repository: mmdetection
+    file: configs/mask2former_vis/README.md
+    config: mask2former_vis
+    algorithm: Mask2Former for Video Instance Segmentation
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 8e
+      mem_gb: 6.0
+      AP: 41.3
+    - model: R-101
+      style: pytorch
+      lr_schedule: 8e
+      mem_gb: 7.5
+      AP: 42.3
+    - model: Swin-L
+      style: pytorch
+      lr_schedule: 8e
+      mem_gb: 18.5
+      AP: 52.3
+  - repository: mmdetection
+    file: configs/regnet/README.md
+    config: regnet
+    algorithm: RegNet
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.4
+      fps: 12.0
+      box_AP: 38.2
+      mask_AP: 34.7
+    - model: RegNetX-3.2GF-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.0
+      box_AP: 40.3
+      mask_AP: 36.6
+    - model: RegNetX-4.0GF-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.5
+      box_AP: 41.5
+      mask_AP: 37.4
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.4
+      fps: 10.3
+      box_AP: 40.0
+      mask_AP: 36.1
+    - model: RegNetX-6.4GF-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.1
+      box_AP: 41.0
+      mask_AP: 37.1
+    - model: X-101-32x4d-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.6
+      fps: 9.4
+      box_AP: 41.9
+      mask_AP: 37.5
+    - model: RegNetX-8.0GF-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.4
+      box_AP: 41.7
+      mask_AP: 37.5
+    - model: RegNetX-12GF-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 7.4
+      box_AP: 42.2
+      mask_AP: 38.0
+    - model: RegNetX-3.2GF-FPN-DCN-C3-C5
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.0
+      box_AP: 40.3
+      mask_AP: 36.6
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.0
+      fps: 18.2
+      box_AP: 37.4
+    - model: RegNetX-3.2GF-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.5
+      box_AP: 39.9
+    - model: RegNetX-3.2GF-FPN
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 4.5
+      box_AP: 41.1
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 3.8
+      fps: 16.6
+      box_AP: 36.5
+    - model: RegNetX-800MF-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 2.5
+      box_AP: 35.6
+    - model: RegNetX-1.6GF-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 3.3
+      box_AP: 37.3
+    - model: RegNetX-3.2GF-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.2
+      box_AP: 39.1
+    - model: RegNetX-400MF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 2.3
+      box_AP: 37.1
+    - model: RegNetX-800MF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 2.8
+      box_AP: 38.8
+    - model: RegNetX-1.6GF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 3.4
+      box_AP: 40.5
+    - model: RegNetX-3.2GF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 4.4
+      box_AP: 42.3
+    - model: RegNetX-4GF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 4.9
+      box_AP: 42.8
+    - model: RegNetX-400MF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 2.5
+      box_AP: 37.6
+      mask_AP: 34.4
+    - model: RegNetX-800MF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 2.9
+      box_AP: 39.5
+      mask_AP: 36.1
+    - model: RegNetX-1.6GF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 3.6
+      box_AP: 40.9
+      mask_AP: 37.5
+    - model: RegNetX-3.2GF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 5.0
+      box_AP: 43.1
+      mask_AP: 38.7
+    - model: RegNetX-4GF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 5.1
+      box_AP: 43.4
+      mask_AP: 39.2
+    - model: RegNetX-400MF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 4.3
+      box_AP: 41.6
+      mask_AP: 36.4
+    - model: RegNetX-800MF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 4.8
+      box_AP: 42.8
+      mask_AP: 37.6
+    - model: RegNetX-1.6GF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 5.4
+      box_AP: 44.5
+      mask_AP: 39.0
+    - model: RegNetX-3.2GF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 6.4
+      box_AP: 45.8
+      mask_AP: 40.0
+    - model: RegNetX-4GF-FPN
+      style: pytorch
+      lr_schedule: 3x
+      mem_gb: 6.9
+      box_AP: 45.8
+      mask_AP: 40.0
+  - repository: mmdetection
+    file: configs/detectors/README.md
+    config: detectors
+    algorithm: DetectoRS
+    models:
+    - model: RFP
+      lr_schedule: 1x
+      mem_gb: 7.5
+      box_AP: 44.8
+    - model: SAC
+      lr_schedule: 1x
+      mem_gb: 5.6
+      box_AP: 45.0
+    - model: DetectoRS
+      lr_schedule: 1x
+      mem_gb: 9.9
+      box_AP: 47.4
+    - model: RFP
+      lr_schedule: 1x
+      mem_gb: 11.2
+      box_AP: 46.6
+      mask_AP: 40.9
+    - model: SAC
+      lr_schedule: 1x
+      mem_gb: 9.3
+      box_AP: 46.4
+      mask_AP: 40.9
+    - model: DetectoRS
+      lr_schedule: 1x
+      mem_gb: 13.6
+      box_AP: 49.1
+      mask_AP: 42.6
+    - model: DetectoRS
+      lr_schedule: 20e
+      mem_gb: 19.6
+      box_AP: 50.5
+      mask_AP: 43.9
+  - repository: mmdetection
+    file: configs/cornernet/README.md
+    config: cornernet
+    algorithm: CornerNet
+    models:
+    - model: HourglassNet-104
+      mem_gb: 13.9
+      fps: 4.2
+      box_AP: 41.2
+    - model: HourglassNet-104
+      mem_gb: 15.9
+      fps: 4.2
+      box_AP: 41.2
+    - model: HourglassNet-104
+      mem_gb: 9.5
+      fps: 3.9
+      box_AP: 40.4
+  - repository: mmdetection
+    file: configs/yolo/README.md
+    config: yolo
+    algorithm: YOLOv3
+    models:
+    - model: DarkNet-53
+      scale: 320.0
+      lr_schedule: 273e
+      mem_gb: 2.7
+      fps: 63.9
+      box_AP: 27.9
+    - model: DarkNet-53
+      scale: 416.0
+      lr_schedule: 273e
+      mem_gb: 3.8
+      fps: 61.2
+      box_AP: 30.9
+    - model: DarkNet-53
+      scale: 608.0
+      lr_schedule: 273e
+      mem_gb: 7.4
+      fps: 48.1
+      box_AP: 33.7
+    - model: DarkNet-53
+      scale: 608.0
+      lr_schedule: 273e
+      mem_gb: 4.7
+      fps: 48.1
+      box_AP: 33.8
+    - model: MobileNetV2
+      scale: 416.0
+      lr_schedule: 300e
+      mem_gb: 5.3
+      box_AP: 23.9
+    - model: MobileNetV2
+      scale: 320.0
+      lr_schedule: 300e
+      mem_gb: 3.2
+      box_AP: 22.2
+  - repository: mmdetection
+    file: configs/free_anchor/README.md
+    config: free_anchor
+    algorithm: FreeAnchor
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.9
+      fps: 18.4
+      box_AP: 38.7
+    - model: R-101
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 6.8
+      fps: 14.9
+      box_AP: 40.3
+    - model: X-101-32x4d
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 8.1
+      fps: 11.1
+      box_AP: 41.9
+  - repository: mmdetection
+    file: configs/legacy_1.x/README.md
+    config: legacy_1.x
+    algorithm: Legacy Configs in MMDetection V1.x
+    models:
+    - model: Mask R-CNN R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 36.8
+      mask_AP: 33.9
+    - model: RetinaNet R-50-FPN
+      style: caffe
+      lr_schedule: 1x
+      box_AP: 35.4
+    - model: RetinaNet R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 35.2
+    - model: Cascade Mask R-CNN R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 40.8
+      mask_AP: 35.6
+    - model: SSD300-VGG16
+      style: caffe
+      lr_schedule: 120e
+      box_AP: 25.4
+  - repository: mmdetection
+    file: configs/detr/README.md
+    config: detr
+    algorithm: DETR
+    models:
+    - model: DETR
+      lr_schedule: 150e
+      mem_gb: 7.9
+      box_AP: 39.9
+  - repository: mmdetection
+    file: configs/foveabox/README.md
+    config: foveabox
+    algorithm: FoveaBox
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.6
+      fps: 24.1
+      box_AP: 36.5
+    - model: R-50
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 5.6
+      box_AP: 37.2
+    - model: R-50
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 8.1
+      fps: 19.4
+      box_AP: 37.9
+    - model: R-50
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 8.1
+      fps: 18.3
+      box_AP: 40.4
+    - model: R-101
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 9.2
+      fps: 17.4
+      box_AP: 38.6
+    - model: R-101
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 11.7
+      box_AP: 40.0
+    - model: R-101
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 11.7
+      fps: 14.7
+      box_AP: 40.0
+    - model: R-101
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 11.7
+      fps: 14.7
+      box_AP: 42.0
+  - repository: mmdetection
+    file: configs/condinst/README.md
+    config: condinst
+    algorithm: CondInst
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      box_AP: 39.8
+      mask_AP: 36.0
+  - repository: mmdetection
+    file: configs/cityscapes/README.md
+    config: cityscapes
+    algorithm: Cityscapes
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.2
+      box_AP: 40.3
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.3
+      box_AP: 40.9
+      mask_AP: 36.4
+  - repository: mmdetection
+    file: configs/paa/README.md
+    config: paa
+    algorithm: PAA
+    models:
+    - model: R-50-FPN
+      lr_schedule: 12e
+      mem_gb: 3.7
+      box_AP: 40.4
+    - model: R-50-FPN
+      lr_schedule: 12e
+      mem_gb: 3.7
+      box_AP: 40.2
+    - model: R-50-FPN
+      lr_schedule: 18e
+      mem_gb: 3.7
+      box_AP: 41.4
+    - model: R-50-FPN
+      lr_schedule: 18e
+      mem_gb: 3.7
+      box_AP: 41.2
+    - model: R-50-FPN
+      lr_schedule: 24e
+      mem_gb: 3.7
+      box_AP: 41.6
+    - model: R-50-FPN
+      lr_schedule: 36e
+      mem_gb: 3.7
+      box_AP: 43.3
+    - model: R-101-FPN
+      lr_schedule: 12e
+      mem_gb: 6.2
+      box_AP: 42.6
+    - model: R-101-FPN
+      lr_schedule: 12e
+      mem_gb: 6.2
+      box_AP: 42.4
+    - model: R-101-FPN
+      lr_schedule: 24e
+      mem_gb: 6.2
+      box_AP: 43.5
+    - model: R-101-FPN
+      lr_schedule: 36e
+      mem_gb: 6.2
+      box_AP: 45.1
+  - repository: mmdetection
+    file: configs/seesaw_loss/README.md
+    config: seesaw_loss
+    algorithm: Seesaw Loss
+    models:
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 25.6
+      mask_AP: 25.0
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 25.6
+      mask_AP: 25.4
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 27.4
+      mask_AP: 26.7
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 27.2
+      mask_AP: 27.3
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 27.6
+      mask_AP: 26.4
+    - model: R-50-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 27.6
+      mask_AP: 26.8
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 28.9
+      mask_AP: 27.6
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 28.9
+      mask_AP: 28.2
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 33.1
+      mask_AP: 29.2
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 33.0
+      mask_AP: 30.0
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 30.0
+      mask_AP: 29.3
+    - model: R-101-FPN
+      style: pytorch
+      lr_schedule: 2x
+      box_AP: 32.8
+      mask_AP: 30.1
+  - repository: mmdetection
+    file: configs/tood/README.md
+    config: tood
+    algorithm: TOOD
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.1
+      box_AP: 42.4
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 4.1
+      box_AP: 42.4
+    - model: R-50
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 4.1
+      box_AP: 44.5
+    - model: R-101
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 6.0
+      box_AP: 46.1
+    - model: R-101-dcnv2
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 6.2
+      box_AP: 49.3
+    - model: X-101-64x4d
+      style: pytorch
+      lr_schedule: 2x
+      mem_gb: 10.2
+      box_AP: 47.6
+    - model: X-101-64x4d-dcnv2
+      style: pytorch
+      lr_schedule: 2x
+  - repository: mmdetection
+    file: configs/fpg/README.md
+    config: fpg
+    algorithm: FPG
+    models:
+    - model: Faster R-CNN
+      lr_schedule: 50e
+      mem_gb: 20.0
+      box_AP: 42.3
+    - model: Faster R-CNN
+      lr_schedule: 50e
+      mem_gb: 11.9
+      box_AP: 41.2
+    - model: Faster R-CNN
+      lr_schedule: 50e
+      mem_gb: 20.0
+      box_AP: 38.9
+    - model: Mask R-CNN
+      lr_schedule: 50e
+      mem_gb: 23.2
+      box_AP: 43.0
+      mask_AP: 38.1
+    - model: Mask R-CNN
+      lr_schedule: 50e
+      mem_gb: 15.3
+      box_AP: 41.7
+      mask_AP: 37.1
+    - model: Mask R-CNN
+      lr_schedule: 50e
+      mem_gb: 23.2
+      box_AP: 49.6
+      mask_AP: 35.6
+    - model: RetinaNet
+      lr_schedule: 50e
+      mem_gb: 20.8
+      box_AP: 40.5
+    - model: RetinaNet
+      lr_schedule: 50e
+      mem_gb: 19.9
+      box_AP: 39.9
+  - repository: mmdetection
+    file: configs/atss/README.md
+    config: atss
+    algorithm: ATSS
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 3.7
+      fps: 19.7
+      box_AP: 39.4
+    - model: R-101
+      style: pytorch
+      lr_schedule: 1x
+      mem_gb: 5.6
+      fps: 12.3
+      box_AP: 41.5
+  - repository: mmdetection
+    file: configs/autoassign/README.md
+    config: autoassign
+    algorithm: AutoAssign
+    models:
+    - model: R-50
+      style: caffe
+      lr_schedule: 1x
+      mem_gb: 4.08
+      box_AP: 40.4
+  - repository: mmdetection
+    file: configs/simple_copy_paste/README.md
+    config: simple_copy_paste
+    algorithm: SimpleCopyPaste
+    models:
+    - model: R-50
+      batch_size: 64.0
+      box_AP: 43.3
+      mask_AP: 39.0
+    - model: R-50
+      batch_size: 64.0
+      box_AP: 43.8
+      mask_AP: 39.2
+    - model: R-50
+      batch_size: 64.0
+      box_AP: 43.5
+      mask_AP: 39.1
+    - model: R-50
+      batch_size: 64.0
+      box_AP: 45.1
+      mask_AP: 40.3
+  - repository: mmdetection
+    file: configs/nas_fcos/README.md
+    config: nas_fcos
+    algorithm: NAS-FCOS
+    models:
+    - model: R-50
+      style: caffe
+      lr_schedule: 1x
+      box_AP: 39.4
+    - model: R-50
+      style: caffe
+      lr_schedule: 1x
+      box_AP: 38.5
+  - repository: mmdetection
+    file: configs/timm_example/README.md
+    config: timm_example
+    algorithm: Timm Example
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+    - model: EfficientNet-B1
+      style: '-'
+      lr_schedule: 1x
+  - repository: mmdetection
+    file: configs/gfl/README.md
+    config: gfl
+    algorithm: GFL
+    models:
+    - model: R-50
+      style: pytorch
+      lr_schedule: 1x
+      fps: 19.5
+      box_AP: 40.2
+    - model: R-50
+      style: pytorch
+      lr_schedule: 2x
+      fps: 19.5
+      box_AP: 42.9
+    - model: R-101
+      style: pytorch
+      lr_schedule: 2x
+      fps: 14.7
+      box_AP: 44.7
+    - model: R-101-dcnv2
+      style: pytorch
+      lr_schedule: 2x
+      fps: 12.9
+      box_AP: 47.1
+    - model: X-101-32x4d
+      style: pytorch
+      lr_schedule: 2x
+      fps: 12.1
+      box_AP: 45.9
+    - model: X-101-32x4d-dcnv2
+      style: pytorch
+      lr_schedule: 2x
+      fps: 10.7
+      box_AP: 48.1
+  - repository: mmdetection
+    file: configs/soft_teacher/README.md
+    config: soft_teacher
+    algorithm: SoftTeacher
+    models:
+    - model: SoftTeacher
+      box_AP: 19.9
+    - model: SoftTeacher
+      box_AP: 24.9
+    - model: SoftTeacher
+      box_AP: 30.4
+    - model: SoftTeacher
+      box_AP: 33.8
+  mmpose:
+  - repository: mmpose
+    file: configs/fashion_2d_keypoint/topdown_heatmap/README.md
+    config: fashion_2d_keypoint
+    algorithm: Top-down heatmap-based pose estimation
+    models:
+    - model: HRNet-w48-UDP-Upper
+      PCK: 96.1
+      AUC: 60.9
+      EPE: 15.1
+    - model: HRNet-w48-UDP-Lower
+      PCK: 97.8
+      AUC: 76.1
+      EPE: 8.9
+    - model: HRNet-w48-UDP-Full
+      PCK: 98.3
+      AUC: 67.3
+      EPE: 11.7
+    - model: ResNet-50-Upper
+      PCK: 95.4
+      AUC: 57.8
+      EPE: 16.8
+    - model: ResNet-50-Lower
+      PCK: 96.5
+      AUC: 74.4
+      EPE: 10.5
+    - model: ResNet-50-Full
+      PCK: 97.7
+      AUC: 66.4
+      EPE: 12.7
+    - model: ResNet-50-Short-Sleeved-Shirt
+      PCK: 0.988
+      AUC: 0.703
+      EPE: 10.2
+    - model: ResNet-50-Long-Sleeved-Shirt
+      PCK: 0.973
+      AUC: 0.587
+      EPE: 16.6
+    - model: ResNet-50-Short-Sleeved-Outwear
+      PCK: 0.966
+      AUC: 0.408
+      EPE: 24.0
+    - model: ResNet-50-Long-Sleeved-Outwear
+      PCK: 0.987
+      AUC: 0.517
+      EPE: 18.1
+    - model: ResNet-50-Vest
+      PCK: 0.981
+      AUC: 0.643
+      EPE: 12.7
+    - model: ResNet-50-Sling
+      PCK: 0.94
+      AUC: 0.557
+      EPE: 21.6
+    - model: ResNet-50-Shorts
+      PCK: 0.975
+      AUC: 0.682
+      EPE: 12.4
+    - model: ResNet-50-Trousers
+      PCK: 0.973
+      AUC: 0.625
+      EPE: 14.8
+    - model: ResNet-50-Skirt
+      PCK: 0.952
+      AUC: 0.653
+      EPE: 16.6
+    - model: ResNet-50-Short-Sleeved-Dress
+      PCK: 0.98
+      AUC: 0.603
+      EPE: 15.6
+    - model: ResNet-50-Long-Sleeved-Dress
+      PCK: 0.976
+      AUC: 0.518
+      EPE: 20.1
+    - model: ResNet-50-Vest-Dress
+      PCK: 0.98
+      AUC: 0.6
+      EPE: 16.0
+    - model: ResNet-50-Sling-Dress
+      PCK: 0.967
+      AUC: 0.544
+      EPE: 19.5
+  - repository: mmpose
+    file: configs/face_2d_keypoint/topdown_regression/README.md
+    config: face_2d_keypoint
+    algorithm: Top-down regression-based pose estimation
+    models:
+    - model: ResNet-50
+      NME: 4.88
+    - model: ResNet-50+WingLoss
+      NME: 4.67
+    - model: ResNet-50+SoftWingLoss
+      NME: 4.44
+  - repository: mmpose
+    file: configs/face_2d_keypoint/rtmpose/README.md
+    config: face_2d_keypoint
+    algorithm: RTMPose
+    models:
+    - model: RTMPose-m
+      NME: 0.0466
+    - model: RTMPose-m
+      NME: 4.01
+    - model: RTMPose-m
+      NME: 1.29
+  - repository: mmpose
+    file: configs/face_2d_keypoint/topdown_heatmap/README.md
+    config: face_2d_keypoint
+    algorithm: Top-down heatmap-based pose estimation
+    models:
+    - model: HRNetv2-w18
+      NME: 4.1
+    - model: HRNetv2-w18+Dark
+      NME: 1.19
+    - model: HRNetv2-w18
+      NME: 1.27
+    - model: HRNetv2-w18+Dark
+      NME: 0.0513
+    - model: SCNet-50
+      NME: 0.0567
+    - model: HRNetv2-w18
+      NME: 0.0569
+    - model: ResNet-50
+      NME: 0.0582
+    - model: HourglassNet
+      NME: 0.0587
+    - model: MobileNet-v2
+      NME: 0.0611
+    - model: HRNetv2-w18
+      NME: 3.48
+    - model: HRNetv2-w18+Dark
+      NME: 4.29
+    - model: HRNetv2-w18+AWing
+      NME: 4.28
+    - model: HRNetv2-w18
+      NME: 4.33
+  - repository: mmpose
+    file: configs/body_2d_keypoint/topdown_regression/README.md
+    config: body_2d_keypoint
+    algorithm: Top-down regression-based pose estimation
+    models:
+    - model: ResNet-152+RLE
+      AP: 0.731
+      ar: 0.805
+    - model: ResNet-101+RLE
+      AP: 0.722
+      ar: 0.768
+    - model: ResNet-50+RLE
+      AP: 0.706
+      ar: 0.768
+    - model: MobileNet-v2+RLE
+      AP: 0.593
+      ar: 0.644
+    - model: ResNet-152
+      AP: 0.584
+      ar: 0.688
+    - model: ResNet-101
+      AP: 0.562
+      ar: 0.67
+    - model: ResNet-50
+      AP: 0.528
+      ar: 0.639
+    - model: ResNet-50+RLE
+      PCK: 0.277
+    - model: ResNet-152
+      PCK: 0.208
+    - model: ResNet-101
+      PCK: 0.2
+    - model: ResNet-50
+      PCK: 0.18
+  - repository: mmpose
+    file: configs/body_2d_keypoint/rtmpose/README.md
+    config: body_2d_keypoint
+    algorithm: RTMPose
+    models:
+    - model: RTMPose-t
+      AP: 0.682
+      ar: 0.736
+    - model: RTMPose-s
+      AP: 0.716
+      ar: 0.768
+    - model: RTMPose-m
+      AP: 0.746
+      ar: 0.795
+    - model: RTMPose-l
+      AP: 0.758
+      ar: 0.806
+    - model: RTMPose-t-aic-coco
+      AP: 0.685
+      ar: 0.738
+    - model: RTMPose-s-aic-coco
+      AP: 0.722
+      ar: 0.772
+    - model: RTMPose-m-aic-coco
+      AP: 0.758
+      ar: 0.806
+    - model: RTMPose-l-aic-coco
+      AP: 0.765
+      ar: 0.813
+    - model: RTMPose-m-aic-coco
+      AP: 0.77
+      ar: 0.816
+    - model: RTMPose-l-aic-coco
+      AP: 0.773
+      ar: 0.819
+    - model: RTMPose-m
+      PCK: 0.348
+    - model: RTMPose-m
+      AP: 0.706
+      ar: 0.788
+    - model: RTMPose-s
+      AP: 0.311
+      ar: 0.381
+    - model: RTMPose-m
+      AP: 0.355
+      ar: 0.417
+    - model: RTMPose-l
+      AP: 0.378
+      ar: 0.442
+    - model: RTMPose-s
+      AP: 0.698
+      ar: 0.732
+    - model: RTMPose-m
+      AP: 0.728
+      ar: 0.759
+    - model: RTMPose-l
+      AP: 0.753
+      ar: 0.783
+  - repository: mmpose
+    file: configs/body_2d_keypoint/simcc/README.md
+    config: body_2d_keypoint
+    algorithm: Top-down SimCC-based pose estimation
+    models:
+    - model: ResNet-50+SimCC
+      AP: 0.735
+      ar: 0.79
+    - model: ResNet-50+SimCC
+      AP: 0.721
+      ar: 0.781
+    - model: S-ViPNAS-MobileNet-V3+SimCC
+      AP: 0.695
+      ar: 0.755
+    - model: MobileNet-V2+SimCC(wo/deconv)
+      AP: 0.62
+      ar: 0.678
+  - repository: mmpose
+    file: configs/body_2d_keypoint/integral_regression/README.md
+    config: body_2d_keypoint
+    algorithm: Top-down integral-regression-based pose estimation
+    models:
+    - model: ResNet-50+Debias-IPR
+      AP: 0.675
+      ar: 0.765
+    - model: ResNet-50+DSNT
+      AP: 0.674
+      ar: 0.764
+    - model: ResNet-50+IPR
+      AP: 0.633
+      ar: 0.73
+  - repository: mmpose
+    file: configs/body_2d_keypoint/topdown_heatmap/README.md
+    config: body_2d_keypoint
+    algorithm: Top-down heatmap-based pose estimation
+    models:
+    - model: ViTPose-h
+      AP: 0.79
+      ar: 0.84
+    - model: HRNet-w48+UDP
+      AP: 0.768
+      ar: 0.817
+    - model: MSPN 4-stg
+      AP: 0.765
+      ar: 0.826
+    - model: HRNet-w48+Dark
+      AP: 0.764
+      ar: 0.814
+    - model: HRNet-w48
+      AP: 0.756
+      ar: 0.809
+    - model: HRFormer-B
+      AP: 0.754
+      ar: 0.807
+    - model: RSN-50-3x
+      AP: 0.75
+      ar: 0.814
+    - model: CSPNeXt-l
+      AP: 0.75
+      ar: 0.8
+    - model: HRNet-w32
+      AP: 0.749
+      ar: 0.804
+    - model: Swin-L
+      AP: 0.743
+      ar: 0.798
+    - model: ViTPose-s
+      AP: 0.739
+      ar: 0.792
+    - model: HRFormer-S
+      AP: 0.738
+      ar: 0.793
+    - model: Swin-B
+      AP: 0.737
+      ar: 0.794
+    - model: SEResNet-101
+      AP: 0.734
+      ar: 0.79
+    - model: SCNet-101
+      AP: 0.733
+      ar: 0.789
+    - model: ResNet-101+Dark
+      AP: 0.733
+      ar: 0.786
+    - model: CSPNeXt-m
+      AP: 0.732
+      ar: 0.785
+    - model: ResNetV1d-101
+      AP: 0.732
+      ar: 0.785
+    - model: SEResNet-50
+      AP: 0.729
+      ar: 0.784
+    - model: SCNet-50
+      AP: 0.728
+      ar: 0.784
+    - model: ResNet-101
+      AP: 0.726
+      ar: 0.783
+    - model: ResNeXt-101
+      AP: 0.726
+      ar: 0.781
+    - model: HourglassNet
+      AP: 0.726
+      ar: 0.78
+    - model: ResNeSt-101
+      AP: 0.725
+      ar: 0.781
+    - model: RSN-50
+      AP: 0.724
+      ar: 0.79
+    - model: Swin-T
+      AP: 0.724
+      ar: 0.782
+    - model: MSPN 1-stg
+      AP: 0.723
+      ar: 0.788
+    - model: ResNetV1d-50
+      AP: 0.722
+      ar: 0.777
+    - model: ResNeSt-50
+      AP: 0.72
+      ar: 0.775
+    - model: ResNet-50
+      AP: 0.718
+      ar: 0.774
+    - model: ResNeXt-50
+      AP: 0.715
+      ar: 0.771
+    - model: PVT-S
+      AP: 0.714
+      ar: 0.773
+    - model: CSPNeXt-s
+      AP: 0.697
+      ar: 0.753
+    - model: LiteHRNet-30
+      AP: 0.676
+      ar: 0.736
+    - model: CSPNeXt-tiny
+      AP: 0.665
+      ar: 0.723
+    - model: MobileNet-v2
+      AP: 0.648
+      ar: 0.709
+    - model: LiteHRNet-18
+      AP: 0.642
+      ar: 0.705
+    - model: CPM
+      AP: 0.627
+      ar: 0.689
+    - model: ShuffleNet-v2
+      AP: 0.602
+      ar: 0.668
+    - model: ShuffleNet-v1
+      AP: 0.587
+      ar: 0.654
+    - model: AlexNet
+      AP: 0.448
+      ar: 0.521
+    - model: HRNet-w48+Dark
+      PCK: 0.36
+    - model: HRNet-w48
+      PCK: 0.303
+    - model: HRNet-w48
+      PCK: 0.337
+    - model: HRNet-w32
+      PCK: 0.334
+    - model: HourglassNet
+      PCK: 0.317
+    - model: ResNet-152
+      PCK: 0.303
+    - model: ResNetV1d-152
+      PCK: 0.3
+    - model: SCNet-50
+      PCK: 0.29
+    - model: ResNeXt-152
+      PCK: 0.294
+    - model: SEResNet-50
+      PCK: 0.292
+    - model: ResNet-50
+      PCK: 0.286
+    - model: ResNetV1d-50
+      PCK: 0.29
+    - model: CPM
+      PCK: 0.285
+    - model: LiteHRNet-30
+      PCK: 0.271
+    - model: LiteHRNet-18
+      PCK: 0.26
+    - model: MobileNet-v2
+      PCK: 0.234
+    - model: ShuffleNet-v2
+      PCK: 0.205
+    - model: ShuffleNet-v1
+      PCK: 0.195
+    - model: HRNet-w32
+      AP: 0.675
+      ar: 0.816
+    - model: CSPNeXt-m
+      AP: 0.662
+      ar: 0.755
+    - model: ResNet-101
+      AP: 0.647
+      ar: 0.8
+    - model: HRNet-w32
+      AP: 0.637
+      ar: 0.785
+    - model: HRNet-w32
+      AP: 0.323
+      ar: 0.366
+    - model: ResNet-101
+      AP: 0.294
+      ar: 0.337
+    - model: ResNet-50
+      PCK: 80.1
+    - model: CPM
+      PCK: 65.7
+    - model: HRNet-w48
+      AP: 84.6
+    - model: HRNet-w32
+      AP: 83.4
+    - model: ResNet-50
+      AP: 81.2
+    - model: ViTPose-s
+      AP: 0.381
+      ar: 0.448
+    - model: ViTPose-b
+      AP: 0.41
+      ar: 0.475
+    - model: ViTPose-s
+      AP: 0.738
+      ar: 0.768
+    - model: ViTPose-b
+      AP: 0.759
+      ar: 0.79
+  - repository: mmpose
+    file: configs/hand_3d_keypoint/internet/README.md
+    config: hand_3d_keypoint
+    algorithm: 'InterHand2.6M: A Dataset and Baseline for 3D Interacting Hand Pose
+      Estimation from a Single RGB Image'
+    models:
+    - model: InterNet_resnet_50
+      mpjpe_single: 9.47
+      mpjpe_interacting: 13.4
+      mpjpe_all: 11.59
+      mrrpe: 29.28
+      AP: 0.99
+    - model: InterNet_resnet_50
+      mpjpe_single: 11.22
+      mpjpe_interacting: 15.23
+      mpjpe_all: 13.16
+      mrrpe: 31.73
+      AP: 0.98
+  - repository: mmpose
+    file: configs/wholebody_2d_keypoint/rtmpose/README.md
+    config: wholebody_2d_keypoint
+    algorithm: RTMPose
+    models:
+    - model: RTMPose-m
+      AP: 0.582
+      whole_ar: 0.674
+    - model: RTMPose-l
+      AP: 0.611
+      whole_ar: 0.7
+    - model: RTMPose-l
+      AP: 0.648
+      whole_ar: 0.73
+  - repository: mmpose
+    file: configs/wholebody_2d_keypoint/dwpose/README.md
+    config: wholebody_2d_keypoint
+    algorithm: DWPose
+    models:
+    - AP: 48.5
+      whole_ar: 58.4
+      flops_sup_br_g: 0.5
+    - AP: 53.8
+      whole_ar: 63.2
+      flops_sup_br_g: 0.9
+    - AP: 60.6
+      whole_ar: 69.5
+      flops_sup_br_g: 2.22
+      ort_latency_sup_br_ms_sup_br_i7_11700: 13.5
+      trt_fp16_latency_sup_br_ms_sup_br_gtx_1660ti: 4.0
+    - AP: 63.1
+      whole_ar: 71.7
+      flops_sup_br_g: 4.52
+      ort_latency_sup_br_ms_sup_br_i7_11700: 23.41
+      trt_fp16_latency_sup_br_ms_sup_br_gtx_1660ti: 5.67
+    - AP: 66.5
+      whole_ar: 74.3
+      flops_sup_br_g: 10.07
+      ort_latency_sup_br_ms_sup_br_i7_11700: 44.58
+      trt_fp16_latency_sup_br_ms_sup_br_gtx_1660ti: 7.68
+  - repository: mmpose
+    file: configs/wholebody_2d_keypoint/topdown_heatmap/README.md
+    config: wholebody_2d_keypoint
+    algorithm: Top-down heatmap-based pose estimation
+    models:
+    - model: HRNet-w48+Dark+
+      AP: 0.661
+      whole_ar: 0.743
+    - model: HRNet-w32+Dark
+      AP: 0.582
+      whole_ar: 0.671
+    - model: HRNet-w48
+      AP: 0.579
+      whole_ar: 0.681
+    - model: CSPNeXt-m
+      AP: 0.567
+      whole_ar: 0.641
+    - model: HRNet-w32
+      AP: 0.549
+      whole_ar: 0.646
+    - model: ResNet-152
+      AP: 0.548
+      whole_ar: 0.661
+    - model: HRNet-w32
+      AP: 0.536
+      whole_ar: 0.636
+    - model: ResNet-101
+      AP: 0.531
+      whole_ar: 0.645
+    - model: S-ViPNAS-Res50+Dark
+      AP: 0.528
+      whole_ar: 0.632
+    - model: ResNet-50
+      AP: 0.521
+      whole_ar: 0.633
+    - model: S-ViPNAS-Res50
+      AP: 0.495
+      whole_ar: 0.607
+    - model: HRNet-w32
+      AP: 0.69
+      whole_ar: 0.729
+  - repository: mmpose
+    file: configs/animal_2d_keypoint/rtmpose/README.md
+    config: animal_2d_keypoint
+    algorithm: RTMPose
+    models:
+    - model: RTMPose-m
+      AP: 0.722
+  - repository: mmpose
+    file: configs/animal_2d_keypoint/topdown_heatmap/README.md
+    config: animal_2d_keypoint
+    algorithm: Top-down heatmap-based pose estimation
+    models:
+    - model: HRNet-w32
+      AP: 0.74
+      ar: 0.78
+    - model: HRNet-w48
+      AP: 0.738
+      ar: 0.778
+    - model: ResNet-152
+      AP: 0.704
+      ar: 0.748
+    - model: ResNet-101
+      AP: 0.696
+      ar: 0.736
+    - model: ResNet-50
+      AP: 0.691
+      ar: 0.736
+    - model: HRNet-w48
+      AP: 0.728
+    - model: HRNet-w32
+      AP: 0.722
+    - model: ResNet-101
+      AP: 0.681
+    - model: ResNet-50
+      AP: 0.68
+    - model: CSPNeXt-m
+      AP: 0.703
+    - model: ResNet-152
+      AUC: 0.925
+      EPE: 1.49
+    - model: ResNet-101
+      AUC: 0.907
+      EPE: 2.03
+    - model: ResNet-50
+      AUC: 0.9
+      EPE: 2.27
+    - model: ResNet-152
+      AUC: 0.921
+      EPE: 1.67
+    - model: ResNet-101
+      AUC: 0.915
+      EPE: 1.83
+    - model: ResNet-50
+      AUC: 0.914
+      EPE: 1.87
+    - model: HRNet-w32
+      PCK: 0.6323
+    - model: HRNet-w32
+      PCK: 0.3741
+    - model: HRNet-w32
+      PCK: 0.571
+    - model: HRNet-w32
+      PCK: 0.5358
+    - model: HRNet-w32
+      PCK: 0.51
+    - model: HRNet-w32
+      PCK: 0.7671
+    - model: HRNet-w32
+      PCK: 0.6406
+  - repository: mmpose
+    file: configs/hand_2d_keypoint/topdown_regression/README.md
+    config: hand_2d_keypoint
+    algorithm: Top-down regression-based pose estimation
+    models:
+    - model: ResNet-50
+      PCK: 0.99
+      AUC: 0.485
+      EPE: 34.21
+    - model: ResNet-50
+      PCK: 0.988
+      AUC: 0.865
+      EPE: 3.32
+  - repository: mmpose
+    file: configs/hand_2d_keypoint/rtmpose/README.md
+    config: hand_2d_keypoint
+    algorithm: RTMPose
+    models:
+    - model: RTMPose-m
+      PCK: 0.815
+      AUC: 0.837
+      EPE: 4.51
+  - repository: mmpose
+    file: configs/hand_2d_keypoint/topdown_heatmap/README.md
+    config: hand_2d_keypoint
+    algorithm: Top-down heatmap-based pose estimation
+    models:
+    - model: HRNetv2-w18+Dark
+      PCK: 0.814
+      AUC: 0.84
+      EPE: 4.37
+    - model: HRNetv2-w18
+      PCK: 0.813
+      AUC: 0.84
+      EPE: 4.39
+    - model: HourglassNet
+      PCK: 0.804
+      AUC: 0.835
+      EPE: 4.54
+    - model: SCNet-50
+      PCK: 0.803
+      AUC: 0.834
+      EPE: 4.55
+    - model: ResNet-50
+      PCK: 0.8
+      AUC: 0.833
+      EPE: 4.64
+    - model: LiteHRNet-18
+      PCK: 0.795
+      AUC: 0.83
+      EPE: 4.77
+    - model: MobileNet-v2
+      PCK: 0.795
+      AUC: 0.829
+      EPE: 4.77
+    - model: ResNet-50
+      PCK: 0.999
+      AUC: 0.868
+      EPE: 3.27
+    - model: HRNetv2-w18+Dark
+      PCK: 0.99
+      AUC: 0.572
+      EPE: 23.96
+    - model: HRNetv2-w18+UDP
+      PCK: 0.99
+      AUC: 0.571
+      EPE: 23.88
+    - model: HRNetv2-w18
+      PCK: 0.99
+      AUC: 0.567
+      EPE: 24.26
+    - model: ResNet-50
+      PCK: 0.989
+      AUC: 0.555
+      EPE: 25.16
+    - model: MobileNet-v2
+      PCK: 0.986
+      AUC: 0.537
+      EPE: 28.56
+    - model: HRNetv2-w18+Dark
+      PCK: 0.992
+      AUC: 0.903
+      EPE: 2.18
+    - model: HRNetv2-w18+UDP
+      PCK: 0.992
+      AUC: 0.902
+      EPE: 2.19
+    - model: HRNetv2-w18
+      PCK: 0.992
+      AUC: 0.902
+      EPE: 2.21
+    - model: ResNet-50
+      PCK: 0.991
+      AUC: 0.898
+      EPE: 2.32
+    - model: MobileNet-v2
+      PCK: 0.985
+      AUC: 0.883
+      EPE: 2.79
