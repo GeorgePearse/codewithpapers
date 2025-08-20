@@ -195,6 +195,21 @@ class ArchiveScraper:
     def scrape_main_page(self) -> Dict:
         """Scrape the main page for navigation and categories"""
         logger.info(f"Scraping main page from: {self.base_url}")
+        
+        # Check if main page data already exists
+        main_page_file = self.data_dir / 'main_page.json'
+        if main_page_file.exists():
+            logger.info("Found existing main page data, checking if URL matches...")
+            with open(main_page_file, 'r') as f:
+                existing_data = json.load(f)
+                # Check if the URL in the cached data matches current base_url
+                if existing_data.get('url') == self.base_url:
+                    logger.info("URLs match, loading existing data...")
+                    return existing_data
+                else:
+                    logger.info(f"URL mismatch - cached: {existing_data.get('url')}, current: {self.base_url}")
+                    logger.info("Re-scraping main page with new URL...")
+        
         soup = self._get_page(self.base_url)
         if not soup:
             logger.error("Failed to scrape main page. Please check the archive URL.")
@@ -436,32 +451,75 @@ class ArchiveScraper:
             json.dump(data, f, indent=2, ensure_ascii=False)
         logger.info(f"Saved data to {filepath}")
     
-    def run(self, max_papers: int = 10):
-        """Run the scraper"""
-        logger.info("Starting Papers with Code archive scraper...")
+    def run(self, max_papers: int = 10, max_tasks: int = 5, continue_from_last: bool = True):
+        """Run the scraper
         
-        # Scrape main page
+        Args:
+            max_papers: Maximum number of papers to scrape per task
+            max_tasks: Maximum number of tasks to scrape
+            continue_from_last: Whether to continue from where we left off
+        """
+        logger.info("Starting Papers with Code archive scraper...")
+        logger.info(f"Previously scraped URLs: {len(self.scraped_urls)}")
+        
+        # Scrape main page (will load existing if already scraped)
         main_data = self.scrape_main_page()
         
-        # Scrape task pages
-        tasks_to_scrape = main_data.get('tasks', [])[:5]  # Start with first 5 tasks
+        if not main_data:
+            logger.error("No main page data available. Cannot continue.")
+            return
         
+        # Scrape task pages
+        tasks_to_scrape = main_data.get('tasks', [])[:max_tasks]
+        logger.info(f"Found {len(tasks_to_scrape)} tasks to scrape")
+        
+        task_count = 0
         for task in tasks_to_scrape:
+            task_count += 1
+            logger.info(f"Processing task {task_count}/{len(tasks_to_scrape)}: {task['name']}")
+            
+            # Skip if already scraped and continue_from_last is True
+            if continue_from_last and task['url'] in self.scraped_urls:
+                logger.info(f"Task already scraped: {task['name']}")
+                continue
+            
             task_data = self.scrape_task_page(task['url'])
             
             # Scrape papers from this task
             papers_scraped = 0
-            for paper in task_data.get('papers', []):
+            papers_in_task = task_data.get('papers', [])
+            logger.info(f"Found {len(papers_in_task)} papers in task {task['name']}")
+            
+            for paper in papers_in_task:
                 if papers_scraped >= max_papers:
+                    logger.info(f"Reached max papers limit ({max_papers}) for task {task['name']}")
                     break
+                
+                # Skip if already scraped
+                if paper['url'] in self.scraped_urls:
+                    logger.info(f"Paper already scraped: {paper['title'][:50]}...")
+                    continue
                     
                 self.scrape_paper_page(paper['url'])
                 papers_scraped += 1
+                logger.info(f"Scraped {papers_scraped}/{min(max_papers, len(papers_in_task))} papers from {task['name']}")
         
         logger.info("Scraping completed!")
         logger.info(f"Total URLs scraped: {len(self.scraped_urls)}")
 
 
 if __name__ == "__main__":
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Scrape Papers with Code archive")
+    parser.add_argument('--max-papers', type=int, default=9999, help='Max papers per task (default: 10)')
+    parser.add_argument('--max-tasks', type=int, default=9999, help='Max tasks to scrape (default: 5)')
+    parser.add_argument('--fresh-start', action='store_true', help='Start fresh, ignore previous progress')
+    args = parser.parse_args()
+    
     scraper = ArchiveScraper()
-    scraper.run(max_papers=10)  # Start with small number for testing
+    scraper.run(
+        max_papers=args.max_papers,
+        max_tasks=args.max_tasks,
+        continue_from_last=not args.fresh_start
+    )

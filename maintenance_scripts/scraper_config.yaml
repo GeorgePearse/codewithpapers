@@ -1,7 +1,8 @@
 # Configuration for Papers with Code Archive Scraper
 
-# Base URL for the archived site
-base_url: "https://web.archive.org/web/20240101123127/https://paperswithcode.com"
+# Base URL for the archived site - SOTA page with good resources
+# CLAUDE DON'T CHANGE THIS
+base_url: "https://web.archive.org/web/20250106155328/https://paperswithcode.com/sota"
 
 # Request settings
 delay: 1.5  # Delay between requests in seconds (be respectful to archive.org)
@@ -42,7 +43,7 @@ url_patterns:
   author: "/author/"
   
 # Archive.org specific settings
-archive_date: "20240101123127"  # Specific archive snapshot to use
+archive_date: "20240105015842"  # Specific archive snapshot to use (SOTA page)
 
 # Logging settings
 log_level: "INFO"
