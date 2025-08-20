@@ -62,6 +62,12 @@ function App() {
     algo.config.toLowerCase().includes(searchTerm.toLowerCase())
   ) || [];
 
+  const getPaperForAlgorithm = (algorithmName) => {
+    return metricsData?.papers?.find(paper => 
+      paper.algorithm?.toLowerCase() === algorithmName?.toLowerCase()
+    );
+  };
+
   const getMetricKeys = (models) => {
     const keys = new Set();
     models.forEach(model => {
@@ -145,6 +151,17 @@ function App() {
           {selectedAlgorithm && (
             <div className="model-details">
               <h2>{selectedAlgorithm.algorithm} Models</h2>
+              
+              {(() => {
+                const paper = getPaperForAlgorithm(selectedAlgorithm.algorithm);
+                return paper && (
+                  <div className="paper-abstract">
+                    <h3>{paper.title}</h3>
+                    <p className="abstract-text">{paper.abstract}</p>
+                  </div>
+                );
+              })()}
+              
               <div className="table-container">
                 <table className="models-table">
                   <thead>
