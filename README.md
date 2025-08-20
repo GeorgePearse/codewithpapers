@@ -30,6 +30,7 @@ Then open http://localhost:3000 in your browser.
 ## Data Format
 
 Papers are currently stored in YAML format (`benchmark_metrics.yaml`). Each paper entry includes:
+
 - Title, authors, abstract
 - Publication details (venue, date)
 - Keywords and techniques
@@ -40,14 +41,17 @@ Papers are currently stored in YAML format (`benchmark_metrics.yaml`). Each pape
 ## Roadmap / TODO
 
 ### Core Features
+
 - [ ] **Multiple Implementation Links**
   - [ ] Official implementation (GitHub, GitLab, etc.)
   - [ ] Community replications with notes on differences
   - [ ] Framework-specific implementations (PyTorch, TensorFlow, JAX)
   - [ ] Simplified/educational implementations
   - [ ] Links to Colab/Kaggle notebooks
+  - [ ] Links to the model weights etc. on hugging face.
 
 ### Training Metrics & Results
+
 - [ ] **Training Run Visualization**
   - [ ] Loss curves (training/validation)
   - [ ] Learning rate schedules
@@ -59,9 +63,10 @@ Papers are currently stored in YAML format (`benchmark_metrics.yaml`). Each pape
   - [ ] Standardized metrics across papers
   - [ ] Confidence intervals and error bars
   - [ ] Computational efficiency metrics (FLOPs, parameters, inference time)
-  - [ ] Inference speed 
+  - [ ] Inference speed
 
 ### Enhanced Paper Information
+
 - [ ] **Code Quality Indicators**
   - [ ] Test coverage
   - [ ] Documentation quality score
@@ -75,6 +80,7 @@ Papers are currently stored in YAML format (`benchmark_metrics.yaml`). Each pape
   - [ ] Reported reproduction success rate
 
 ### Graph Enhancements
+
 - [ ] **Advanced Filtering**
   - [ ] Filter by year range
   - [ ] Filter by venue/conference
@@ -86,8 +92,8 @@ Papers are currently stored in YAML format (`benchmark_metrics.yaml`). Each pape
   - [ ] Trending topics over time
   - [ ] Gap analysis (under-explored connections)
 
-
 ### Collaboration Features
+
 - [ ] **User Annotations**
   - [ ] Personal notes on papers ???
 - [ ] **Community Features**
@@ -97,13 +103,14 @@ Papers are currently stored in YAML format (`benchmark_metrics.yaml`). Each pape
   - [ ] Bounties for reproductions
 
 ### Analysis Tools
+
 - [ ] **Paper Recommendations**
   - [ ] "Papers like this"
-
 
 ## Contributing
 
 This project is in early development. Contributions are welcome! Areas where help is particularly needed:
+
 - Data collection and curation
 - Frontend improvements and new visualizations
 - API integrations
@@ -112,6 +119,7 @@ This project is in early development. Contributions are welcome! Areas where hel
 ## Vision
 
 The ultimate goal is to create a comprehensive platform that:
+
 1. Makes ML research more accessible and navigable
 2. Provides deep insights into paper implementations and reproducibility
 3. Facilitates collaboration and knowledge sharing

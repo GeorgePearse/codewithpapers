@@ -1,2 +1,8 @@
 mmdetection/
 mmpose/
+references/mmdetection/
+references/mmpose/
+node_modules/
+*.pyc
+__pycache__/
+.DS_Store
