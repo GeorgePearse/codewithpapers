@@ -109,6 +109,8 @@ Papers are currently stored in YAML format (`benchmark_metrics.yaml`). Each pape
 
 Could try to make this work, but honestly feels unlikely that it's worth it, at least not until everything else is working well https://github.com/paperswithcode/sota-extractor
 
+Plan for the maintenance of the dataset right now, is to workout if something like GitHub can cope with the volume of data, but then sync it with postgres to run the backend on.
+
 ## Contributing
 
 This project is in early development. Contributions are welcome! Areas where help is particularly needed:
