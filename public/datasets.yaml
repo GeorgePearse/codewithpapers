@@ -1,0 +1,324 @@
+# Machine Learning Datasets from Papers with Code
+# Total: 50 popular datasets extracted from 13,092 available datasets
+
+datasets:
+  - name: CIFAR-10
+    description: "A dataset of 60,000 32x32 color images in 10 classes, with 6,000 images per class. Contains 50,000 training and 10,000 test images."
+    papers_count: 16113
+    benchmarks_count: 108
+    categories: ["image_classification", "computer_vision"]
+    url: "https://www.cs.toronto.edu/~kriz/cifar.html"
+
+  - name: ImageNet
+    description: "Contains 14,197,122 annotated images according to WordNet hierarchy. Used in ILSVRC challenge for image classification and object detection."
+    papers_count: 15391
+    benchmarks_count: 55
+    categories: ["image_classification", "object_detection", "computer_vision"]
+    url: "https://www.image-net.org/"
+
+  - name: COCO (Common Objects in Context)
+    description: "Large-scale object detection, segmentation, and captioning dataset designed for research on wide variety of object categories."
+    papers_count: 11890
+    benchmarks_count: 96
+    categories: ["object_detection", "segmentation", "image_captioning", "computer_vision"]
+    url: "https://cocodataset.org/"
+
+  - name: CIFAR-100
+    description: "60,000 32x32 color images in 100 classes grouped into 20 superclasses. 500 training and 100 testing images per class."
+    papers_count: 9019
+    benchmarks_count: 58
+    categories: ["image_classification", "computer_vision"]
+    url: "https://www.cs.toronto.edu/~kriz/cifar.html"
+
+  - name: MNIST
+    description: "Database of handwritten digits with 60,000 training examples and 10,000 test examples. Size-normalized and centered in 28x28 images."
+    papers_count: 7638
+    benchmarks_count: 52
+    categories: ["image_classification", "digit_recognition", "computer_vision"]
+    url: "http://yann.lecun.com/exdb/mnist/"
+
+  - name: NeRF (Neural Radiance Fields)
+    description: "Dataset for synthesizing novel views of complex scenes. Contains synthetic renderings and real images for 3D scene reconstruction."
+    papers_count: 3860
+    benchmarks_count: 1
+    categories: ["3d_reconstruction", "novel_view_synthesis", "computer_vision"]
+
+  - name: Cityscapes
+    description: "Large-scale database for semantic understanding of urban street scenes. 5,000 fine and 20,000 coarse annotated images from 50 cities."
+    papers_count: 3693
+    benchmarks_count: 58
+    categories: ["semantic_segmentation", "autonomous_driving", "computer_vision"]
+    url: "https://www.cityscapes-dataset.com/"
+
+  - name: KITTI
+    description: "Popular dataset for mobile robotics and autonomous driving with RGB cameras, stereo cameras, and 3D laser scanner data."
+    papers_count: 3653
+    benchmarks_count: 143
+    categories: ["autonomous_driving", "object_detection", "3d_vision", "computer_vision"]
+    url: "http://www.cvlibs.net/datasets/kitti/"
+
+  - name: CelebA (CelebFaces Attributes)
+    description: "202,599 face images (178×218) from 10,177 celebrities, annotated with 40 binary facial attributes."
+    papers_count: 3472
+    benchmarks_count: 23
+    categories: ["face_recognition", "attribute_prediction", "computer_vision"]
+    url: "http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"
+
+  - name: SVHN (Street View House Numbers)
+    description: "600,000 32×32 RGB images of printed digits (0-9) cropped from house number plates. 73,257 training and 26,032 test images."
+    papers_count: 3400
+    benchmarks_count: 12
+    categories: ["digit_recognition", "image_classification", "computer_vision"]
+    url: "http://ufldl.stanford.edu/housenumbers/"
+
+  - name: Fashion-MNIST
+    description: "70,000 28×28 grayscale images of fashion products from 10 categories. 60,000 training and 10,000 test images."
+    papers_count: 3198
+    benchmarks_count: 17
+    categories: ["image_classification", "computer_vision"]
+    url: "https://github.com/zalandoresearch/fashion-mnist"
+
+  - name: GLUE
+    description: "Collection of nine natural language understanding tasks including CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE, and WNLI."
+    papers_count: 3194
+    benchmarks_count: 29
+    categories: ["nlp", "language_understanding", "text_classification"]
+    url: "https://gluebenchmark.com/"
+
+  - name: LibriSpeech
+    description: "Approximately 1,000 hours of audiobooks from LibriVox project. Split into 100hr, 360hr, and 500hr training sets."
+    papers_count: 2351
+    benchmarks_count: 9
+    categories: ["speech_recognition", "audio"]
+    url: "https://www.openslr.org/12/"
+
+  - name: SST (Stanford Sentiment Treebank)
+    description: "11,855 single sentences from movie reviews with fully labeled parse trees for compositional sentiment analysis."
+    papers_count: 2350
+    benchmarks_count: 11
+    categories: ["sentiment_analysis", "nlp", "text_classification"]
+    url: "https://nlp.stanford.edu/sentiment/"
+
+  - name: CUB-200-2011 (Caltech-UCSD Birds)
+    description: "11,788 images of 200 bird subcategories with detailed annotations including part locations, attributes, and bounding boxes."
+    papers_count: 2232
+    benchmarks_count: 50
+    categories: ["fine_grained_classification", "image_classification", "computer_vision"]
+    url: "http://www.vision.caltech.edu/visipedia/CUB-200-2011.html"
+
+  - name: nuScenes
+    description: "Large-scale autonomous driving dataset with 1000 scenes from Boston and Singapore. Full sensor suite including LiDAR and cameras."
+    papers_count: 2128
+    benchmarks_count: 22
+    categories: ["autonomous_driving", "3d_object_detection", "computer_vision"]
+    url: "https://www.nuscenes.org/"
+
+  - name: ShapeNet
+    description: "Large repository of 3D CAD models with over 300M models, 220,000 classified into 3,135 classes."
+    papers_count: 1941
+    benchmarks_count: 13
+    categories: ["3d_vision", "shape_classification", "computer_vision"]
+    url: "https://shapenet.org/"
+
+  - name: MMLU (Massive Multitask Language Understanding)
+    description: "Benchmark covering 57 subjects across STEM, humanities, and social sciences for evaluating knowledge in zero/few-shot settings."
+    papers_count: 1908
+    benchmarks_count: 27
+    categories: ["nlp", "question_answering", "knowledge_evaluation"]
+
+  - name: UCF101
+    description: "13,320 video clips classified into 101 human action categories. Total length over 27 hours with 25 FPS at 320×240 resolution."
+    papers_count: 1857
+    benchmarks_count: 27
+    categories: ["action_recognition", "video_understanding", "computer_vision"]
+    url: "https://www.crcv.ucf.edu/data/UCF101.php"
+
+  - name: GSM8K
+    description: "8.5K high quality grade school math word problems. 7.5K training and 1K test problems requiring 2-8 steps to solve."
+    papers_count: 1854
+    benchmarks_count: 4
+    categories: ["mathematical_reasoning", "nlp", "problem_solving"]
+
+  - name: VQA (Visual Question Answering)
+    description: "Open-ended questions about images requiring understanding of vision, language, and commonsense knowledge."
+    papers_count: 1831
+    benchmarks_count: 0
+    categories: ["visual_question_answering", "multimodal", "computer_vision", "nlp"]
+    url: "https://visualqa.org/"
+
+  - name: MultiNLI
+    description: "433K sentence pairs across ten genres for natural language inference. Includes matched and mismatched dev/test sets."
+    papers_count: 1830
+    benchmarks_count: 3
+    categories: ["natural_language_inference", "nlp", "text_classification"]
+    url: "https://cims.nyu.edu/~sbowman/multinli/"
+
+  - name: SST-2
+    description: "Binary sentiment classification dataset from Stanford Sentiment Treebank with movie review sentences."
+    papers_count: 1804
+    benchmarks_count: 5
+    categories: ["sentiment_analysis", "nlp", "text_classification"]
+
+  - name: IMDb Movie Reviews
+    description: "50,000 movie reviews labeled as positive or negative. 25,000 for training and 25,000 for testing."
+    papers_count: 1785
+    benchmarks_count: 11
+    categories: ["sentiment_analysis", "nlp", "text_classification"]
+    url: "https://ai.stanford.edu/~amaas/data/sentiment/"
+
+  - name: MuJoCo
+    description: "Physics engine environments for benchmarking Reinforcement Learning methods with multi-joint dynamics and contact."
+    papers_count: 1630
+    benchmarks_count: 2
+    categories: ["reinforcement_learning", "robotics", "simulation"]
+    url: "https://mujoco.org/"
+
+  - name: ScanNet
+    description: "Indoor RGB-D dataset with 1513 annotated 3D scans. Includes semantic segmentation for 20 classes of objects."
+    papers_count: 1587
+    benchmarks_count: 22
+    categories: ["3d_semantic_segmentation", "indoor_scenes", "computer_vision"]
+    url: "http://www.scan-net.org/"
+
+  - name: FFHQ (Flickr-Faces-HQ)
+    description: "70,000 high-quality 1024×1024 face images with considerable variation in age, ethnicity, and accessories."
+    papers_count: 1466
+    benchmarks_count: 17
+    categories: ["face_generation", "image_generation", "computer_vision"]
+    url: "https://github.com/NVlabs/ffhq-dataset"
+
+  - name: ModelNet
+    description: "Synthetic object point clouds with 12,311 CAD-generated meshes in 40 categories. Most widely used for point cloud analysis."
+    papers_count: 1403
+    benchmarks_count: 18
+    categories: ["3d_classification", "point_cloud", "computer_vision"]
+    url: "https://modelnet.cs.princeton.edu/"
+
+  - name: Natural Questions
+    description: "307,373 training examples with Google queries and Wikipedia pages. Includes long and short answer annotations."
+    papers_count: 1402
+    benchmarks_count: 10
+    categories: ["question_answering", "nlp", "information_retrieval"]
+    url: "https://ai.google.com/research/NaturalQuestions"
+
+  - name: mini-ImageNet
+    description: "50,000 training and 10,000 testing images evenly distributed across 100 classes. Designed for few-shot learning."
+    papers_count: 1343
+    benchmarks_count: 20
+    categories: ["few_shot_learning", "image_classification", "computer_vision"]
+
+  - name: Kinetics
+    description: "~500,000 video clips covering 600 human action classes. Each clip ~10 seconds from YouTube videos."
+    papers_count: 1340
+    benchmarks_count: 31
+    categories: ["action_recognition", "video_understanding", "computer_vision"]
+    url: "https://deepmind.com/research/open-source/kinetics"
+
+  - name: CARLA
+    description: "Open urban driving simulator built on Unreal Engine 4. Provides RGB cameras, depth maps, and semantic segmentation."
+    papers_count: 1331
+    benchmarks_count: 4
+    categories: ["autonomous_driving", "simulation", "reinforcement_learning"]
+    url: "https://carla.org/"
+
+  - name: MATH
+    description: "12,500 challenging competition mathematics problems with full step-by-step solutions for teaching derivations."
+    papers_count: 1313
+    benchmarks_count: 3
+    categories: ["mathematical_reasoning", "problem_solving", "nlp"]
+
+  - name: SNLI (Stanford Natural Language Inference)
+    description: "570k sentence pairs labeled as entailment, contradiction, or neutral. Premises from Flickr30k image captions."
+    papers_count: 1311
+    benchmarks_count: 1
+    categories: ["natural_language_inference", "nlp", "text_classification"]
+    url: "https://nlp.stanford.edu/projects/snli/"
+
+  - name: OpenAI Gym
+    description: "Toolkit for RL algorithms with environments including Atari, Box2D, Classic Control, MuJoCo, Robotics, and Toy Text."
+    papers_count: 1301
+    benchmarks_count: 3
+    categories: ["reinforcement_learning", "simulation"]
+    url: "https://gym.openai.com/"
+
+  - name: Oxford 102 Flower
+    description: "102 flower categories common in UK. Each class has 40-258 images for fine-grained flower classification."
+    papers_count: 1297
+    benchmarks_count: 18
+    categories: ["fine_grained_classification", "image_classification", "computer_vision"]
+    url: "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/"
+
+  - name: Visual Genome
+    description: "101,174 MSCOCO images with 1.7M VQA pairs, densely annotated objects, attributes, and relationships."
+    papers_count: 1254
+    benchmarks_count: 19
+    categories: ["visual_question_answering", "scene_understanding", "computer_vision"]
+    url: "https://visualgenome.org/"
+
+  - name: MovieLens
+    description: "Movie rating dataset with user preferences as 0-5 star ratings. Used for recommender system research."
+    papers_count: 1243
+    benchmarks_count: 19
+    categories: ["recommendation_systems", "collaborative_filtering"]
+    url: "https://grouplens.org/datasets/movielens/"
+
+  - name: PubMed
+    description: "19,717 scientific publications about diabetes with citation network of 44,338 links. TF/IDF vectors from 500 words."
+    papers_count: 1235
+    benchmarks_count: 24
+    categories: ["graph_learning", "text_classification", "citation_networks"]
+
+  - name: QNLI
+    description: "Natural Language Inference dataset from SQuAD v1.1. Task is determining if context contains answer to question."
+    papers_count: 1234
+    benchmarks_count: 4
+    categories: ["question_answering", "natural_language_inference", "nlp"]
+
+  - name: Tiny ImageNet
+    description: "100,000 images of 200 classes downsized to 64×64. 500 training, 50 validation, and 50 test images per class."
+    papers_count: 1222
+    benchmarks_count: 8
+    categories: ["image_classification", "computer_vision"]
+    url: "http://cs231n.stanford.edu/tiny-imagenet-200.zip"
+
+  - name: ADE20K
+    description: "20K+ scene-centric images with pixel-level annotations. 150 semantic categories including objects and stuff."
+    papers_count: 1205
+    benchmarks_count: 29
+    categories: ["semantic_segmentation", "scene_parsing", "computer_vision"]
+    url: "https://groups.csail.mit.edu/vision/datasets/ADE20K/"
+
+  - name: HumanEval
+    description: "164 programming problems for evaluating code synthesis from docstrings. Tests functional correctness of generated code."
+    papers_count: 1183
+    benchmarks_count: 3
+    categories: ["code_generation", "program_synthesis", "nlp"]
+    url: "https://github.com/openai/human-eval"
+
+  - name: Places
+    description: "2.5+ million images covering 205+ scene categories with 5,000+ images per category for scene recognition."
+    papers_count: 1149
+    benchmarks_count: 4
+    categories: ["scene_classification", "image_classification", "computer_vision"]
+    url: "http://places.csail.mit.edu/"
+
+  - name: STL-10
+    description: "100,000 unlabeled and 13,000 labeled images from 10 classes. 96×96 color images for self-taught learning."
+    papers_count: 1090
+    benchmarks_count: 18
+    categories: ["self_supervised_learning", "image_classification", "computer_vision"]
+    url: "https://cs.stanford.edu/~acoates/stl10/"
+
+  - name: WikiText-2
+    description: "100+ million tokens from Wikipedia Good and Featured articles for language modeling."
+    papers_count: 1079
+    benchmarks_count: 3
+    categories: ["language_modeling", "nlp"]
+    url: "https://www.salesforce.com/products/einstein/ai-research/the-wikitext-dependency-language-modeling-dataset/"
+
+  - name: Office-Home
+    description: "4 domains (Art, Clipart, Product, Real-World) with 65 categories each. 15,500 images for domain adaptation."
+    papers_count: 1069
+    benchmarks_count: 12
+    categories: ["domain_adaptation", "transfer_learning", "computer_vision"]
+    url: "https://www.hemanthdv.org/officeHomeDataset.html"
