@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Create database tables in Neon Postgres."""
 
+import os
 import psycopg2
 from pathlib import Path
 
-# Connection string
-DATABASE_URL = "postgresql://neondb_owner:npg_NwBESm09zFAW@ep-royal-rice-ad5hm3zh-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require"
+# Connection string from environment
+DATABASE_URL = os.getenv('DATABASE_URL')
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set. Please create a .env.local file with your database credentials.")
 
 def create_tables():
     """Execute migration SQL to create tables."""

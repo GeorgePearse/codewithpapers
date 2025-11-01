@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Test connection to Neon Postgres database."""
 
+import os
 import psycopg2
 from psycopg2 import sql
 
-# Connection string
-DATABASE_URL = "postgresql://neondb_owner:npg_NwBESm09zFAW@ep-royal-rice-ad5hm3zh-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require"
+# Connection string from environment
+DATABASE_URL = os.getenv('DATABASE_URL')
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set. Please create a .env.local file with your database credentials.")
 
 def test_connection():
     """Test database connection and list existing tables."""

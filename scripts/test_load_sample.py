@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """Test loading a small sample of data."""
 
+import os
 import psycopg2
 import pandas as pd
 import json
 from pathlib import Path
 
-DATABASE_URL = "postgresql://neondb_owner:npg_NwBESm09zFAW@ep-royal-rice-ad5hm3zh-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require"
+DATABASE_URL = os.getenv('DATABASE_URL')
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set. Please create a .env.local file with your database credentials.")
 DATA_DIR = Path(__file__).parent.parent / "data" / "pwc-archive"
 
 def test_load_sample():

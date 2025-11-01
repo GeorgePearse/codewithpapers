@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Load Papers with Code data from parquet files into Postgres database with checkpoint support."""
 
+import os
 import json
 import psycopg2
 import psycopg2.extras
@@ -11,8 +12,10 @@ from typing import Optional
 import pickle
 import argparse
 
-# Connection string
-DATABASE_URL = "postgresql://neondb_owner:npg_NwBESm09zFAW@ep-royal-rice-ad5hm3zh-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require"
+# Connection string from environment
+DATABASE_URL = os.getenv('DATABASE_URL')
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set. Please create a .env.local file with your database credentials.")
 
 # Data directory
 DATA_DIR = Path(__file__).parent.parent / "data" / "pwc-archive"

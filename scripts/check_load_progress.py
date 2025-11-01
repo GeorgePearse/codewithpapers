@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Check the progress of data loading."""
 
+import os
 import pickle
 import psycopg2
 from pathlib import Path
 
-DATABASE_URL = "postgresql://neondb_owner:npg_NwBESm09zFAW@ep-royal-rice-ad5hm3zh-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require"
+DATABASE_URL = os.getenv('DATABASE_URL')
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set. Please create a .env.local file with your database credentials.")
 CHECKPOINT_FILE = Path(__file__).parent.parent / "data" / "pwc-archive" / ".load_checkpoint.pkl"
 
 # Total expected counts
