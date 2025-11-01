@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import yaml from 'js-yaml';
 import { fetchPapers } from './lib/supabase';
 import PaperCard from './components/PaperCard';
 import './App.css';
@@ -11,7 +10,6 @@ function App() {
   const [filter, setFilter] = useState('latest'); // 'top', 'latest', 'greatest'
   const [searchTerm, setSearchTerm] = useState('');
   const [searchInput, setSearchInput] = useState('');
-  const [dataSource, setDataSource] = useState(null); // 'supabase' or 'yaml'
   const [activeView, setActiveView] = useState('papers'); // 'papers' or 'sota'
 
   useEffect(() => {
@@ -22,7 +20,6 @@ function App() {
     setLoading(true);
     setError(null);
 
-    // Try Supabase first
     try {
       const options = {
         limit: 20,
@@ -51,65 +48,11 @@ function App() {
       }
 
       setPapers(data || []);
-      setDataSource('supabase');
     } catch (err) {
-      console.log('Supabase not available, falling back to YAML:', err.message);
-      // Fallback to YAML
-      await loadYamlFallback();
+      console.error('Error loading papers:', err);
+      setError(err.message || 'Failed to load papers from database');
     } finally {
       setLoading(false);
-    }
-  }
-
-  async function loadYamlFallback() {
-    try {
-      const baseUrl = import.meta.env.BASE_URL;
-      const response = await fetch(`${baseUrl}benchmark_metrics.yaml`);
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch YAML file');
-      }
-
-      const text = await response.text();
-      const data = yaml.load(text);
-
-      // Convert YAML data to paper format
-      const yamlPapers = [];
-
-      // Extract papers from mmdetection configs
-      if (data?.metrics?.mmdetection) {
-        data.metrics.mmdetection.forEach((config, idx) => {
-          yamlPapers.push({
-            id: `mmdetection-${idx}`,
-            title: config.algorithm,
-            abstract: `Config: ${config.config}. Backbone: ${config.backbone || 'N/A'}`,
-            arxiv_id: config.paper_id,
-            arxiv_url: config.paper_url,
-            published_date: null,
-            authors: null,
-            implementations: [{
-              github_url: config.config_url || 'https://github.com/open-mmlab/mmdetection',
-              framework: 'PyTorch',
-              is_official: true
-            }]
-          });
-        });
-      }
-
-      // Filter by search term
-      let filtered = yamlPapers;
-      if (searchTerm) {
-        filtered = yamlPapers.filter(p =>
-          p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          (p.abstract && p.abstract.toLowerCase().includes(searchTerm.toLowerCase()))
-        );
-      }
-
-      setPapers(filtered);
-      setDataSource('yaml');
-    } catch (err) {
-      console.error('Error loading YAML fallback:', err);
-      setError('Failed to load data from both Supabase and YAML files');
     }
   }
 
@@ -153,13 +96,6 @@ function App() {
               </form>
             </div>
           </nav>
-          {dataSource && (
-            <div className="data-source-indicator">
-              <span className={`badge ${dataSource === 'supabase' ? 'badge-success' : 'badge-warning'}`}>
-                {dataSource === 'supabase' ? '✓ Database Connected' : '⚠ Fallback Mode (YAML)'}
-              </span>
-            </div>
-          )}
         </div>
       </header>
 
@@ -221,14 +157,17 @@ function App() {
 
         {error && (
           <div className="error-container">
-            <h3>Error loading papers</h3>
+            <h3>Database Connection Error</h3>
             <p>{error}</p>
             <p className="error-hint">
-              Make sure you have set up your Supabase credentials in .env.local:
+              Configure Supabase credentials in .env.local:
               <br />
-              VITE_SUPABASE_URL=your-project-url
+              <code>VITE_SUPABASE_URL=your-project-url</code>
               <br />
-              VITE_SUPABASE_ANON_KEY=your-anon-key
+              <code>VITE_SUPABASE_ANON_KEY=your-anon-key</code>
+            </p>
+            <p style={{ marginTop: '12px', fontSize: '0.875rem' }}>
+              See <a href="https://github.com/GeorgePearse/codewithpapers#setup" target="_blank" rel="noopener noreferrer">setup instructions</a> for details.
             </p>
           </div>
         )}
@@ -328,10 +267,11 @@ function App() {
       <footer className="pwc-footer">
         <div className="container">
           <p>
-            Rebuilding Papers with Code • Data from{' '}
+            Rebuilding Papers with Code • {papers.length > 0 ? `${papers.length.toLocaleString()}+ papers` : 'Loading database'} • Data from{' '}
             <a href="https://huggingface.co/datasets/pwc-archive" target="_blank" rel="noopener noreferrer">
               PWC Archive
             </a>
+            {' '}via Supabase
           </p>
         </div>
       </footer>

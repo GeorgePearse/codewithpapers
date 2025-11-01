@@ -4,11 +4,8 @@
   "private": true,
   "dependencies": {
     "@supabase/supabase-js": "^2.55.0",
-    "dotenv": "^17.2.1",
-    "js-yaml": "^4.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "supabase": "^2.34.3"
+    "react-dom": "^18.2.0"
   },
   "scripts": {
     "dev": "vite",
