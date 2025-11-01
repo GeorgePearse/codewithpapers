@@ -18,7 +18,13 @@ CodeWithPapers creates an interactive force-directed graph visualization of ML p
   - Connected papers
 - **Responsive Design**: Collapsible sidebar for better space utilization
 
+## Live Demo
+
+The site is deployed at: **https://georgepearse.github.io/codewithpapers/**
+
 ## Running Locally
+
+### Frontend (React/Vite)
 
 ```bash
 npm install
@@ -26,6 +32,33 @@ npm run dev
 ```
 
 Then open http://localhost:3000 in your browser.
+
+### Deployment
+
+The site automatically deploys to GitHub Pages when you push to `main`. See [DEPLOYMENT.md](DEPLOYMENT.md) for details.
+
+### Python Scripts
+
+This project uses [uv](https://github.com/astral-sh/uv) for fast, reliable Python dependency management.
+
+**Install uv:**
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+**Install Python dependencies:**
+```bash
+uv sync
+```
+
+**Run Python scripts:**
+```bash
+# Download Papers with Code archive data
+uv run python scripts/download_pwc_data.py --list
+
+# Run other scripts
+uv run python add_abstracts.py
+```
 
 ## Data Format
 
@@ -121,6 +154,44 @@ Definitely going to want to scrape https://web.archive.org/web/20250708172035/ht
 
 There was definitely some other website like this https://www.connectedpapers.com/main/9397e7acd062245d37350f5c05faf56e9cfae0d6/DeepFruits:-A-Fruit-Detection-System-Using-Deep-Neural-Networks/graph but better, should check that you don't start feature creeping into this territory.
 
+## Development
+
+### Python Environment
+
+This project uses `uv` for Python dependency management. The configuration is in `pyproject.toml`.
+
+**Key commands:**
+```bash
+# Sync dependencies
+uv sync
+
+# Add a new dependency
+uv add package-name
+
+# Add a dev dependency
+uv add --dev package-name
+
+# Run a script
+uv run python script.py
+
+# Format code
+uv run black .
+
+# Lint code
+uv run ruff check .
+```
+
+### JavaScript/Node Environment
+
+Standard npm workflow for the React frontend:
+```bash
+npm install          # Install dependencies
+npm run dev          # Start dev server
+npm run build        # Build for production
+npm run lint         # Lint code
+npm run format       # Format code with prettier
+```
+
 ## Contributing
 
 This project is in early development. Contributions are welcome! Areas where help is particularly needed:
@@ -138,6 +209,47 @@ The ultimate goal is to create a comprehensive platform that:
 2. Provides deep insights into paper implementations and reproducibility
 3. Facilitates collaboration and knowledge sharing
 4. Helps researchers identify gaps and opportunities in the field
+
+## Data Sources
+
+### Papers with Code Archive (Hugging Face)
+
+The project utilizes the Papers with Code archive hosted on Hugging Face, which contains the last publicly available snapshot of PWC datasets (retrieved July 28-29, 2025). All datasets are licensed under CC-BY-SA-4.0.
+
+**Main Organization**: https://huggingface.co/pwc-archive
+
+### Papers with Code Archive (Archive.org)
+
+For the most recent archived snapshots of the Papers with Code website:
+- **Archive.org snapshots**: https://web.archive.org/web/20241101000000*/paperswithcode.com
+
+The goal is to rebuild Papers with Code using these archived datasets and web snapshots.
+
+**Available Datasets**:
+
+1. **[papers-with-abstracts](https://huggingface.co/datasets/pwc-archive/papers-with-abstracts)** (576k papers)
+   - Complete paper metadata including titles, abstracts, authors, conference details, arXiv IDs, and associated methods
+   - Primary source for paper information
+
+2. **[links-between-paper-and-code](https://huggingface.co/datasets/pwc-archive/links-between-paper-and-code)** (300k links)
+   - Connects academic papers to their GitHub repositories
+   - Includes paper metadata, repository URLs, and flags for official implementations
+
+3. **[datasets](https://huggingface.co/datasets/pwc-archive/datasets)** (15k datasets)
+   - Information about ML datasets (MNIST, ImageNet, GLUE, CelebA, etc.)
+   - Includes dataset descriptions, associated papers, tasks, modalities, and framework-specific data loaders
+
+4. **[methods](https://huggingface.co/datasets/pwc-archive/methods)** (8.73k methods)
+   - ML methods and techniques with metadata
+   - Categorized by research areas (Computer Vision, NLP, RL, etc.)
+   - Includes introduction year, source papers, and code snippets
+
+5. **[evaluation-tables](https://huggingface.co/datasets/pwc-archive/evaluation-tables)** (2.25k tables)
+   - Benchmark results and performance comparisons
+   - State-of-the-art tracking across different tasks
+
+6. **[files](https://huggingface.co/datasets/pwc-archive/files)** (62 items)
+   - Additional archive files
 
 ## License
 
