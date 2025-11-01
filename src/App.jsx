@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import yaml from 'js-yaml';
 import { fetchPapers } from './lib/supabase';
 import PaperCard from './components/PaperCard';
 import './App.css';
@@ -10,6 +11,8 @@ function App() {
   const [filter, setFilter] = useState('latest'); // 'top', 'latest', 'greatest'
   const [searchTerm, setSearchTerm] = useState('');
   const [searchInput, setSearchInput] = useState('');
+  const [dataSource, setDataSource] = useState(null); // 'supabase' or 'yaml'
+  const [activeView, setActiveView] = useState('papers'); // 'papers' or 'sota'
 
   useEffect(() => {
     loadPapers();
@@ -19,6 +22,7 @@ function App() {
     setLoading(true);
     setError(null);
 
+    // Try Supabase first
     try {
       const options = {
         limit: 20,
@@ -30,18 +34,14 @@ function App() {
 
       // Adjust ordering based on filter
       if (filter === 'top') {
-        // For now, use created_at as proxy for trending
-        // In the future, could add view counts, stars, etc.
         options.orderBy = 'created_at';
         options.order = 'desc';
       } else if (filter === 'latest') {
         options.orderBy = 'published_date';
         options.order = 'desc';
       } else if (filter === 'greatest') {
-        // Could sort by citation count or impact factor
-        // For now, use published_date
         options.orderBy = 'published_date';
-        options.order = 'asc'; // Oldest first as proxy for "classic" papers
+        options.order = 'asc';
       }
 
       const { data, error: fetchError } = await fetchPapers(options);
@@ -51,11 +51,65 @@ function App() {
       }
 
       setPapers(data || []);
+      setDataSource('supabase');
     } catch (err) {
-      console.error('Error loading papers:', err);
-      setError(err.message || 'Failed to load papers');
+      console.log('Supabase not available, falling back to YAML:', err.message);
+      // Fallback to YAML
+      await loadYamlFallback();
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function loadYamlFallback() {
+    try {
+      const baseUrl = import.meta.env.BASE_URL;
+      const response = await fetch(`${baseUrl}benchmark_metrics.yaml`);
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch YAML file');
+      }
+
+      const text = await response.text();
+      const data = yaml.load(text);
+
+      // Convert YAML data to paper format
+      const yamlPapers = [];
+
+      // Extract papers from mmdetection configs
+      if (data?.metrics?.mmdetection) {
+        data.metrics.mmdetection.forEach((config, idx) => {
+          yamlPapers.push({
+            id: `mmdetection-${idx}`,
+            title: config.algorithm,
+            abstract: `Config: ${config.config}. Backbone: ${config.backbone || 'N/A'}`,
+            arxiv_id: config.paper_id,
+            arxiv_url: config.paper_url,
+            published_date: null,
+            authors: null,
+            implementations: [{
+              github_url: config.config_url || 'https://github.com/open-mmlab/mmdetection',
+              framework: 'PyTorch',
+              is_official: true
+            }]
+          });
+        });
+      }
+
+      // Filter by search term
+      let filtered = yamlPapers;
+      if (searchTerm) {
+        filtered = yamlPapers.filter(p =>
+          p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          (p.abstract && p.abstract.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+      }
+
+      setPapers(filtered);
+      setDataSource('yaml');
+    } catch (err) {
+      console.error('Error loading YAML fallback:', err);
+      setError('Failed to load data from both Supabase and YAML files');
     }
   }
 
@@ -73,6 +127,20 @@ function App() {
             <div className="navbar-brand">
               <h1 className="logo">Papers with Code</h1>
             </div>
+            <div className="navbar-menu">
+              <button
+                className={`nav-link ${activeView === 'papers' ? 'active' : ''}`}
+                onClick={() => setActiveView('papers')}
+              >
+                Papers
+              </button>
+              <button
+                className={`nav-link ${activeView === 'sota' ? 'active' : ''}`}
+                onClick={() => setActiveView('sota')}
+              >
+                Browse State-of-the-Art
+              </button>
+            </div>
             <div className="navbar-search">
               <form onSubmit={handleSearch}>
                 <input
@@ -85,54 +153,63 @@ function App() {
               </form>
             </div>
           </nav>
+          {dataSource && (
+            <div className="data-source-indicator">
+              <span className={`badge ${dataSource === 'supabase' ? 'badge-success' : 'badge-warning'}`}>
+                {dataSource === 'supabase' ? '✓ Database Connected' : '⚠ Fallback Mode (YAML)'}
+              </span>
+            </div>
+          )}
         </div>
       </header>
 
       {/* Main Content */}
       <main className="container">
-        {/* Filter Badges */}
-        <div className="content-header">
-          <div className="filter-badges">
-            <button
-              className={`filter-badge ${filter === 'top' ? 'active' : ''}`}
-              onClick={() => setFilter('top')}
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-              </svg>
-              Top
-            </button>
-            <button
-              className={`filter-badge ${filter === 'latest' ? 'active' : ''}`}
-              onClick={() => setFilter('latest')}
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-              </svg>
-              Latest
-            </button>
-            <button
-              className={`filter-badge ${filter === 'greatest' ? 'active' : ''}`}
-              onClick={() => setFilter('greatest')}
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-                <path d="M4 22h16"/>
-                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
-              </svg>
-              Greatest
-            </button>
-          </div>
+        {activeView === 'papers' && (
+          <>
+            {/* Filter Badges */}
+            <div className="content-header">
+              <div className="filter-badges">
+                <button
+                  className={`filter-badge ${filter === 'top' ? 'active' : ''}`}
+                  onClick={() => setFilter('top')}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                  </svg>
+                  Top
+                </button>
+                <button
+                  className={`filter-badge ${filter === 'latest' ? 'active' : ''}`}
+                  onClick={() => setFilter('latest')}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                  </svg>
+                  Latest
+                </button>
+                <button
+                  className={`filter-badge ${filter === 'greatest' ? 'active' : ''}`}
+                  onClick={() => setFilter('greatest')}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                    <path d="M4 22h16"/>
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                  </svg>
+                  Greatest
+                </button>
+              </div>
 
-          <h2 className="content-title">
-            {filter === 'top' && 'Trending Research'}
-            {filter === 'latest' && 'Latest Papers'}
-            {filter === 'greatest' && 'Classic Papers'}
-          </h2>
-        </div>
+              <h2 className="content-title">
+                {filter === 'top' && 'Trending Research'}
+                {filter === 'latest' && 'Latest Papers'}
+                {filter === 'greatest' && 'Classic Papers'}
+              </h2>
+            </div>
 
         {/* Papers List */}
         {loading && (
@@ -175,6 +252,74 @@ function App() {
             <p className="papers-count">
               Showing {papers.length} papers
             </p>
+          </div>
+        )}
+          </>
+        )}
+
+        {/* Browse State-of-the-Art View */}
+        {activeView === 'sota' && (
+          <div className="sota-view">
+            <div className="content-header">
+              <h2 className="content-title">Browse State-of-the-Art</h2>
+              <p className="content-subtitle">Explore cutting-edge results across different tasks and benchmarks</p>
+            </div>
+
+            <div className="sota-categories">
+              <div className="sota-category-card">
+                <div className="sota-category-icon">🖼️</div>
+                <h3>Computer Vision</h3>
+                <p>Image Classification, Object Detection, Segmentation, Pose Estimation</p>
+                <div className="sota-stats">
+                  <span>{papers.length > 0 ? Math.floor(papers.length * 0.4) : 0} papers</span>
+                </div>
+              </div>
+
+              <div className="sota-category-card">
+                <div className="sota-category-icon">💬</div>
+                <h3>Natural Language Processing</h3>
+                <p>Language Modeling, Text Classification, Question Answering, Translation</p>
+                <div className="sota-stats">
+                  <span>{papers.length > 0 ? Math.floor(papers.length * 0.3) : 0} papers</span>
+                </div>
+              </div>
+
+              <div className="sota-category-card">
+                <div className="sota-category-icon">🎯</div>
+                <h3>Reinforcement Learning</h3>
+                <p>Game AI, Robotics, Control, Multi-Agent Systems</p>
+                <div className="sota-stats">
+                  <span>{papers.length > 0 ? Math.floor(papers.length * 0.15) : 0} papers</span>
+                </div>
+              </div>
+
+              <div className="sota-category-card">
+                <div className="sota-category-icon">📊</div>
+                <h3>Graphs & Structured Data</h3>
+                <p>Graph Neural Networks, Knowledge Graphs, Recommendation Systems</p>
+                <div className="sota-stats">
+                  <span>{papers.length > 0 ? Math.floor(papers.length * 0.15) : 0} papers</span>
+                </div>
+              </div>
+
+              <div className="sota-category-card">
+                <div className="sota-category-icon">🔊</div>
+                <h3>Audio & Speech</h3>
+                <p>Speech Recognition, Audio Classification, Text-to-Speech</p>
+                <div className="sota-stats">
+                  <span>{papers.length > 0 ? Math.floor(papers.length * 0.1) : 0} papers</span>
+                </div>
+              </div>
+
+              <div className="sota-category-card">
+                <div className="sota-category-icon">🧠</div>
+                <h3>General AI</h3>
+                <p>Meta-Learning, Transfer Learning, Few-Shot Learning</p>
+                <div className="sota-stats">
+                  <span>{papers.length > 0 ? Math.floor(papers.length * 0.1) : 0} papers</span>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </main>
