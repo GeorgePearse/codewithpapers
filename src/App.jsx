@@ -17,10 +17,11 @@ function App() {
   useEffect(() => {
     const loadYamlData = async () => {
       try {
-        // Load both YAML files
+        // Load both YAML files - use BASE_URL for GitHub Pages compatibility
+        const baseUrl = import.meta.env.BASE_URL;
         const [metricsResponse, datasetsResponse] = await Promise.all([
-          fetch('/benchmark_metrics.yaml'),
-          fetch('/datasets.yaml')
+          fetch(`${baseUrl}benchmark_metrics.yaml`),
+          fetch(`${baseUrl}datasets.yaml`)
         ]);
         
         if (!metricsResponse.ok || !datasetsResponse.ok) {
