@@ -1,139 +1,195 @@
 import React, { useState, useEffect } from 'react';
-import yaml from 'js-yaml';
-import PapersView from './PapersView';
-import DatasetsView from './DatasetsView';
+import { fetchPapers } from './lib/supabase';
+import PaperCard from './components/PaperCard';
 import './App.css';
 
 function App() {
-  const [metricsData, setMetricsData] = useState(null);
-  const [datasetsData, setDatasetsData] = useState(null);
+  const [papers, setPapers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState(null);
+  const [filter, setFilter] = useState('latest'); // 'top', 'latest', 'greatest'
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
-  const [activeTab, setActiveTab] = useState('papers');
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
-    const loadYamlData = async () => {
-      try {
-        // Load both YAML files - use BASE_URL for GitHub Pages compatibility
-        const baseUrl = import.meta.env.BASE_URL;
-        const [metricsResponse, datasetsResponse] = await Promise.all([
-          fetch(`${baseUrl}benchmark_metrics.yaml`),
-          fetch(`${baseUrl}datasets.yaml`)
-        ]);
-        
-        if (!metricsResponse.ok || !datasetsResponse.ok) {
-          throw new Error('Failed to fetch YAML files');
-        }
-        
-        const [metricsText, datasetsText] = await Promise.all([
-          metricsResponse.text(),
-          datasetsResponse.text()
-        ]);
-        
-        const metricsData = yaml.load(metricsText);
-        const datasetsData = yaml.load(datasetsText);
-        
-        setMetricsData(metricsData);
-        setDatasetsData(datasetsData);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
+    loadPapers();
+  }, [filter, searchTerm]);
+
+  async function loadPapers() {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const options = {
+        limit: 20,
+        offset: 0,
+        orderBy: 'published_date',
+        order: 'desc',
+        search: searchTerm || null
+      };
+
+      // Adjust ordering based on filter
+      if (filter === 'top') {
+        // For now, use created_at as proxy for trending
+        // In the future, could add view counts, stars, etc.
+        options.orderBy = 'created_at';
+        options.order = 'desc';
+      } else if (filter === 'latest') {
+        options.orderBy = 'published_date';
+        options.order = 'desc';
+      } else if (filter === 'greatest') {
+        // Could sort by citation count or impact factor
+        // For now, use published_date
+        options.orderBy = 'published_date';
+        options.order = 'asc'; // Oldest first as proxy for "classic" papers
       }
-    };
 
-    loadYamlData();
-  }, []);
+      const { data, error: fetchError } = await fetchPapers(options);
 
+      if (fetchError) {
+        throw fetchError;
+      }
 
-  const filteredAlgorithms = metricsData?.metrics?.mmdetection?.filter(algo => 
-    algo.algorithm.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    algo.config.toLowerCase().includes(searchTerm.toLowerCase())
-  ) || [];
-
-  if (loading) {
-    return (
-      <div className="app">
-        <div className="loading-container">
-          <h2>Loading benchmark metrics...</h2>
-        </div>
-      </div>
-    );
+      setPapers(data || []);
+    } catch (err) {
+      console.error('Error loading papers:', err);
+      setError(err.message || 'Failed to load papers');
+    } finally {
+      setLoading(false);
+    }
   }
 
-  if (error) {
-    return (
-      <div className="app">
-        <div className="error-container">
-          <h2>Error loading data</h2>
-          <p>{error}</p>
-        </div>
-      </div>
-    );
+  function handleSearch(e) {
+    e.preventDefault();
+    setSearchTerm(searchInput);
   }
 
   return (
     <div className="app">
-      <header className="app-header">
-        <h1>Papers with Code Browser</h1>
-        <nav className="nav-tabs">
-          <button 
-            className={`tab-button ${activeTab === 'papers' ? 'active' : ''}`}
-            onClick={() => setActiveTab('papers')}
-          >
-            Papers
-          </button>
-          <button 
-            className={`tab-button ${activeTab === 'datasets' ? 'active' : ''}`}
-            onClick={() => setActiveTab('datasets')}
-          >
-            Datasets
-          </button>
-        </nav>
-        {activeTab === 'papers' && (
-          <div className="summary">
-            <div className="summary-card">
-              <h3>MMDetection</h3>
-              <p>Total Configs: {metricsData?.summary?.mmdetection?.total_configs || 0}</p>
-              <p>Total Models: {metricsData?.summary?.mmdetection?.total_models || 0}</p>
+      {/* Header */}
+      <header className="pwc-header">
+        <div className="container">
+          <nav className="navbar">
+            <div className="navbar-brand">
+              <h1 className="logo">Papers with Code</h1>
             </div>
-            <div className="summary-card">
-              <h3>MMPose</h3>
-              <p>Total Configs: {metricsData?.summary?.mmpose?.total_configs || 0}</p>
-              <p>Total Models: {metricsData?.summary?.mmpose?.total_models || 0}</p>
+            <div className="navbar-search">
+              <form onSubmit={handleSearch}>
+                <input
+                  type="search"
+                  placeholder="Search papers..."
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  className="search-input"
+                />
+              </form>
             </div>
-          </div>
-        )}
-        {activeTab === 'datasets' && (
-          <div className="summary">
-            <div className="summary-card">
-              <h3>Total Datasets</h3>
-              <p>{datasetsData?.datasets?.length || 0} datasets available</p>
-            </div>
-          </div>
-        )}
+          </nav>
+        </div>
       </header>
 
-      <main className="main-content">
-        {activeTab === 'papers' && (
-          <PapersView
-            metricsData={metricsData}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            filteredAlgorithms={filteredAlgorithms}
-            selectedAlgorithm={selectedAlgorithm}
-            setSelectedAlgorithm={setSelectedAlgorithm}
-            sortConfig={sortConfig}
-            setSortConfig={setSortConfig}
-          />
+      {/* Main Content */}
+      <main className="container">
+        {/* Filter Badges */}
+        <div className="content-header">
+          <div className="filter-badges">
+            <button
+              className={`filter-badge ${filter === 'top' ? 'active' : ''}`}
+              onClick={() => setFilter('top')}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+              Top
+            </button>
+            <button
+              className={`filter-badge ${filter === 'latest' ? 'active' : ''}`}
+              onClick={() => setFilter('latest')}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+              Latest
+            </button>
+            <button
+              className={`filter-badge ${filter === 'greatest' ? 'active' : ''}`}
+              onClick={() => setFilter('greatest')}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                <path d="M4 22h16"/>
+                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+              </svg>
+              Greatest
+            </button>
+          </div>
+
+          <h2 className="content-title">
+            {filter === 'top' && 'Trending Research'}
+            {filter === 'latest' && 'Latest Papers'}
+            {filter === 'greatest' && 'Classic Papers'}
+          </h2>
+        </div>
+
+        {/* Papers List */}
+        {loading && (
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
+            <p>Loading papers from database...</p>
+          </div>
         )}
-        {activeTab === 'datasets' && (
-          <DatasetsView datasetsData={datasetsData} />
+
+        {error && (
+          <div className="error-container">
+            <h3>Error loading papers</h3>
+            <p>{error}</p>
+            <p className="error-hint">
+              Make sure you have set up your Supabase credentials in .env.local:
+              <br />
+              VITE_SUPABASE_URL=your-project-url
+              <br />
+              VITE_SUPABASE_ANON_KEY=your-anon-key
+            </p>
+          </div>
+        )}
+
+        {!loading && !error && papers.length === 0 && (
+          <div className="empty-state">
+            <p>No papers found{searchTerm && ` for "${searchTerm}"`}</p>
+          </div>
+        )}
+
+        {!loading && !error && papers.length > 0 && (
+          <div className="papers-list">
+            {papers.map((paper) => (
+              <PaperCard key={paper.id} paper={paper} />
+            ))}
+          </div>
+        )}
+
+        {!loading && !error && papers.length > 0 && (
+          <div className="load-more">
+            <p className="papers-count">
+              Showing {papers.length} papers
+            </p>
+          </div>
         )}
       </main>
+
+      {/* Footer */}
+      <footer className="pwc-footer">
+        <div className="container">
+          <p>
+            Rebuilding Papers with Code • Data from{' '}
+            <a href="https://huggingface.co/datasets/pwc-archive" target="_blank" rel="noopener noreferrer">
+              PWC Archive
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
