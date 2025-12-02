@@ -12,6 +12,7 @@ data/
 dist/
 build/
 backend/target/
+.pre-commit-bin/
 .env
 .env.local
 .env.*.local

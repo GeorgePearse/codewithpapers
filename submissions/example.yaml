@@ -1,0 +1,83 @@
+# =============================================================================
+# CodeWithPapers - Paper Submission Example
+# =============================================================================
+#
+# This is a complete example showing all available fields.
+# Copy this file and rename it to submit your paper.
+#
+# Naming convention: {arxiv_id}-{short-title}.yaml
+# Example: 1706.03762-attention-is-all-you-need.yaml
+#
+# =============================================================================
+
+paper:
+  # REQUIRED: Paper title (5-500 characters)
+  title: "Attention Is All You Need"
+
+  # REQUIRED: arXiv ID
+  # Formats: "2301.12345", "2301.12345v2", "cs.CV/0601001"
+  arxiv_id: "1706.03762"
+
+  # OPTIONAL: Abstract (will be displayed on the site)
+  abstract: |
+    The dominant sequence transduction models are based on complex recurrent or
+    convolutional neural networks that include an encoder and a decoder. The best
+    performing models also connect the encoder and decoder through an attention
+    mechanism. We propose a new simple network architecture, the Transformer,
+    based solely on attention mechanisms, dispensing with recurrence and convolutions
+    entirely.
+
+  # OPTIONAL: URLs (auto-generated from arxiv_id if omitted)
+  arxiv_url: "https://arxiv.org/abs/1706.03762"
+  pdf_url: "https://arxiv.org/pdf/1706.03762.pdf"
+
+  # OPTIONAL: Publication date (YYYY-MM-DD)
+  published_date: "2017-06-12"
+
+  # OPTIONAL: Author list
+  authors:
+    - "Ashish Vaswani"
+    - "Noam Shazeer"
+    - "Niki Parmar"
+    - "Jakob Uszkoreit"
+    - "Llion Jones"
+    - "Aidan N. Gomez"
+    - "Lukasz Kaiser"
+    - "Illia Polosukhin"
+
+# =============================================================================
+# OPTIONAL: Code Implementations
+# =============================================================================
+# Link GitHub repositories that implement this paper.
+
+implementations:
+  - github_url: "https://github.com/tensorflow/tensor2tensor"
+    framework: "tensorflow"
+    is_official: true
+
+  - github_url: "https://github.com/huggingface/transformers"
+    framework: "pytorch"
+    is_official: false
+
+  - github_url: "https://github.com/jadore801120/attention-is-all-you-need-pytorch"
+    framework: "pytorch"
+    is_official: false
+
+# =============================================================================
+# OPTIONAL: Benchmark Results
+# =============================================================================
+# Report performance metrics on standard benchmarks.
+
+benchmark_results:
+  - dataset_name: "WMT 2014 English-German"
+    task: "Machine Translation"
+    metric_name: "BLEU"
+    metric_value: 28.4
+
+  - dataset_name: "WMT 2014 English-French"
+    task: "Machine Translation"
+    metric_name: "BLEU"
+    metric_value: 41.8
+    extra_data:
+      model: "Transformer (big)"
+      training_time: "3.5 days on 8 P100 GPUs"

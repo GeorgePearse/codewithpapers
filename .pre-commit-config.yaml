@@ -1,0 +1,65 @@
+# Pre-commit hooks configuration
+# Install: pip install pre-commit && pre-commit install
+# Manual run: pre-commit run --all-files
+
+repos:
+  # Standard pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+        exclude: ^submissions/
+      - id: check-added-large-files
+
+  # JavaScript/TypeScript formatting
+  - repo: local
+    hooks:
+      - id: prettier
+        name: Prettier
+        entry: npx prettier --write
+        language: system
+        files: \.(js|jsx|ts|tsx|css|md|json)$
+        exclude: ^(node_modules|dist|backend)/
+
+  # Rust formatting
+  - repo: local
+    hooks:
+      - id: rustfmt
+        name: Rust Format
+        entry: cargo fmt --manifest-path backend/Cargo.toml --
+        language: system
+        files: \.rs$
+        pass_filenames: true
+
+  # YAML submission validation
+  # Downloads pre-built binary from GitHub releases
+  - repo: local
+    hooks:
+      - id: validate-submissions
+        name: Validate Paper Submissions
+        entry: bash -c '
+          if [ ! -f .pre-commit-bin/validate_submission ]; then
+            mkdir -p .pre-commit-bin
+            OS=$(uname -s | tr "[:upper:]" "[:lower:]")
+            ARCH=$(uname -m)
+            if [ "$ARCH" = "x86_64" ]; then
+              ARCH="amd64"
+            elif [ "$ARCH" = "arm64" ] || [ "$ARCH" = "aarch64" ]; then
+              ARCH="arm64"
+            fi
+            BINARY="validate_submission-${OS}-${ARCH}"
+            echo "Downloading $BINARY..."
+            curl -sL "https://github.com/GeorgePearse/codewithpapers/releases/latest/download/${BINARY}" -o .pre-commit-bin/validate_submission
+            chmod +x .pre-commit-bin/validate_submission
+          fi
+          .pre-commit-bin/validate_submission "$@"
+        '
+        language: system
+        files: ^submissions/.*\.(yaml|yml)$
+        exclude: ^submissions/(example|_)
+        pass_filenames: true
+
+# Note: The submission validator binary is cached in .pre-commit-bin/
+# Add .pre-commit-bin/ to .gitignore

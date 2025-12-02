@@ -270,7 +270,23 @@ npm run format       # Format code with prettier
 
 ## Contributing
 
-This project is in early development. Contributions are welcome! Areas where help is particularly needed:
+This project is in early development. Contributions are welcome!
+
+### Submit a Paper
+
+The easiest way to contribute is to submit papers via YAML files:
+
+1. Copy the template: `cp submissions/example.yaml submissions/your-paper.yaml`
+2. Fill in the paper details (title, arxiv_id required; abstract, authors, implementations optional)
+3. Submit a Pull Request
+4. CI validates your submission automatically
+5. Once merged, the data is inserted into the database
+
+See [`submissions/README.md`](submissions/README.md) for the full schema and examples.
+
+### Other Contributions
+
+Areas where help is particularly needed:
 
 - Data collection and curation
 - Frontend improvements and new visualizations

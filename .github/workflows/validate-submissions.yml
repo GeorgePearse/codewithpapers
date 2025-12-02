@@ -1,0 +1,71 @@
+name: Validate Paper Submissions
+
+on:
+  pull_request:
+    paths:
+      - 'submissions/**/*.yaml'
+      - 'submissions/**/*.yml'
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  validate:
+    name: Validate Submissions
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-action@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: backend
+
+      - name: Build validator
+        working-directory: backend
+        run: cargo build --release --bin validate_submission
+
+      - name: Validate submissions
+        id: validate
+        run: |
+          ./backend/target/release/validate_submission submissions/ --format github
+        continue-on-error: true
+
+      - name: Post validation results
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            let body = '## Paper Submission Validation\n\n';
+
+            if ('${{ steps.validate.outcome }}' === 'success') {
+              body += ':white_check_mark: **All submissions are valid!**\n\n';
+              body += 'Your submission will be processed automatically when this PR is merged.';
+            } else {
+              body += ':x: **Validation failed**\n\n';
+              body += 'Please fix the errors shown in the workflow logs and push again.\n\n';
+              body += '### Common Issues\n';
+              body += '- Invalid arXiv ID format (expected: `2301.12345` or `2301.12345v2`)\n';
+              body += '- Missing required fields (`title`, `arxiv_id`)\n';
+              body += '- Invalid GitHub URL format\n';
+              body += '- Unknown fields (check for typos)\n';
+            }
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+      - name: Fail if validation failed
+        if: steps.validate.outcome == 'failure'
+        run: exit 1

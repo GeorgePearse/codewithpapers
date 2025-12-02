@@ -1,0 +1,117 @@
+name: Process Paper Submissions
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'submissions/**/*.yaml'
+      - 'submissions/**/*.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "database-insert"
+  cancel-in-progress: false
+
+jobs:
+  process:
+    name: Insert to Database
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 2
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-action@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: backend
+
+      - name: Build processor
+        working-directory: backend
+        run: cargo build --release --bin process_submission
+
+      - name: Validate secrets
+        run: |
+          if [ -z "${{ secrets.POSTGRES_URI }}" ]; then
+            echo "::error::POSTGRES_URI secret is not set!"
+            exit 1
+          fi
+          echo "::notice::Database credentials configured"
+
+      - name: Get changed files
+        id: changed
+        run: |
+          FILES=$(git diff --name-only HEAD~1 HEAD -- 'submissions/*.yaml' 'submissions/*.yml' 2>/dev/null | tr '\n' ' ' || echo "")
+          echo "files=$FILES" >> $GITHUB_OUTPUT
+          echo "Changed files: $FILES"
+
+      - name: Process submissions
+        id: process
+        if: steps.changed.outputs.files != ''
+        env:
+          POSTGRES_URI: ${{ secrets.POSTGRES_URI }}
+        run: |
+          ./backend/target/release/process_submission \
+            --files ${{ steps.changed.outputs.files }} \
+            --audit-log ./audit.json
+
+      - name: Upload audit log
+        if: always() && steps.process.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-${{ github.run_id }}
+          path: audit.json
+          retention-days: 90
+
+      - name: Delete processed files
+        if: success() && steps.changed.outputs.files != ''
+        run: |
+          for file in ${{ steps.changed.outputs.files }}; do
+            if [ -f "$file" ]; then
+              git rm "$file"
+              echo "Deleted: $file"
+            fi
+          done
+
+      - name: Commit deletion
+        if: success() && steps.changed.outputs.files != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --staged --quiet || git commit -m "chore: remove processed paper submissions [skip ci]"
+          git push
+
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `Database insertion failed - Run #${context.runId}`;
+            const body = `## Database Insertion Failure
+
+            **Run:** ${context.runId}
+            **Commit:** ${context.sha}
+            **Files:** ${{ steps.changed.outputs.files }}
+
+            Please investigate the audit log artifact for details.
+
+            The YAML files have NOT been deleted and will be retried on next push.
+            `;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['database', 'automated', 'needs-attention']
+            });
