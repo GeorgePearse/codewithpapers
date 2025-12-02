@@ -74,6 +74,77 @@ Papers are currently stored in YAML format (`benchmark_metrics.yaml`). Each pape
 - Implementation links
 - Benchmark results
 
+## Database Schema
+
+```mermaid
+erDiagram
+    papers {
+        uuid id PK
+        text title
+        text abstract
+        text arxiv_id UK
+        text arxiv_url
+        text pdf_url
+        date published_date
+        jsonb authors
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    datasets {
+        uuid id PK
+        text name UK
+        text description
+        text[] modalities
+        text[] task_categories
+        text[] languages
+        text size
+        text homepage_url
+        text github_url
+        text paper_url
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    benchmarks {
+        uuid id PK
+        text name
+        uuid dataset_id FK
+        text task
+        text description
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    implementations {
+        uuid id PK
+        uuid paper_id FK
+        text github_url
+        text framework
+        int stars
+        bool is_official
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    benchmark_results {
+        uuid id PK
+        uuid paper_id FK
+        uuid benchmark_id FK
+        uuid implementation_id FK
+        text metric_name
+        decimal metric_value
+        jsonb extra_data
+        timestamp created_at
+    }
+
+    papers ||--o{ implementations : "has"
+    papers ||--o{ benchmark_results : "has"
+    datasets ||--o{ benchmarks : "has"
+    benchmarks ||--o{ benchmark_results : "evaluated in"
+    implementations ||--o{ benchmark_results : "produces"
+```
+
 ## Roadmap / TODO
 
 Architecture -> So what we could do, is have entries and edits submitted via GitHub, but then not stored with it, maybe it stays there for a few weeks, maybe it gets deleted as soon as ingested, tests check that it conforms to the required structure. Just chuck everything in postgres for now, it's a pretty RDBMS type problem, and can yeet anything else in JSONB very easily if needed, just give absolutely every table an overflow JSONB column and call it a day. The submissions should probably be YAML files.
