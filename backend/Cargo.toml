@@ -1,0 +1,42 @@
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "Backend API and scrapers for CodeWithPapers"
+repository = "https://github.com/GeorgePearse/codewithpapers"
+
+[dependencies]
+tokio = { version = "1.36", features = ["full"] }
+sqlx = { version = "0.7", features = ["runtime-tokio-native-tls", "postgres", "uuid", "chrono", "json"] }
+dotenvy = "0.15"
+parquet = "50.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0"
+futures = "0.3"
+uuid = { version = "1.0", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+axum = "0.7"
+tower-http = { version = "0.5", features = ["cors"] }
+reqwest = { version = "0.12.24", features = ["json", "rustls-tls"] }
+scraper = "0.24.0"
+regex = "1.12.2"
+clap = { version = "4.5", features = ["derive"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["fmt"] }
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
+
+[[bin]]
+name = "sota_scraper"
+path = "src/bin/sota_scraper.rs"
+
+[[bin]]
+name = "github_scraper"
+path = "src/bin/github_scraper.rs"
+
+[[bin]]
+name = "arxiv_enricher"
+path = "src/bin/arxiv_enricher.rs"
