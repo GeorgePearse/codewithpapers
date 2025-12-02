@@ -29,6 +29,9 @@ clap = { version = "4.5", features = ["derive"] }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["fmt"] }
 
+# Full-text search
+tantivy = "0.22"
+
 [dev-dependencies]
 tower = { version = "0.5", features = ["util"] }
 
@@ -41,10 +44,6 @@ name = "github_scraper"
 path = "src/bin/github_scraper.rs"
 
 [[bin]]
-name = "arxiv_enricher"
-path = "src/bin/arxiv_enricher.rs"
-
-[[bin]]
 name = "data_loader"
 path = "src/bin/data_loader.rs"
 
@@ -55,3 +54,7 @@ path = "src/bin/validate_submission.rs"
 [[bin]]
 name = "process_submission"
 path = "src/bin/process_submission.rs"
+
+[[bin]]
+name = "build_search_index"
+path = "src/bin/build_search_index.rs"

@@ -1,8 +1,9 @@
 use std::net::SocketAddr;
+use std::sync::Arc;
 use sqlx::postgres::PgPoolOptions;
 use std::env;
 use dotenvy::dotenv;
-use backend::create_app;
+use backend::{create_app, search::SearchIndex};
 
 #[tokio::main]
 async fn main() {
@@ -17,7 +18,26 @@ async fn main() {
         .await
         .expect("Failed to create pool");
 
-    let app = create_app(pool);
+    // Try to load Tantivy search index (optional)
+    let index_path = env::var("TANTIVY_INDEX_PATH")
+        .unwrap_or_else(|_| "./data/tantivy_index".to_string());
+
+    let search_index = match SearchIndex::open(&index_path) {
+        Ok(index) => {
+            println!("Tantivy search index loaded from {}", index_path);
+            Some(Arc::new(index))
+        }
+        Err(e) => {
+            println!(
+                "Tantivy search index not available at {} ({}). Using PostgreSQL fallback.",
+                index_path, e
+            );
+            println!("Run `cargo run --bin build_search_index` to build the index.");
+            None
+        }
+    };
+
+    let app = create_app(pool, search_index);
 
     // Run our application
     let addr = SocketAddr::from(([127, 0, 0, 1], 8000));

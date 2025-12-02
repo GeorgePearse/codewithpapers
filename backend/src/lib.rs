@@ -6,7 +6,10 @@ use axum::{
 };
 use serde::{Deserialize, Serialize};
 use sqlx::{Pool, Postgres};
+use std::sync::Arc;
 use tower_http::cors::{Any, CorsLayer};
+
+pub mod search;
 
 // ============================================================================
 // Response Types
@@ -26,7 +29,7 @@ pub struct ApiError {
 // Database Models
 // ============================================================================
 
-#[derive(Serialize, Deserialize, sqlx::FromRow, Debug)]
+#[derive(Serialize, Deserialize, sqlx::FromRow, Debug, Clone)]
 pub struct Paper {
     pub id: uuid::Uuid,
     pub title: String,
@@ -157,19 +160,20 @@ pub struct StatsResponse {
 #[derive(Clone)]
 pub struct AppState {
     pub pool: Pool<Postgres>,
+    pub search_index: Option<Arc<search::SearchIndex>>,
 }
 
 // ============================================================================
 // Router Setup
 // ============================================================================
 
-pub fn create_app(pool: Pool<Postgres>) -> Router {
+pub fn create_app(pool: Pool<Postgres>, search_index: Option<Arc<search::SearchIndex>>) -> Router {
     let cors = CorsLayer::new()
         .allow_origin(Any)
         .allow_methods(Any)
         .allow_headers(Any);
 
-    let state = AppState { pool };
+    let state = AppState { pool, search_index };
 
     Router::new()
         // Health & Stats
@@ -273,59 +277,190 @@ async fn get_stats(
 
 async fn get_papers(
     State(state): State<AppState>,
-    Query(params): Query<PaginationParams>,
-) -> Result<Json<Vec<Paper>>, (StatusCode, Json<ApiError>)> {
-    let limit = params.limit.unwrap_or(20).min(100);
-    let offset = params.offset.unwrap_or(0);
+    Query(params): Query<search::SearchParams>,
+) -> Result<Json<search::SearchResponse<Paper>>, (StatusCode, Json<ApiError>)> {
+    let limit = params.limit.unwrap_or(20).min(100) as usize;
+    let offset = params.offset.unwrap_or(0) as usize;
     let order = if params.order.as_deref() == Some("asc") {
         "ASC"
     } else {
         "DESC"
     };
 
-    let query = if let Some(search) = &params.search {
-        let search_pattern = format!("%{}%", search);
-        sqlx::query_as::<_, Paper>(&format!(
-            r#"
-            SELECT id, title, abstract, arxiv_id, arxiv_url, pdf_url,
-                   published_date, authors, created_at, updated_at
-            FROM papers
-            WHERE title ILIKE $1 OR abstract ILIKE $1
-            ORDER BY published_date {} NULLS LAST
-            LIMIT $2 OFFSET $3
-            "#,
-            order
-        ))
-        .bind(search_pattern)
-        .bind(limit)
-        .bind(offset)
-        .fetch_all(&state.pool)
-        .await
-    } else {
-        sqlx::query_as::<_, Paper>(&format!(
-            r#"
-            SELECT id, title, abstract, arxiv_id, arxiv_url, pdf_url,
-                   published_date, authors, created_at, updated_at
-            FROM papers
-            ORDER BY published_date {} NULLS LAST
-            LIMIT $1 OFFSET $2
-            "#,
-            order
-        ))
-        .bind(limit)
-        .bind(offset)
-        .fetch_all(&state.pool)
-        .await
-    };
+    // If search query provided and Tantivy index available, use full-text search
+    if let Some(query_str) = params.get_query() {
+        if !query_str.trim().is_empty() {
+            if let Some(ref search_index) = state.search_index {
+                return search_papers_tantivy(&state, search_index, query_str, &params, limit, offset).await;
+            }
+            // Fall back to PostgreSQL ILIKE if no Tantivy index
+            return search_papers_postgres(&state, query_str, &params, limit, offset, order).await;
+        }
+    }
 
-    query.map(Json).map_err(|e| {
+    // No search query - browse papers from PostgreSQL
+    browse_papers_postgres(&state, limit, offset, order).await
+}
+
+/// Search papers using Tantivy full-text search
+async fn search_papers_tantivy(
+    state: &AppState,
+    search_index: &search::SearchIndex,
+    query_str: &str,
+    params: &search::SearchParams,
+    limit: usize,
+    offset: usize,
+) -> Result<Json<search::SearchResponse<Paper>>, (StatusCode, Json<ApiError>)> {
+    // Execute Tantivy search
+    let search_result = search::query::search_papers(search_index, query_str, params, limit, offset)
+        .map_err(|e| {
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(ApiError {
+                    error: format!("Search failed: {}", e),
+                }),
+            )
+        })?;
+
+    if search_result.paper_ids.is_empty() {
+        return Ok(Json(search::SearchResponse {
+            papers: vec![],
+            total_hits: 0,
+            facets: search_result.facets,
+        }));
+    }
+
+    // Fetch full paper data from PostgreSQL, preserving search order
+    let papers = fetch_papers_by_ids(&state.pool, &search_result.paper_ids).await?;
+
+    Ok(Json(search::SearchResponse {
+        papers,
+        total_hits: search_result.total_hits,
+        facets: search_result.facets,
+    }))
+}
+
+/// Fetch papers by IDs from PostgreSQL, preserving order
+async fn fetch_papers_by_ids(
+    pool: &Pool<Postgres>,
+    ids: &[uuid::Uuid],
+) -> Result<Vec<Paper>, (StatusCode, Json<ApiError>)> {
+    if ids.is_empty() {
+        return Ok(vec![]);
+    }
+
+    // Fetch all papers by IDs
+    let papers: Vec<Paper> = sqlx::query_as(
+        r#"
+        SELECT id, title, abstract, arxiv_id, arxiv_url, pdf_url,
+               published_date, authors, created_at, updated_at
+        FROM papers
+        WHERE id = ANY($1)
+        "#,
+    )
+    .bind(ids)
+    .fetch_all(pool)
+    .await
+    .map_err(|e| {
         (
             StatusCode::INTERNAL_SERVER_ERROR,
             Json(ApiError {
                 error: e.to_string(),
             }),
         )
-    })
+    })?;
+
+    // Reorder to match search result order
+    let paper_map: std::collections::HashMap<uuid::Uuid, Paper> =
+        papers.into_iter().map(|p| (p.id, p)).collect();
+
+    let ordered_papers: Vec<Paper> = ids
+        .iter()
+        .filter_map(|id| paper_map.get(id).cloned())
+        .collect();
+
+    Ok(ordered_papers)
+}
+
+/// Search papers using PostgreSQL ILIKE (fallback)
+async fn search_papers_postgres(
+    state: &AppState,
+    query_str: &str,
+    _params: &search::SearchParams,
+    limit: usize,
+    offset: usize,
+    order: &str,
+) -> Result<Json<search::SearchResponse<Paper>>, (StatusCode, Json<ApiError>)> {
+    let search_pattern = format!("%{}%", query_str);
+
+    let papers: Vec<Paper> = sqlx::query_as(&format!(
+        r#"
+        SELECT id, title, abstract, arxiv_id, arxiv_url, pdf_url,
+               published_date, authors, created_at, updated_at
+        FROM papers
+        WHERE title ILIKE $1 OR abstract ILIKE $1
+        ORDER BY published_date {} NULLS LAST
+        LIMIT $2 OFFSET $3
+        "#,
+        order
+    ))
+    .bind(&search_pattern)
+    .bind(limit as i64)
+    .bind(offset as i64)
+    .fetch_all(&state.pool)
+    .await
+    .map_err(|e| {
+        (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(ApiError {
+                error: e.to_string(),
+            }),
+        )
+    })?;
+
+    Ok(Json(search::SearchResponse {
+        papers,
+        total_hits: 0, // PostgreSQL fallback doesn't provide total count
+        facets: None,
+    }))
+}
+
+/// Browse papers without search (PostgreSQL)
+async fn browse_papers_postgres(
+    state: &AppState,
+    limit: usize,
+    offset: usize,
+    order: &str,
+) -> Result<Json<search::SearchResponse<Paper>>, (StatusCode, Json<ApiError>)> {
+    let papers: Vec<Paper> = sqlx::query_as(&format!(
+        r#"
+        SELECT id, title, abstract, arxiv_id, arxiv_url, pdf_url,
+               published_date, authors, created_at, updated_at
+        FROM papers
+        ORDER BY published_date {} NULLS LAST
+        LIMIT $1 OFFSET $2
+        "#,
+        order
+    ))
+    .bind(limit as i64)
+    .bind(offset as i64)
+    .fetch_all(&state.pool)
+    .await
+    .map_err(|e| {
+        (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(ApiError {
+                error: e.to_string(),
+            }),
+        )
+    })?;
+
+    let total = papers.len();
+    Ok(Json(search::SearchResponse {
+        papers,
+        total_hits: total,
+        facets: None,
+    }))
 }
 
 async fn get_paper_by_id(
