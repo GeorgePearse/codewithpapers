@@ -6,6 +6,19 @@ An interactive visualization tool for exploring machine learning papers and thei
 
 CodeWithPapers creates an interactive force-directed graph visualization of ML papers, showing connections between papers through citations, shared authors, and common techniques. The goal is to make research exploration more intuitive and to surface connections that might not be immediately apparent.
 
+## Data Status
+
+The database is loaded with data from the Papers with Code archive:
+
+| Table           | Count   | Status           |
+| --------------- | ------- | ---------------- |
+| Papers          | 508,819 | 88.3% of archive |
+| Datasets        | 15,053  | 100%             |
+| Implementations | 163,208 | Complete         |
+| Benchmarks      | 49      | Complete         |
+
+_Note: ~67k papers were skipped because they have null/empty titles (incomplete entries in the PWC archive)._
+
 ## Current Features
 
 - **Interactive Graph Visualization**: Force-directed graph showing paper relationships
