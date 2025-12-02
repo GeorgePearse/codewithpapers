@@ -4,20 +4,29 @@
 import os
 import psycopg2
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Connection string from environment
-DATABASE_URL = os.getenv('DATABASE_URL')
+DATABASE_URL = os.getenv("DATABASE_URL") or os.getenv("POSTGRES_URI")
 if not DATABASE_URL:
-    raise ValueError("DATABASE_URL environment variable is not set. Please create a .env.local file with your database credentials.")
+    raise ValueError(
+        "DATABASE_URL or POSTGRES_URI environment variable is not set. Please create a .env file with your database credentials."
+    )
+
 
 def create_tables():
     """Execute migration SQL to create tables."""
     try:
         # Read migration SQL
-        migration_file = Path(__file__).parent.parent / "supabase" / "migrations" / "001_initial_schema.sql"
+        migration_file = (
+            Path(__file__).parent.parent / "supabase" / "migrations" / "001_initial_schema.sql"
+        )
 
         print(f"Reading migration file: {migration_file}")
-        with open(migration_file, 'r') as f:
+        with open(migration_file, "r") as f:
             migration_sql = f.read()
 
         # Connect to database
@@ -57,8 +66,10 @@ def create_tables():
     except Exception as e:
         print(f"✗ Error creating tables: {e}")
         import traceback
+
         traceback.print_exc()
         return False
+
 
 if __name__ == "__main__":
     create_tables()

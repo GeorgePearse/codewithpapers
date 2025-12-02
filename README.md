@@ -42,16 +42,19 @@ The site automatically deploys to GitHub Pages when you push to `main`. See [DEP
 This project uses [uv](https://github.com/astral-sh/uv) for fast, reliable Python dependency management.
 
 **Install uv:**
+
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 **Install Python dependencies:**
+
 ```bash
 uv sync
 ```
 
 **Run Python scripts:**
+
 ```bash
 # Download Papers with Code archive data
 uv run python scripts/download_pwc_data.py --list
@@ -161,6 +164,7 @@ There was definitely some other website like this https://www.connectedpapers.co
 This project uses `uv` for Python dependency management. The configuration is in `pyproject.toml`.
 
 **Key commands:**
+
 ```bash
 # Sync dependencies
 uv sync
@@ -184,6 +188,7 @@ uv run ruff check .
 ### JavaScript/Node Environment
 
 Standard npm workflow for the React frontend:
+
 ```bash
 npm install          # Install dependencies
 npm run dev          # Start dev server
@@ -221,7 +226,9 @@ The project utilizes the Papers with Code archive hosted on Hugging Face, which 
 ### Papers with Code Archive (Archive.org)
 
 For the most recent archived snapshots of the Papers with Code website:
+
 - **Archive.org snapshots**: https://web.archive.org/web/20241101000000*/paperswithcode.com
+- **Latest SOTA snapshot**: https://web.archive.org/web/20250717073537/https://paperswithcode.com/sota
 
 The goal is to rebuild Papers with Code using these archived datasets and web snapshots.
 
