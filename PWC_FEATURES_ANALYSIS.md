@@ -5,6 +5,7 @@ Analysis from archived site: https://web.archive.org/web/20240703005204/https://
 ## Homepage Structure
 
 ### Navigation Bar
+
 - **Logo**: PWC barcode-style logo
 - **Search**: Global search with autocomplete
 - **Main Nav Items**:
@@ -17,6 +18,7 @@ Analysis from archived site: https://web.archive.org/web/20240703005204/https://
   - Sign In
 
 ### Content Filters
+
 - **Top** (Trending) - Default view
 - **Latest** (New papers)
 - **Greatest** (Most impactful)
@@ -26,10 +28,12 @@ Analysis from archived site: https://web.archive.org/web/20240703005204/https://
 Each paper card displays:
 
 **Left Column (Image)**:
+
 - Paper thumbnail/preview image
 - Links to paper detail page
 
 **Right Column (Content)**:
+
 - **Title**: Large, linked to paper detail
 - **Metadata Row**:
   - GitHub repository link (if available)
@@ -42,6 +46,7 @@ Each paper card displays:
 ## Key Features to Implement
 
 ### Phase 1: Core Display (Current)
+
 - [x] Load papers from Postgres database
 - [ ] Display paper cards in grid layout
 - [ ] Show title, date, abstract
@@ -49,17 +54,20 @@ Each paper card displays:
 - [ ] Framework badges
 
 ### Phase 2: Search & Filter
+
 - [ ] Global search across papers
 - [ ] Filter by trending/latest/greatest
 - [ ] Filter by date range
 - [ ] Filter by tasks/methods
 
 ### Phase 3: Browse SOTA
+
 - [ ] Browse by task category
 - [ ] Benchmark leaderboards
 - [ ] Dataset pages
 
 ### Phase 4: Enhanced Features
+
 - [ ] Paper detail pages
 - [ ] Author pages
 - [ ] Dataset pages
@@ -70,62 +78,70 @@ Each paper card displays:
 
 Our schema → PWC display:
 
-| Database Field | PWC Display |
-|---------------|-------------|
-| `papers.title` | Card title |
-| `papers.abstract` | Card abstract |
-| `papers.arxiv_id` | Link to arXiv |
-| `papers.published_date` | Publication date |
-| `papers.authors` | Author list (JSONB) |
-| `implementations.github_url` | GitHub link |
-| `implementations.framework` | Framework badge |
-| `benchmarks` + `benchmark_results` | SOTA indicators |
-| `paper_datasets` | Related datasets |
+| Database Field                     | PWC Display         |
+| ---------------------------------- | ------------------- |
+| `papers.title`                     | Card title          |
+| `papers.abstract`                  | Card abstract       |
+| `papers.arxiv_id`                  | Link to arXiv       |
+| `papers.published_date`            | Publication date    |
+| `papers.authors`                   | Author list (JSONB) |
+| `implementations.github_url`       | GitHub link         |
+| `implementations.framework`        | Framework badge     |
+| `benchmarks` + `benchmark_results` | SOTA indicators     |
+| `paper_datasets`                   | Related datasets    |
 
 ## Design Elements
 
 ### Colors
+
 - Primary blue: #0d6efd
 - Cyan/teal: #21cbce (PWC brand color)
 - Gray text: #6c757d
 
 ### Typography
+
 - Font: Lato (sans-serif)
 - Headers: Bold
 - Body: Regular weight
 
 ### Layout
+
 - Container: Centered, max-width
 - Cards: White background, subtle shadow
 - Grid: Responsive (1 col mobile, 2-3 cols desktop)
 
-## API Endpoints Needed
-
-Using Supabase REST API:
+## API Endpoints (Rust Backend)
 
 ```javascript
 // Get recent papers
-GET /rest/v1/papers?select=*,implementations(*)&order=published_date.desc&limit=20
+GET /api/papers?limit=20&order=desc
 
 // Search papers
-GET /rest/v1/papers?title=ilike.*search*&select=*
+GET /api/papers?search=query&limit=20
 
-// Get paper with all relations
-GET /rest/v1/papers?id=eq.{uuid}&select=*,implementations(*),benchmark_results(benchmark(*))
+// Get paper with implementations
+GET /api/papers/{id}
+
+// Get stats
+GET /api/stats
+
+// Get datasets, benchmarks, implementations
+GET /api/datasets
+GET /api/benchmarks
+GET /api/implementations
 ```
 
 ## Implementation Plan
 
-1. **Update React App** to fetch from Supabase instead of YAML
+1. **React App** fetches from Rust backend API
 2. **Create Paper Card Component** matching PWC design
-3. **Add Supabase Client** configuration
-4. **Implement Search** and filtering
-5. **Add Pagination** or infinite scroll
-6. **Deploy** updated version to GitHub Pages
+3. **Implement Search** and filtering
+4. **Add Pagination** or infinite scroll
+5. **Deploy** frontend and backend
 
 ## Current Status
 
-- Database: ✅ 30,000+ papers loaded and growing
-- Schema: ✅ Complete with papers, implementations, benchmarks
-- Frontend: 🔄 Needs rebuild to match PWC design
-- API: 🔄 Need to configure Supabase client
+- Database: ✅ Postgres with papers, implementations, benchmarks
+- Backend: ✅ Rust/Axum API complete
+- Frontend: ✅ React app using Rust API
+- Deployment: 🔄 Deploy to production

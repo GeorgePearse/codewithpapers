@@ -11,6 +11,9 @@ from datetime import datetime
 from typing import Optional
 import pickle
 import argparse
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Connection string from environment
 DATABASE_URL = os.getenv("DATABASE_URL") or os.getenv("POSTGRES_URI")

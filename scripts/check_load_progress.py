@@ -6,9 +6,12 @@ import pickle
 import psycopg2
 from pathlib import Path
 
-DATABASE_URL = os.getenv('DATABASE_URL')
+from dotenv import load_dotenv
+load_dotenv()
+
+DATABASE_URL = os.getenv('DATABASE_URL') or os.getenv('POSTGRES_URI')
 if not DATABASE_URL:
-    raise ValueError("DATABASE_URL environment variable is not set. Please create a .env.local file with your database credentials.")
+    raise ValueError("DATABASE_URL or POSTGRES_URI environment variable is not set.")
 CHECKPOINT_FILE = Path(__file__).parent.parent / "data" / "pwc-archive" / ".load_checkpoint.pkl"
 
 # Total expected counts
