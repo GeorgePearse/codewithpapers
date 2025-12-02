@@ -148,6 +148,7 @@ def load_papers(conn, batch_size=1000, checkpoint=None):
 
             except Exception as e:
                 print(f"Error inserting paper: {e}")
+                conn.rollback()  # Reset transaction state
                 continue
 
         conn.commit()
@@ -236,6 +237,7 @@ def load_datasets(conn, batch_size=1000, checkpoint=None):
 
             except Exception as e:
                 print(f"Error inserting dataset: {e}")
+                conn.rollback()
                 continue
 
         conn.commit()
@@ -331,6 +333,7 @@ def load_code_links(conn, batch_size=1000, checkpoint=None):
 
             except Exception as e:
                 print(f"Error inserting implementation: {e}")
+                conn.rollback()
                 continue
 
         conn.commit()
@@ -445,6 +448,7 @@ def load_evaluation_tables(conn, batch_size=1000, checkpoint=None):
 
             except Exception as e:
                 print(f"Error inserting evaluation data: {e}")
+                conn.rollback()
                 continue
 
         conn.commit()
