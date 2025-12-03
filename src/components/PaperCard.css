@@ -1,21 +1,24 @@
 .paper-card {
   display: flex;
-  gap: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
+  gap: 24px;
+  padding: 24px;
+  margin-bottom: 24px;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  border: 1px solid #f1f3f5;
 }
 
 .paper-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  border-color: #e9ecef;
 }
 
 .paper-card-image {
   flex-shrink: 0;
-  width: 200px;
+  width: 220px;
 }
 
 .paper-thumbnail {
@@ -23,8 +26,9 @@
   padding-top: 66.67%; /* 3:2 aspect ratio */
   position: relative;
   background: #f8f9fa;
-  border-radius: 4px;
+  border-radius: 8px;
   overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .paper-thumbnail-placeholder {
@@ -36,37 +40,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #6c757d;
+  color: #adb5bd;
+  background: #f8f9fa;
 }
 
 .paper-card-content {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .paper-title {
-  margin: 0 0 8px 0;
+  margin: 0 0 12px 0;
   font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.3;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
 }
 
 .paper-title a {
   color: #212529;
   text-decoration: none;
+  transition: color 0.2s;
 }
 
 .paper-title a:hover {
   color: #21cbce;
-  text-decoration: none;
 }
 
 .paper-metadata {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-size: 0.875rem;
   color: #6c757d;
 }
@@ -74,78 +82,92 @@
 .paper-github {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-}
-
-.paper-github svg {
-  flex-shrink: 0;
+  gap: 6px;
+  color: #495057;
+  font-weight: 600;
 }
 
 .paper-github a {
-  color: #6c757d;
+  color: #495057;
   text-decoration: none;
+  transition: color 0.2s;
 }
 
 .paper-github a:hover {
-  color: #21cbce;
-  text-decoration: underline;
+  color: #212529;
 }
 
 .paper-framework-badge {
-  display: inline-block;
-  padding: 2px 8px;
+  display: inline-flex;
+  padding: 4px 10px;
   background: #e7f5ff;
   color: #0d6efd;
-  border-radius: 4px;
+  border-radius: 20px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .paper-date {
-  color: #6c757d;
+  color: #868e96;
 }
 
 .paper-authors {
-  font-size: 0.875rem;
-  color: #6c757d;
-  margin-bottom: 8px;
+  font-size: 0.9375rem;
+  color: #495057;
+  margin-bottom: 12px;
+  line-height: 1.5;
 }
 
 .paper-abstract {
-  margin: 12px 0;
+  margin: 0 0 20px;
   line-height: 1.6;
   color: #495057;
+  font-size: 0.9375rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
 }
 
 .paper-links {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-top: 12px;
+  margin-top: auto;
 }
 
 .paper-link-arxiv {
-  display: inline-block;
-  padding: 4px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
   background: #f8f9fa;
-  color: #6c757d;
+  color: #495057;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 20px;
   font-size: 0.875rem;
-  transition: background 0.2s;
+  font-weight: 600;
+  transition: all 0.2s;
+  border: 1px solid #e9ecef;
 }
 
 .paper-link-arxiv:hover {
-  background: #e9ecef;
+  background: white;
+  border-color: #21cbce;
   color: #21cbce;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(33, 203, 206, 0.1);
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
   .paper-card {
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
+    padding: 20px;
   }
 
   .paper-card-image {
@@ -153,7 +175,8 @@
   }
 
   .paper-thumbnail {
-    max-width: 300px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
+    padding-top: 50%;
   }
 }
