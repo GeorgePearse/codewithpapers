@@ -17,3 +17,8 @@ backend/target/
 .env.local
 .env.*.local
 *.log
+
+# Database temp files (may contain connection strings)
+.temp/
+db/.temp/
+supabase/.temp/
